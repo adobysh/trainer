@@ -8,10 +8,6 @@ import java.util.Random;
 
 public class SentenceMaker {
 
-	public SentenceMaker() {
-
-	}
-
 	public static String[] makeSentance(int level, int score) {
 		switch (level) {
             case 0:

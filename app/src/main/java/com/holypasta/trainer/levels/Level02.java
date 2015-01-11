@@ -8,22 +8,18 @@ public class Level02 {
         int where = new Random().nextInt(9);
         if (score < 17) {
             return part01_pronoun(where);
+        } else if (score < 34) {
+            return part02_interrogative(where/3);
+        } else if (score < 50) {
+            return part03_interrogative_pronoun(where/3);
         } else {
-            if (score < 34) {
-                return part02_interrogative(where/3);
-            } else {
-                if (score < 50) {
+            switch (new Random().nextInt(3)) {
+                case 0:
+                    return part01_pronoun(where);
+                case 1:
+                    return part02_interrogative(where/3);
+                case 2:
                     return part03_interrogative_pronoun(where/3);
-                } else {
-                    switch (new Random().nextInt(3)) {
-                        case 0:
-                            return part01_pronoun(where);
-                        case 1:
-                            return part02_interrogative(where/3);
-                        case 2:
-                            return part03_interrogative_pronoun(where/3);
-                    }
-                }
             }
         }
         return new String[]{"Почему мы знаем его?", "Why do we know him?"};

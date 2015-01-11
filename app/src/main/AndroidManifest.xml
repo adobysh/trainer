@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.holypasta.trainer.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,10 +17,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LevelActivity">
+            android:name="com.holypasta.trainer.activity.LevelActivity">
         </activity>
         <activity
-            android:name=".TheoryActivity"
+            android:name="com.holypasta.trainer.activity.TheoryActivity"
             android:label="@string/title_activity_theory"
             android:screenOrientation="portrait" >
         </activity>

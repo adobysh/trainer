@@ -1,6 +1,5 @@
-package com.holypasta.trainer.english;
+package com.holypasta.trainer.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,52 +21,43 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.holypasta.trainer.Constants;
+import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.MakeScore;
-import com.holypasta.trainer.util.MyConst;
 import com.holypasta.trainer.util.SentenceMaker;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@SuppressLint("NewApi")
-public class LevelActivity extends ActionBarActivity implements OnClickListener,
+public class LevelActivity extends ActionBarActivity implements Constants, OnClickListener,
         TextView.OnEditorActionListener, TextToSpeech.OnInitListener {
 
-	private int ID_LESSON;
-    boolean voiceIsOn = false;
-
-    private String urlVideo;
-    private String[] videoIDs;
-
+	private int lessonId;
+    private boolean voiceIsOn = false;
     private boolean isHelped = false;
     private boolean failNow = false;
     private boolean isChecked = false;
     private int tv1darkColor;
-
-    SharedPreferences sPref;
-
+    private SharedPreferences sPref;
     // speaking
-    protected LinearLayout ll_next;
-    protected String ruText;
-    protected String[] enText = new String[] {};
-    protected TextView tv1ruText;
-    protected TextView tvScore;
-    protected EditText et1enText;
-    protected TextView button1Help;
-    protected TextView button2OK;
-    protected TextView button3Say;
-    protected TextView button4Next;
-
-    protected int myScore = 0;
-
+    private LinearLayout ll_next;
+    private String ruText;
+    private String[] enText = new String[] {};
+    private TextView tv1ruText;
+    private TextView tvScore;
+    private EditText et1enText;
+    private TextView button1Help;
+    private TextView button2OK;
+    private TextView button3Say;
+    private TextView button4Next;
+    private int myScore = 0;
     // переменная для проверки возможности
     // распознавания голоса в телефоне
-    protected final int VR_REQUEST = 999;
-
+    private final int VR_REQUEST = 999;
     // переменные для работы TTS:
     // переменная для проверки данных для TTS
-    protected int MY_DATA_CHECK_CODE = 0;
+    private int MY_DATA_CHECK_CODE = 0;
     // Text To Speech интерфейс
     protected TextToSpeech repeatTTS;
     protected boolean ttsIsOn = false;
@@ -76,27 +66,15 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_level);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-		ID_LESSON = getIntent().getExtras().getInt("ID");
-
-        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
-        myScore = sPref.getInt(MyConst.SCORE_0_15 + ID_LESSON, 0);
-        voiceIsOn = (sPref.getInt(MyConst.VOICE, 0) == 1)?true:false;
-
+		lessonId = getIntent().getExtras().getInt(EXTRA_LESSON_ID);
+        sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
+        myScore = sPref.getInt(Constants.SCORE_0_15 + lessonId, 0);
+        voiceIsOn = (sPref.getInt(Constants.VOICE, 0) == 1);
         prepareToDialog();
-
         tv1darkColor = tv1ruText.getCurrentTextColor();
-
         tvScore.setText(MakeScore.make(myScore));
-        getActionBar().setTitle(getResources().getStringArray(R.array.contents)[ID_LESSON]);
-        videoIDs = new String [] { "j7RJ_fk7PcE", "DNyhZ4abPWk", "tZ4whtYtODA",
-                "w1z7fIJJWiU", "DoD43g6wnd8", "8MEA6mE1ThU", "ahxebQMw1-I", "iu5xXDtmIrs", "g6e_G8U4lsE",
-                "0NbFr17dJ1c", "Zl5mxpi-Dvw", "9or1-tMWyo0", "Hl1ba1OyKl0", "UYGdntvd4PY", "1RviTGwOJdo",
-                "NC1xPDE15cw" };
-        urlVideo = "vnd.youtube:" + videoIDs[ID_LESSON];
-
+        getSupportActionBar().setTitle(getResources().getStringArray(R.array.contents)[lessonId]);
         et1enText.setOnEditorActionListener(this);
         buttonNext();
 	}
@@ -114,9 +92,7 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
         button3Say = (TextView) findViewById(R.id.button3Say);
         button4Next = (TextView) findViewById(R.id.button4Next);
 //		button4Next.setOnClickListener(this);
-
         if (voiceIsOn) {
-
             // проверяем, поддерживается ли распознование речи
             PackageManager packManager = getPackageManager();
             List<ResolveInfo> intActivities = packManager.queryIntentActivities(
@@ -135,12 +111,10 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
                 Toast.makeText(this, "Упс - Распознавание речи не поддерживается!",
                         Toast.LENGTH_LONG).show();
             }
-
             // подготовка движка TTS для проговаривания слов
             Intent checkTTSIntent = new Intent();
             // проверка наличия TTS
             checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-
             // запуск checkTTSIntent интента
             startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
         } else {
@@ -165,7 +139,6 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
     }
 
     protected void listenToSpeech() {
-
         // запускаем интент, распознающий речь и передаем ему требуемые данные
         Intent listenIntent = new Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -174,22 +147,19 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
                 getClass().getPackage().getName());
         // В процессе распознования выводим сообщение
         listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Говорите!");
-
         // set language
-
         listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
         // устанавливаем модель речи
         listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         // указываем число результатов, которые могут быть получены
         listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
-
         // начинаем прослушивание
         startActivityForResult(listenIntent, VR_REQUEST);
     }
 
 	public void generateText() {
-		String[] textArray = SentenceMaker.makeSentance(ID_LESSON, myScore);
+		String[] textArray = SentenceMaker.makeSentance(lessonId, myScore);
 		ruText = textArray[0];
         enText = new String[textArray.length-1];
         for (int i = 1; i < textArray.length; i++) {
@@ -238,19 +208,17 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
             if (isTrue){
                 et1enText.setTextColor(getResources().getColor(R.color.myGreen));
                 if (!isHelped) {// если помощи не было
-                    if (myScore < MyConst.MAX_SCORE) {
+                    if (myScore < Constants.MAX_SCORE) {
                         myScore++;
                         tvScore.setText(MakeScore.make(myScore));
 //                        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor ed = sPref.edit();
-                        ed.putInt(MyConst.SCORE_0_15 + ID_LESSON, myScore);
+                        ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
                         ed.apply();
                     }
                 }
                 buttonsEnabled(false);
                 isChecked = true;
-
-
             } else {
                 et1enText.setTextColor(getResources().getColor(R.color.myRed));
                 if (!failNow) { // если еще не фэйлил
@@ -290,7 +258,7 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
 			ArrayList<String> suggestedWords = data
 					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String resultString = suggestedWords.get(0).intern();
-            if (ID_LESSON < 2) {
+            if (lessonId < 2) {
                     String[] tmp = resultString.split(" ");
 			        if (tmp[0].equalsIgnoreCase("will")
 					    || tmp[0].equalsIgnoreCase("do")
@@ -307,7 +275,6 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
 			}
             et1enText.setText(resultString);
 		}
-
 		// tss код здесь
 		// returned from TTS data check
 		if (requestCode == MY_DATA_CHECK_CODE) {
@@ -323,7 +290,6 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
 	}
 
 	public void speackNow(String text) {
-		// TODO Auto-generated method stub
 		repeatTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 	}
 
@@ -343,16 +309,20 @@ public class LevelActivity extends ActionBarActivity implements OnClickListener,
                 break;
             case R.id.action_theory:
                 Intent intent = new Intent();
-                intent.putExtra("ID", ID_LESSON);
+                intent.putExtra(EXTRA_LESSON_ID, lessonId);
                 intent.setClass(this, TheoryActivity.class);
                 startActivity(intent);
                 break;
             case R.id.action_video:
 //              startActivity(new  createPlayVideoIntent(this, urlVideo));
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlVideo)));
+                startActivity(new Intent(Intent.ACTION_VIEW, getVideoUrl()));
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private Uri getVideoUrl() {
+        return Uri.parse(VIDEO_BASE_URL + VIDEO_ID[lessonId]);
     }
 
     @Override

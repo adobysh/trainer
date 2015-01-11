@@ -1,4 +1,4 @@
-package com.holypasta.trainer.english;
+package com.holypasta.trainer.activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,12 +18,13 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.holypasta.trainer.Constants;
+import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.MakeScore;
-import com.holypasta.trainer.util.MyConst;
 import com.holypasta.trainer.util.ViewHolder;
 
 
-public class MainActivity extends ActionBarActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends ActionBarActivity implements Constants, AdapterView.OnItemClickListener {
 
     ListView lv1main;
     MyAdapter adapter;
@@ -51,11 +52,11 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     protected void onResume() {
         super.onResume();
         myScores = new int[16];
-        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
+        sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
         complete = 0;
         for (int i = 0; i < myScores.length; i++) {
-            myScores[i] = sPref.getInt(MyConst.SCORE_0_15 + i, 0);
-            if (myScores[i] >= MyConst.PASS_SCORE) {
+            myScores[i] = sPref.getInt(Constants.SCORE_0_15 + i, 0);
+            if (myScores[i] >= Constants.PASS_SCORE) {
                 complete++;
             }
         }
@@ -70,9 +71,9 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
     @Override
     protected void onPause() {
         super.onPause();
-        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
+        sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putInt(MyConst.VOICE, (voiceIsOn == true)?1:0);
+        ed.putInt(Constants.VOICE, (voiceIsOn == true)?1:0);
         ed.commit();
     }
 
@@ -126,7 +127,7 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
                 holder.textScore.setTextColor(darkColor);
                 holder.textTitle.setTextColor(darkColor);
             } else {
-                if (position < MyConst.COMPLETE) {
+                if (position < Constants.COMPLETE) {
                     holder.textTitle.setText(parts[position]);
 
                     holder.textNumber.setTextColor(darkColor);
@@ -149,13 +150,12 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        if (arg2 < MyConst.COMPLETE) {
+        if (arg2 < Constants.COMPLETE) {
             if (arg2 <= complete) {
                 activeLvl = arg2; // запоминаем номер открываемого урока, чтобы не сохранять его
                                     // очки перед разрушением активити
-
                 Intent intent = new Intent();
-                intent.putExtra("ID", arg2);
+                intent.putExtra(EXTRA_LESSON_ID, arg2);
                 intent.setClass(this, LevelActivity.class);
                 startActivity(intent);
             } else {
@@ -181,8 +181,8 @@ public class MainActivity extends ActionBarActivity implements AdapterView.OnIte
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
-        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
-        if (sPref.getInt(MyConst.VOICE, 0) == 1) {
+        sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
+        if (sPref.getInt(Constants.VOICE, 0) == 1) {
             voiceIsOn = true;
             menu.findItem(R.id.action_voice).setChecked(true);
         }

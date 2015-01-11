@@ -3,8 +3,6 @@ package com.holypasta.trainer.util;
 import android.app.Activity;
 import android.content.res.Resources;
 
-import com.holypasta.trainer.english.R;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

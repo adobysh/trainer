@@ -1,32 +1,23 @@
-package com.holypasta.trainer.english;
+package com.holypasta.trainer.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import com.holypasta.trainer.Constants;
+import com.holypasta.trainer.english.R;
 
-public class TheoryActivity extends ActionBarActivity {
+public class TheoryActivity extends ActionBarActivity implements Constants {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theory);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        final int ID_LESSON = getIntent().getExtras().getInt("ID");
-
+        final int ID_LESSON = getIntent().getExtras().getInt(EXTRA_LESSON_ID);
         WebView web = (WebView)findViewById(R.id.webTheory);
         web.loadUrl("file:///android_res/raw/lesson" + (ID_LESSON+1) + ".html");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.theory, menu);
-        return true;
     }
 
     @Override
