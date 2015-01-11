@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.holypasta.trainer.english.MainActivity" >
+    
+
+    <item android:id="@+id/action_video"
+        android:title="@string/action_video"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_theory"
+        android:title="@string/action_theory"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+</menu>

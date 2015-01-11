@@ -1,0 +1,41 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="TextLittle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextLittleButton" parent="TextLittle">
+        <item name="android:paddingTop">10sp</item>
+        <item name="android:paddingBottom">10sp</item>
+        <item name="android:paddingLeft">15sp</item>
+        <item name="android:paddingRight">15sp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="BackgroundMain">
+        <item name="android:padding">5sp</item>
+    </style>
+
+    <style name="BackgroundWhite" parent="BackgroundMain">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="TableBackground">
+        <item name="android:layout_margin">5sp</item>
+        <item name="android:background">#EEEEEE</item>
+    </style>
+
+    <style name="TableItemBackground">
+        <item name="android:paddingLeft">2sp</item>
+        <item name="android:paddingRight">2sp</item>
+        <item name="android:layout_margin">1sp</item>
+        <item name="android:background">#FFFFFF</item>
+    </style>
+
+</resources>

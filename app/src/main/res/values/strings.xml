@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Тренажер</string>
+    <string name="hello_world">Вали отсэдава!!</string>
+
+    <string name="action_theory">\?!</string>
+    <string name="action_video">8)</string>
+    <string name="action_unlock">Разблокировать уроки</string>
+    <string name="action_lock">Сбросить прогресс</string>
+    <string name="action_voice">Голос</string>
+
+    <string name="title_activity_theory">Теория</string>
+
+</resources>

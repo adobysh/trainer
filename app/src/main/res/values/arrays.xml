@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="contents">
+        <item>Базовая форма глагола</item>
+        <item>Местоимения. Вопросительные\u00A0слова</item>
+        <item>Глагол "to be". Притяжательные\u00A0местоимения</item>
+        <item>Урок 4</item>
+        <item>Урок 5</item>
+        <item>Урок 6</item>
+        <item>Урок 7</item>
+        <item>Урок 8</item>
+        <item>Урок 9</item>
+        <item>Урок 10</item>
+        <item>Урок 11</item>
+        <item>Урок 12</item>
+        <item>Урок 13</item>
+        <item>Урок 14</item>
+        <item>Урок 15</item>
+        <item>Урок 16</item>
+        <!--
+        <item>Бонус: 50 000 слов</item>
+        <item>д/з 2: Неправильные глаголы</item>
+        <item>д/з 3: Множественное число</item>
+        <item>д/з 4: Слова к тексту 1</item>
+        -->
+    </string-array>
+
+</resources>

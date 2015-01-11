@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/media/hdd/Programs/adt-bundle-linux-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-v4/19.0.1/support-v4-19.0.1.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="587da9a481ffd341d2fa091704489b89845ddacd">
+        <dex dex="/media/hdd/workspace_old/trainer/app/build/intermediates/pre-dexed/debug/support-v4-19.0.1-4e0e575668350223d6dd9d29cd882f2b036eb3c5.jar" />
+    </item>
+    <item
+        jar="/media/hdd/workspace_old/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/19.0.1/classes.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="f71a6822470c9eb659d4f4a6cb57b780b35f058b">
+        <dex dex="/media/hdd/workspace_old/trainer/app/build/intermediates/pre-dexed/debug/classes-3e22b8902e904580ab94ef480ef295655243c924.jar" />
+    </item>
+
+</items>
