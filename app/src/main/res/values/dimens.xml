@@ -3,4 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    </resources>
+    <dimen name="divider_easy_mode">128dp</dimen>
+    <dimen name="divider_hard_mode">64dp</dimen>
+
+</resources>

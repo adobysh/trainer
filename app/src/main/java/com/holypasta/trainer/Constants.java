@@ -12,7 +12,6 @@ public interface Constants {
     static final String SCORE_0_15 = "SCORE_";
     static final String SCORES = "SCORES";
 
-    static final String PREF_VOICE = "PREF_VOICE";
     static final String PREF_HARDCORE_MODE = "PREF_HARDCORE_MODE";
 
     static final int MAX_SCORE = 50;

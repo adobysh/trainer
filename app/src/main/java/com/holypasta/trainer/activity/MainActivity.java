@@ -25,7 +25,6 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
     private ListView lv1main;
     private MyAdapter adapter;
     private List<Integer> myScores;
-    private boolean voiceIsOn;
     private SharedPreferences sPref;
     private int complete;
     private int mode;
@@ -61,7 +60,6 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
         super.onPause();
         sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
-        ed.putInt(Constants.PREF_VOICE, (voiceIsOn == true)?1:0);
         ed.putInt(Constants.PREF_HARDCORE_MODE, mode);
         ed.commit();
     }
@@ -94,10 +92,6 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_menu, menu);
         sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
-        if (sPref.getInt(Constants.PREF_VOICE, 0) == 1) {
-            voiceIsOn = true;
-            menu.findItem(R.id.action_voice).setChecked(true);
-        }
         mode = sPref.getInt(Constants.PREF_HARDCORE_MODE, 0);
         if (mode == 1) {
             menu.findItem(R.id.action_hardcore_mode).setChecked(true);
@@ -108,15 +102,6 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_voice:
-                if (item.isChecked() == true) {
-                    item.setChecked(false);
-                    voiceIsOn = false;
-                } else {
-                    item.setChecked(true);
-                    voiceIsOn = true;
-                }
-                break;
             case R.id.action_hardcore_mode:
                 if (item.isChecked() == true) {
                     item.setChecked(false);

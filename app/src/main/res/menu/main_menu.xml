@@ -3,30 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.holypasta.trainer.activity.MainActivity" >
     
-<!--
-    <item android:id="@+id/action_unlock"
-        android:title="@string/action_unlock"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_lock"
-        android:title="@string/action_lock"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
--->
-    <item
-        android:id="@+id/action_voice"
-        android:orderInCategory="0"
-        app:showAsAction="never"
-        android:title="@string/action_voice"
-        android:checkable="true"
-        android:checked="false"/>
-
     <item
         android:id="@+id/action_hardcore_mode"
         android:orderInCategory="1"
         app:showAsAction="never"
-        android:title="HARDCORE MODE"
+        android:title="@string/action_hard_mode"
         android:checkable="true"
         android:checked="false"/>
 

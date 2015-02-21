@@ -19,7 +19,6 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +43,6 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private boolean isChecked = false;
     private int tv1darkColor;
     private SharedPreferences sPref;
-    // speaking
     private MultiSentence multiSentence;
     private TextView tvScore;
     private TextView taskField;
@@ -52,6 +50,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private TextView button1Help;
     private TextView button2OK;
     private TextView button3Say;
+    private TextView buttonNext;
     private TextView timer;
     private int myScore = 0;
     // переменная для проверки возможности
@@ -78,7 +77,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
         myScore = sPref.getInt(Constants.SCORE_0_15 + lessonId, 0);
-        voiceIsOn = (sPref.getInt(Constants.PREF_VOICE, 0) == 1);
+        voiceIsOn = mode == MODE_HARD;
         prepareToDialog();
         tv1darkColor = taskField.getCurrentTextColor();
         tvScore.setText(MakeScore.make(myScore));
@@ -100,10 +99,12 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         });
         if (mode == MODE_HARD) {
             button1Help = (TextView) findViewById(R.id.button1Help);
-            button1Help.setOnClickListener(this);
             button2OK = (TextView) findViewById(R.id.button2OK);
-            button2OK.setOnClickListener(this);
             button3Say = (TextView) findViewById(R.id.button3Say);
+            buttonNext = (TextView) findViewById(R.id.buttonNext);
+            button1Help.setOnClickListener(this);
+            button2OK.setOnClickListener(this);
+            buttonNext.setOnClickListener(this);
             if (voiceIsOn) {
                 // проверяем, поддерживается ли распознование речи
                 PackageManager packManager = getPackageManager();
@@ -140,8 +141,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         }
     }
 
-    protected void installTTS() {
-        // интент, перебрасывающий пользователя на страницу TSS в Google Play
+    protected void installTTSfromGooglePlay() {
         Intent installTTSIntent = new Intent();
         installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
         startActivity(installTTSIntent);
@@ -218,6 +218,9 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 		case R.id.button3Say:
 			listenToSpeech();
 			break;
+        case R.id.buttonNext:
+            buttonNext();
+            break;
 		}
 	}
 
@@ -289,7 +292,8 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     public void buttonsEnabled(boolean isEnabled){
         if (mode == MODE_HARD) {
             button3Say.setEnabled(isEnabled);
-            button2OK.setEnabled(isEnabled);
+            button2OK.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            buttonNext.setVisibility(isEnabled ? View.GONE : View.VISIBLE);
         } else {
             buttonTrue.setEnabled(isEnabled);
             buttonFalse.setEnabled(isEnabled);
@@ -321,19 +325,19 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 			}
             resultField.setText(resultString);
 		}
-		// tss код здесь
-		// returned from TTS data check
 		if (requestCode == MY_DATA_CHECK_CODE) {
-			// все необходимые приложения установлены, создаем TTS
-			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+			if (isTTSInstalled(resultCode)) {
 				repeatTTS = new TextToSpeech(this, this);
 				ttsIsOn = true;
-				// движок не установлен, предположим пользователю установить его
 			} else {
-				installTTS();
+				installTTSfromGooglePlay();
 			}
 		}
 	}
+
+    private boolean isTTSInstalled(int resultCode) {
+        return resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS;
+    }
 
 	public void speakNow(String text) {
 		repeatTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
