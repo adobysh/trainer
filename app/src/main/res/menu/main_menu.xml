@@ -16,9 +16,17 @@
 -->
     <item
         android:id="@+id/action_voice"
-        android:orderInCategory="100"
+        android:orderInCategory="0"
         app:showAsAction="never"
         android:title="@string/action_voice"
+        android:checkable="true"
+        android:checked="false"/>
+
+    <item
+        android:id="@+id/action_hardcore_mode"
+        android:orderInCategory="1"
+        app:showAsAction="never"
+        android:title="HARDCORE MODE"
         android:checkable="true"
         android:checked="false"/>
 

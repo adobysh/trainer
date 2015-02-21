@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
@@ -16,12 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.holypasta.trainer.Constants;
+import com.holypasta.trainer.data.MultiSentence;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.MakeScore;
 import com.holypasta.trainer.util.SentenceMaker;
@@ -29,6 +32,7 @@ import com.holypasta.trainer.util.SentenceMaker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 public class LevelActivity extends ActionBarActivity implements Constants, OnClickListener,
         TextView.OnEditorActionListener, TextToSpeech.OnInitListener {
@@ -41,16 +45,14 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private int tv1darkColor;
     private SharedPreferences sPref;
     // speaking
-    private LinearLayout ll_next;
-    private String ruText;
-    private String[] enText = new String[] {};
-    private TextView tv1ruText;
+    private MultiSentence multiSentence;
     private TextView tvScore;
-    private EditText et1enText;
+    private TextView taskField;
+    private TextView resultField;
     private TextView button1Help;
     private TextView button2OK;
     private TextView button3Say;
-    private TextView button4Next;
+    private TextView timer;
     private int myScore = 0;
     // переменная для проверки возможности
     // распознавания голоса в телефоне
@@ -61,70 +63,85 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     // Text To Speech интерфейс
     protected TextToSpeech repeatTTS;
     protected boolean ttsIsOn = false;
+    private int mode;
+    private Button buttonTrue;
+    private Button buttonFalse;
+    private Random random = new Random();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_level);
+        Bundle extras = getIntent().getExtras();
+		lessonId = extras.getInt(EXTRA_LESSON_ID);
+        mode = extras.getInt(EXTRA_MODE);
+        setContentView(mode == MODE_HARD ? R.layout.activity_level_hard : R.layout.activity_level_easy);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		lessonId = getIntent().getExtras().getInt(EXTRA_LESSON_ID);
         sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
         myScore = sPref.getInt(Constants.SCORE_0_15 + lessonId, 0);
-        voiceIsOn = (sPref.getInt(Constants.VOICE, 0) == 1);
+        voiceIsOn = (sPref.getInt(Constants.PREF_VOICE, 0) == 1);
         prepareToDialog();
-        tv1darkColor = tv1ruText.getCurrentTextColor();
+        tv1darkColor = taskField.getCurrentTextColor();
         tvScore.setText(MakeScore.make(myScore));
         getSupportActionBar().setTitle(getResources().getStringArray(R.array.contents)[lessonId]);
-        et1enText.setOnEditorActionListener(this);
+        resultField.setOnEditorActionListener(this);
         buttonNext();
 	}
 
     protected void prepareToDialog() {
-        ll_next = (LinearLayout)findViewById(R.id.ll_next);
-        ll_next.setOnClickListener(this);
-        tv1ruText = (TextView) findViewById(R.id.textView1);
+        taskField = (TextView) findViewById(R.id.textView1);
         tvScore = (TextView) findViewById(R.id.tvScore);
-        et1enText = (EditText) findViewById(R.id.editText1);
-        button1Help = (TextView) findViewById(R.id.button1Help);
-        button1Help.setOnClickListener(this);
-        button2OK = (TextView) findViewById(R.id.button2OK);
-        button2OK.setOnClickListener(this);
-        button3Say = (TextView) findViewById(R.id.button3Say);
-        button4Next = (TextView) findViewById(R.id.button4Next);
-//		button4Next.setOnClickListener(this);
-        if (voiceIsOn) {
-            // проверяем, поддерживается ли распознование речи
-            PackageManager packManager = getPackageManager();
-            List<ResolveInfo> intActivities = packManager.queryIntentActivities(
-                    new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-            if (intActivities.size() != 0) {
-                // распознавание поддерживается, будем отслеживать событие щелчка по
-                // кнопке
-                button3Say.setOnClickListener(this);
-            } else {
-                // распознавание не работает. Заблокируем
-                // кнопку и выведем соответствующее
-                // предупреждение.
-                button3Say.setEnabled(false);
-                // Toast.makeText(this, "Oops - Speech recognition not supported!",
-                // Toast.LENGTH_LONG).show();
-                Toast.makeText(this, "Упс - Распознавание речи не поддерживается!",
-                        Toast.LENGTH_LONG).show();
+        resultField = mode == MODE_HARD ? (EditText) findViewById(R.id.editText1) : (TextView) findViewById(R.id.result_easy);
+        resultField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Toast.makeText(LevelActivity.this, "Edit", Toast.LENGTH_SHORT).show();
+                return false;
             }
-            // подготовка движка TTS для проговаривания слов
-            Intent checkTTSIntent = new Intent();
-            // проверка наличия TTS
-            checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-            // запуск checkTTSIntent интента
-            startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
-        } else {
-            button3Say.setVisibility(View.GONE);
+        });
+        if (mode == MODE_HARD) {
+            button1Help = (TextView) findViewById(R.id.button1Help);
+            button1Help.setOnClickListener(this);
+            button2OK = (TextView) findViewById(R.id.button2OK);
+            button2OK.setOnClickListener(this);
+            button3Say = (TextView) findViewById(R.id.button3Say);
+            if (voiceIsOn) {
+                // проверяем, поддерживается ли распознование речи
+                PackageManager packManager = getPackageManager();
+                List<ResolveInfo> intActivities = packManager.queryIntentActivities(
+                        new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+                if (intActivities.size() != 0) {
+                    // распознавание поддерживается, будем отслеживать событие щелчка по
+                    // кнопке
+                    button3Say.setOnClickListener(this);
+                } else {
+                    // распознавание не работает. Заблокируем
+                    // кнопку и выведем соответствующее
+                    // предупреждение.
+                    button3Say.setEnabled(false);
+                    Toast.makeText(this, "Упс - Распознавание речи не поддерживается!",
+                            Toast.LENGTH_LONG).show();
+                }
+                // подготовка движка TTS для проговаривания слов
+                Intent checkTTSIntent = new Intent();
+                // проверка наличия TTS
+                checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+                // запуск checkTTSIntent интента
+                startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
+            } else {
+                button3Say.setVisibility(View.GONE);
+            }
+        } else if (mode == MODE_EASY) {
+            buttonTrue = (Button) findViewById(R.id.answer_true);
+            buttonFalse = (Button) findViewById(R.id.answer_false);
+            buttonTrue.setOnClickListener(this);
+            buttonFalse.setOnClickListener(this);
+            timer = (TextView) findViewById(R.id.timer);
+            timer.setText(null);
         }
     }
 
     protected void installTTS() {
-        // интент, перебрасывающий пользователя на страницу TSS в Google
-        // Play
+        // интент, перебрасывающий пользователя на страницу TSS в Google Play
         Intent installTTSIntent = new Intent();
         installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
         startActivity(installTTSIntent);
@@ -132,13 +149,12 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 
     @Override
     public void onInit(int initStatus) {
-        if (voiceIsOn) {
-            if (initStatus == TextToSpeech.SUCCESS)
-                repeatTTS.setLanguage(Locale.US); // Язык
+        if (voiceIsOn && initStatus == TextToSpeech.SUCCESS) {
+            repeatTTS.setLanguage(Locale.US); // Язык
         }
     }
 
-    protected void listenToSpeech() {
+    private void listenToSpeech() {
         // запускаем интент, распознающий речь и передаем ему требуемые данные
         Intent listenIntent = new Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -159,13 +175,28 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     }
 
 	public void generateText() {
-		String[] textArray = SentenceMaker.makeSentance(lessonId, myScore);
-		ruText = textArray[0];
-        enText = new String[textArray.length-1];
-        for (int i = 1; i < textArray.length; i++) {
-            enText[i-1] = textArray[i];
+        switch (mode) {
+            case MODE_HARD:
+                multiSentence = SentenceMaker.makeSentance(lessonId, myScore);
+                taskField.setText(multiSentence.getRuSentance());
+                break;
+            case MODE_EASY:
+                boolean isTrue = random.nextBoolean();
+                if (isTrue) {
+                    multiSentence = SentenceMaker.makeSentance(lessonId, myScore);
+                    multiSentence = new MultiSentence(multiSentence.getRuSentance(), multiSentence.getEnSentances(), isTrue);
+                    resultField.setText(multiSentence.getEnSentances());
+                } else {
+                    multiSentence = SentenceMaker.makeSentance(lessonId, myScore);
+                    MultiSentence en = SentenceMaker.makeSentance(lessonId, myScore);
+                    while (multiSentence.getRuSentance().equals(en.getRuSentance())) {
+                        en = SentenceMaker.makeSentance(lessonId, myScore);
+                    }
+                    resultField.setText(en.getEnSentances());
+                }
+                taskField.setText(multiSentence.getRuSentance());
+                break;
         }
-		tv1ruText.setText(ruText);
 	}
 
 	@Override
@@ -173,65 +204,82 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 		switch (v.getId()) {
 		case R.id.button1Help:
             isHelped = true;
-            et1enText.setTextColor(tv1darkColor);
-			et1enText.setText(enText[0]);
-			if (ttsIsOn && voiceIsOn)
-				speackNow(enText[0]);
-            for (int i = 0; i < enText.length-1;i++) { // перемешка результатов
-                String tmp = enText[i];
-                enText[i]=enText[i+1];
-                enText[i+1]=tmp;
+            resultField.setTextColor(tv1darkColor);
+			resultField.setText(multiSentence.getEnSentances());
+			if (ttsIsOn && voiceIsOn) {
+                speakNow(resultField.getText().toString());
             }
             break;
-		case R.id.button2OK:
-			buttonOK();
+        case R.id.button2OK:
+        case R.id.answer_false:
+        case R.id.answer_true:
+			buttonOK(v.getId());
 			break;
 		case R.id.button3Say:
 			listenToSpeech();
 			break;
-		case R.id.ll_next:
-			buttonNext();
-			break;
 		}
 	}
 
-    public void buttonOK(){
-        if (!"".equalsIgnoreCase(et1enText.getText().toString())) {
-            boolean isTrue = false;
-            for (int i = 0; i < enText.length; i++) {
-                if (enText[i].equalsIgnoreCase(et1enText.getText().toString())
-                        || (enText[i]+".").equalsIgnoreCase(et1enText.getText().toString())) {
-                    isTrue = true;
-                    continue;
-                }
-            }
-            if (isTrue){
-                et1enText.setTextColor(getResources().getColor(R.color.myGreen));
+    public void buttonOK(int buttonId){
+        if (resultField.getText().length() != 0) {
+            String answer = resultField.getText().toString();
+            final boolean checkResult = mode == MODE_HARD ? multiSentence.checkResult(answer)
+                    : multiSentence.checkResult(buttonId == R.id.answer_true);
+            if (checkResult) {
+                resultField.setTextColor(getResources().getColor(R.color.green));
                 if (!isHelped) {// если помощи не было
                     if (myScore < Constants.MAX_SCORE) {
                         myScore++;
-                        tvScore.setText(MakeScore.make(myScore));
-//                        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor ed = sPref.edit();
-                        ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
-                        ed.apply();
                     }
                 }
                 buttonsEnabled(false);
                 isChecked = true;
             } else {
-                et1enText.setTextColor(getResources().getColor(R.color.myRed));
+                resultField.setTextColor(getResources().getColor(R.color.myRed));
                 if (!failNow) { // если еще не фэйлил
                     failNow = true;
                 }
+                if (myScore > 0) {
+                    myScore--;
+                }
+            }
+            tvScore.setText(MakeScore.make(myScore));
+//                        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor ed = sPref.edit();
+            ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
+            ed.apply();
+            if (mode == MODE_EASY) {
+                taskField.setText(null);
+                resultField.setText(checkResult ? "+1" : (buttonId == R.id.answer_true ? "Правильный вариант:\n" + multiSentence.getEnSentances() : "Ошибки небыло"));
+                buttonTrue.setEnabled(false);
+                buttonFalse.setEnabled(false);
+                final int timeToNext = checkResult ? 4000 : 7000;
+                new CountDownTimer(timeToNext, 1000) {
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        if (millisUntilFinished >= 2000) {
+                            timer.setText("(" + (int)(millisUntilFinished/1000 - 1) + ")");
+                        } else {
+                            buttonNext();
+                        }
+                    }
+
+                    @Override
+                    public void onFinish() { }
+                }.start();
             }
         }
     }
 
     public void buttonNext(){
         generateText();
-        et1enText.setText("");
-        et1enText.setTextColor(tv1darkColor);
+        if (mode == MODE_HARD) {
+            resultField.setText(null);
+        } else {
+            timer.setText(null);
+        }
+        resultField.setTextColor(tv1darkColor);
         buttonsEnabled(true);
         isHelped = false;
         failNow = false;
@@ -239,18 +287,16 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     }
 
     public void buttonsEnabled(boolean isEnabled){
-        if (isEnabled){
-            button1Help.setEnabled(true);
-            button3Say.setEnabled(true);
-            button2OK.setEnabled(true);
+        if (mode == MODE_HARD) {
+            button3Say.setEnabled(isEnabled);
+            button2OK.setEnabled(isEnabled);
         } else {
-            button3Say.setEnabled(false);
-            button2OK.setEnabled(false);
+            buttonTrue.setEnabled(isEnabled);
+            buttonFalse.setEnabled(isEnabled);
         }
     }
 
-	// Получаем результат распознавания
-	@Override
+	@Override // Получаем результат распознавания
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// проверяем результат распознавания речи
 		if (requestCode == VR_REQUEST && resultCode == RESULT_OK) {
@@ -273,7 +319,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                         resultString+="?";
 			        }
 			}
-            et1enText.setText(resultString);
+            resultField.setText(resultString);
 		}
 		// tss код здесь
 		// returned from TTS data check
@@ -289,13 +335,12 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 		}
 	}
 
-	public void speackNow(String text) {
+	public void speakNow(String text) {
 		repeatTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
 	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -314,7 +359,6 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 startActivity(intent);
                 break;
             case R.id.action_video:
-//              startActivity(new  createPlayVideoIntent(this, urlVideo));
                 startActivity(new Intent(Intent.ACTION_VIEW, getVideoUrl()));
                 break;
         }
@@ -327,10 +371,9 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_GO) {
-            // обрабатываем нажатие кнопки DONE
+        if (actionId == EditorInfo.IME_ACTION_GO) { // обрабатываем нажатие кнопки DONE на экранной клавиатуре
             if (!isChecked)
-                buttonOK();
+                buttonOK(R.id.button2OK);
             else
                 buttonNext();
             return true;

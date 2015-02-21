@@ -17,7 +17,7 @@
             android:id="@+id/textNumber"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/myGreen"
+            android:textColor="@color/green"
             android:gravity="center"
             android:textSize="28sp" />
 

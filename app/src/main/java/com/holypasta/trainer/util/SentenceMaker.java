@@ -1,6 +1,8 @@
 package com.holypasta.trainer.util;
 
 
+import com.holypasta.trainer.data.MultiSentence;
+import com.holypasta.trainer.levels.AbstractLevel;
 import com.holypasta.trainer.levels.Level01;
 import com.holypasta.trainer.levels.Level02;
 
@@ -8,26 +10,43 @@ import java.util.Random;
 
 public class SentenceMaker {
 
-	public static String[] makeSentance(int level, int score) {
-		switch (level) {
+	public static MultiSentence makeSentance(int levelId, int score) {
+        AbstractLevel level = null;
+        String[] badSentance = null;
+		switch (levelId) {
             case 0:
-                return Level01.makeSentance();
+                level = new Level01();
+                break;
             case 1:
-                return Level02.makeSentance(score);
+                level = new Level02();
+                break;
             case 2:
                 switch (new Random().nextInt(5)) {
                     case 0:
-                        return new String[] {"Я здесь", "I am here"};
+                        badSentance = new String[] {"Я здесь", "I am here"};
+                        break;
                     case 1:
-                        return new String[] {"Я был здесь", "I was here"};
+                        badSentance = new String[] {"Я был здесь", "I was here"};
+                        break;
                     case 2:
-                        return new String[] {"Я буду здесь", "I will be here"};
+                        badSentance = new String[] {"Я буду здесь", "I will be here"};
+                        break;
                     case 3:
-                        return new String[] {"Мне нравится летать", "I like to fly"};
+                        badSentance = new String[] {"Мне нравится летать", "I like to fly"};
+                        break;
                     case 4:
-                        return new String[] {"Ему хочется летать", "He wants to fly"};
+                        badSentance = new String[] {"Ему хочется летать", "He wants to fly"};
+                        break;
                 }
+                break;
+            default:
+                badSentance = new String[] {"x","y"};
+                break;
         }
-        return new String[]{"x","y"};
+        if (level != null) {
+            return level.makeSentance(score);
+        } else {
+            return new MultiSentence(badSentance);
+        }
 	}
 }

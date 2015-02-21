@@ -2,7 +2,10 @@
 <resources>
 
     <string name="app_name">Тренажер</string>
-    <string name="hello_world">Вали отсэдава!!</string>
+
+    <string name="button_help">\?</string>
+    <string name="button_say">!</string>
+    <string name="button_ok">\u2713</string>
 
     <string name="action_theory">\?!</string>
     <string name="action_video">8)</string>

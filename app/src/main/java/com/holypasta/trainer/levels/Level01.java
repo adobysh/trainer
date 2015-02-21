@@ -1,10 +1,11 @@
 package com.holypasta.trainer.levels;
 
+import com.holypasta.trainer.data.MultiSentence;
 import com.holypasta.trainer.util.RuVerbs01;
 
-public class Level01 {
+public class Level01 extends AbstractLevel {
 
-    public static String[] makeSentance() {
+    public MultiSentence makeSentance(int score) {
         String[][] verbs = new String[][]{
                 // infinitive
                 {"love", "live", "work", "open", "close", "start", "finish",
@@ -93,12 +94,6 @@ public class Level01 {
                         pronounsEN[1][why] + " didn't " + verbs[0][verb]};
                 break;
         }
-
-        String[] resultString = new String[sentenceEN.length + 1];
-        resultString[0] = sentenceRU;
-        for (int i = 1; i < sentenceEN.length + 1; i++) {
-            resultString[i] = sentenceEN[i - 1];
-        }
-        return resultString;
+        return new MultiSentence(sentenceRU, sentenceEN);
     }
 }
