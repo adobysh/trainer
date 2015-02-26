@@ -3,13 +3,27 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
-    <style name="TextLittle">
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@android:color/white</item>
+
+        <!-- Support library compatibility -->
+        <item name="background">@android:color/white</item>
+    </style>
+
+    <style name="TextLittleBlack">
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/material_black</item>
     </style>
 
-    <style name="TextLittleButton" parent="TextLittle">
+    <style name="TextLittleButton" parent="TextLittleBlack">
         <item name="android:paddingTop">10sp</item>
         <item name="android:paddingBottom">10sp</item>
         <item name="android:paddingLeft">15sp</item>

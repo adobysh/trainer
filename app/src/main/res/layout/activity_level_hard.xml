@@ -28,7 +28,7 @@
             android:text="@string/button_help" />
 
         <EditText
-            style="@style/TextLittle"
+            style="@style/TextLittleBlack"
             android:id="@+id/editText1"
             android:imeOptions="actionGo"
             android:layout_width="wrap_content"

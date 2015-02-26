@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="green">#00aa00</color>
-    <color name="myRed">#ff0000</color>
+    <color name="material_green">#4CAF50</color>
+    <color name="material_green_light">#C8E6C9</color>
+    <color name="material_red">#F44336</color>
+    <color name="material_red_light">#FFCDD2</color>
+    <color name="material_black">#212121</color>
+    <color name="material_divider">#B6B6B6</color>
+
+    <color name="pressed">#c0df</color>
+    <color name="background_accent">#9fff</color>
+    <color name="text_dimmed">#6000</color>
+    <color name="divider">#2000</color>
+    <color name="panel_bg">#ddd</color>
+    <color name="panel_bg_selected">#ffd</color>
+    <color name="shadow">#9999</color>
+    <color name="messages_background">#b000</color>
+    <color name="message_text">#fff</color>
 
 </resources>

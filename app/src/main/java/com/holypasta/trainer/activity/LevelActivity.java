@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,8 +35,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static android.view.View.GONE;
+
 public class LevelActivity extends ActionBarActivity implements Constants, OnClickListener,
-        TextView.OnEditorActionListener, TextToSpeech.OnInitListener {
+        TextView.OnEditorActionListener, TextToSpeech.OnInitListener, Animation.AnimationListener {
 
 	private int lessonId;
     private boolean voiceIsOn = false;
@@ -47,11 +51,13 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private TextView tvScore;
     private TextView taskField;
     private TextView resultField;
+    private TextView message;
     private TextView button1Help;
     private TextView button2OK;
     private TextView button3Say;
     private TextView buttonNext;
-    private TextView timer;
+    private Animation fielsdAnimation;
+    private Animation messageAnimation;
     private int myScore = 0;
     // переменная для проверки возможности
     // распознавания голоса в телефоне
@@ -81,7 +87,8 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         prepareToDialog();
         tv1darkColor = taskField.getCurrentTextColor();
         tvScore.setText(MakeScore.make(myScore));
-        getSupportActionBar().setTitle(getResources().getStringArray(R.array.contents)[lessonId]);
+//        getSupportActionBar().setTitle(getResources().getStringArray(R.array.contents)[lessonId]);
+        getSupportActionBar().setTitle((lessonId+1) + " урок");
         resultField.setOnEditorActionListener(this);
         buttonNext();
 	}
@@ -129,15 +136,16 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 // запуск checkTTSIntent интента
                 startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
             } else {
-                button3Say.setVisibility(View.GONE);
+                button3Say.setVisibility(GONE);
             }
         } else if (mode == MODE_EASY) {
             buttonTrue = (Button) findViewById(R.id.answer_true);
             buttonFalse = (Button) findViewById(R.id.answer_false);
+            message = (TextView) findViewById(R.id.message);
+            message.setVisibility(View.GONE);
+            message.setBackgroundResource(R.drawable.button_green);
             buttonTrue.setOnClickListener(this);
             buttonFalse.setOnClickListener(this);
-            timer = (TextView) findViewById(R.id.timer);
-            timer.setText(null);
         }
     }
 
@@ -230,16 +238,15 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             final boolean checkResult = mode == MODE_HARD ? multiSentence.checkResult(answer)
                     : multiSentence.checkResult(buttonId == R.id.answer_true);
             if (checkResult) {
-                resultField.setTextColor(getResources().getColor(R.color.green));
+                resultField.setTextColor(getResources().getColor(R.color.material_green));
                 if (!isHelped) {// если помощи не было
                     if (myScore < Constants.MAX_SCORE) {
                         myScore++;
                     }
                 }
-                buttonsEnabled(false);
                 isChecked = true;
             } else {
-                resultField.setTextColor(getResources().getColor(R.color.myRed));
+                resultField.setTextColor(getResources().getColor(R.color.material_red));
                 if (!failNow) { // если еще не фэйлил
                     failNow = true;
                 }
@@ -247,23 +254,32 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                     myScore--;
                 }
             }
+            buttonsEnabled(false);
             tvScore.setText(MakeScore.make(myScore));
-//                        sPref = getSharedPreferences(MyConst.SCORES, Context.MODE_PRIVATE);
             SharedPreferences.Editor ed = sPref.edit();
             ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
             ed.apply();
             if (mode == MODE_EASY) {
-                taskField.setText(null);
-                resultField.setText(checkResult ? "+1" : (buttonId == R.id.answer_true ? "Правильный вариант:\n" + multiSentence.getEnSentances() : "Ошибки небыло"));
+                fielsdAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);//todo
+                fielsdAnimation.setAnimationListener(this);
+                resultField.startAnimation(fielsdAnimation);
+                taskField.startAnimation(fielsdAnimation);
+                message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true ? "Правильный вариант:\n" + multiSentence.getEnSentances() : "Ошибки небыло"));
+                int drawableId = checkResult ? R.drawable.button_green : R.drawable.button_red;
+                message.setBackgroundResource(drawableId);
+                message.setVisibility(View.VISIBLE);
+                Animation animation = AnimationUtils.loadAnimation(this, R.anim.scale_in);
+                message.startAnimation(animation);
                 buttonTrue.setEnabled(false);
                 buttonFalse.setEnabled(false);
-                final int timeToNext = checkResult ? 4000 : 7000;
+                final int timeToNext = checkResult || buttonId == R.id.answer_false ? 3000 : 6000;
                 new CountDownTimer(timeToNext, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
-                        if (millisUntilFinished >= 2000) {
-                            timer.setText("(" + (int)(millisUntilFinished/1000 - 1) + ")");
-                        } else {
+                        if (millisUntilFinished < 2000) {
+                            messageAnimation = AnimationUtils.loadAnimation(LevelActivity.this, R.anim.scale_out);
+                            messageAnimation.setAnimationListener(LevelActivity.this);
+                            message.startAnimation(messageAnimation);
                             buttonNext();
                         }
                     }
@@ -279,8 +295,12 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         generateText();
         if (mode == MODE_HARD) {
             resultField.setText(null);
-        } else {
-            timer.setText(null);
+        } else if (mode == MODE_EASY) {
+            Animation animation = AnimationUtils.loadAnimation(this, R.anim.slide_in);
+            resultField.setVisibility(View.VISIBLE);
+            taskField.setVisibility(View.VISIBLE);
+            resultField.startAnimation(animation);
+            taskField.startAnimation(animation);
         }
         resultField.setTextColor(tv1darkColor);
         buttonsEnabled(true);
@@ -292,8 +312,8 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     public void buttonsEnabled(boolean isEnabled){
         if (mode == MODE_HARD) {
             button3Say.setEnabled(isEnabled);
-            button2OK.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-            buttonNext.setVisibility(isEnabled ? View.GONE : View.VISIBLE);
+            button2OK.setVisibility(isEnabled ? View.VISIBLE : GONE);
+            buttonNext.setVisibility(isEnabled ? GONE : View.VISIBLE);
         } else {
             buttonTrue.setEnabled(isEnabled);
             buttonFalse.setEnabled(isEnabled);
@@ -383,5 +403,21 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) { }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) { }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+        if (animation == fielsdAnimation) {
+            resultField.setVisibility(View.INVISIBLE);
+            taskField.setVisibility(View.INVISIBLE);
+        } else if (animation == messageAnimation) {
+            message.setVisibility(GONE);
+        }
     }
 }
