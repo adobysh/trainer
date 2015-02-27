@@ -1,5 +1,6 @@
 package com.holypasta.trainer.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -185,20 +186,20 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 	public void generateText() {
         switch (mode) {
             case MODE_HARD:
-                multiSentence = SentenceMaker.makeSentance(lessonId, myScore);
+                multiSentence = SentenceMaker.makeSentance(this, lessonId, myScore);
                 taskField.setText(multiSentence.getRuSentance());
                 break;
             case MODE_EASY:
                 boolean isTrue = random.nextBoolean();
                 if (isTrue) {
-                    multiSentence = SentenceMaker.makeSentance(lessonId, myScore);
+                    multiSentence = SentenceMaker.makeSentance(this, lessonId, myScore);
                     multiSentence = new MultiSentence(multiSentence.getRuSentance(), multiSentence.getEnSentances(), isTrue);
                     resultField.setText(multiSentence.getEnSentances());
                 } else {
-                    multiSentence = SentenceMaker.makeSentance(lessonId, myScore);
-                    MultiSentence en = SentenceMaker.makeSentance(lessonId, myScore);
+                    multiSentence = SentenceMaker.makeSentance(this, lessonId, myScore);
+                    MultiSentence en = SentenceMaker.makeSentance(this, lessonId, myScore);
                     while (multiSentence.getRuSentance().equals(en.getRuSentance())) {
-                        en = SentenceMaker.makeSentance(lessonId, myScore);
+                        en = SentenceMaker.makeSentance(this, lessonId, myScore);
                     }
                     resultField.setText(en.getEnSentances());
                 }
@@ -365,7 +366,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.level_menu, menu);
         return true;
     }
 
@@ -383,10 +384,18 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 startActivity(intent);
                 break;
             case R.id.action_video:
-                startActivity(new Intent(Intent.ACTION_VIEW, getVideoUrl()));
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, getYouTubeUrl()));
+                } catch (ActivityNotFoundException e) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, getVideoUrl()));
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private Uri getYouTubeUrl() {
+        return Uri.parse(YOUTUBE_BASE_URL + VIDEO_ID[lessonId]);
     }
 
     private Uri getVideoUrl() {

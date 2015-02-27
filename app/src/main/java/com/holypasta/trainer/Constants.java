@@ -8,18 +8,32 @@ public interface Constants {
     static final String EXTRA_LESSON_ID = "extra.lesson.id";
     static final String EXTRA_MODE = "extra.mode";
 
-    static final int COMPLETE = 3;
+    static final int COMPLETE = 5;
     static final String SCORE_0_15 = "SCORE_";
     static final String SCORES = "SCORES";
 
     static final String PREF_HARDCORE_MODE = "PREF_HARDCORE_MODE";
 
-    static final int MAX_SCORE = 50;
-    static final int PASS_SCORE = 45;
+    static final int MAX_SCORE = 100;
+    static final int PASS_SCORE = 100;
 
-    static final String VIDEO_BASE_URL = "vnd.youtube:";
-    static final String[] VIDEO_ID = new String [] { "j7RJ_fk7PcE", "DNyhZ4abPWk", "tZ4whtYtODA",
-            "w1z7fIJJWiU", "DoD43g6wnd8", "8MEA6mE1ThU", "ahxebQMw1-I", "iu5xXDtmIrs", "g6e_G8U4lsE",
-            "0NbFr17dJ1c", "Zl5mxpi-Dvw", "9or1-tMWyo0", "Hl1ba1OyKl0", "UYGdntvd4PY", "1RviTGwOJdo",
-            "NC1xPDE15cw" };
+    static final String YOUTUBE_BASE_URL = "vnd.youtube:";
+    static final String VIDEO_BASE_URL = "https://www.youtube.com/watch?v=";
+    static final String[] VIDEO_ID = new String [] {
+            "y9fFDpSqKdQ",
+            "KpNy_DBth6k",
+            "qg9NhobhbTg",
+            "Bq6zgXdAc7Q",
+            "VMwVt6ohKFE",
+            "B93DPIcRV2o",
+            "xCNIdZewu2s",
+            "yr5KPLPXOVs",
+            "2x4WP4owvkw",
+            "vkO2B8p_jy4",
+            "mq0Bz4YR45k",
+            "bSVEllZUFTw",
+            "ASz1-RT-zgc",
+            "rW6YhEjABbw",
+            "KAP66olZSQA",
+            "kY4_9sXfcSo" };
 }

@@ -67,23 +67,23 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
         if (arg2 < Constants.COMPLETE) {
-            if (arg2 <= complete) {
+//            if (arg2 <= complete) {
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_LESSON_ID, arg2);
                 intent.putExtra(EXTRA_MODE, mode);
                 intent.setClass(this, LevelActivity.class);
                 startActivity(intent);
-            } else {
-                final AlertDialog aboutDialog = new AlertDialog.Builder(
-                        MainActivity.this)
-                        .setMessage("Вам необходимо завершить предыдущие уроки")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        }).create();
-                aboutDialog.show();
-            }
+//            } else {
+//                final AlertDialog aboutDialog = new AlertDialog.Builder(
+//                        MainActivity.this)
+//                        .setMessage("Вам необходимо завершить предыдущие уроки")
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                            }
+//                        }).create();
+//                aboutDialog.show();
+//            }
         }
     }
 

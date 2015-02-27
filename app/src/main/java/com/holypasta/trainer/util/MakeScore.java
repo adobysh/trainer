@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 public class MakeScore {
 
     static public String make(int score) {
-        return ("\u2606 " + (new DecimalFormat("0.0")).format(score/10.0));
+//        return ("\u2606 " + (new DecimalFormat("0.0")).format(score/10.0));
+        return "\u2606 " + score;
     }
 }

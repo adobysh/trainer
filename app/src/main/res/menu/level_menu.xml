@@ -6,13 +6,13 @@
 
     <item android:id="@+id/action_video"
         android:title="@string/action_video"
-        android:icon="@drawable/youtube35"
+        android:icon="@android:drawable/ic_media_play"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/action_theory"
         android:title="@string/action_theory"
-        android:icon="@drawable/help19"
+        android:icon="@android:drawable/ic_dialog_info"
         android:orderInCategory="100"
         app:showAsAction="always" />
 </menu>
