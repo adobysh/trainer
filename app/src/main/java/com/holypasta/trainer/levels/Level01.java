@@ -16,8 +16,7 @@ public class Level01 extends AbstractLevel {
                 // past +
                 {"loved", "lived", "worked", "opened", "closed", "started",
                         "finished", "saw", "came", "went", "knew", "thought"}};
-        String[] pronounsRU = new String[]{"Я", "Ты", "Он", "Она", "Это",
-                "Они", "Мы"};
+        String[] pronounsRU = new String[]{"Я", "Ты", "Он", "Она", "Это", "Они", "Мы"};
         String[][] pronounsEN = new String[][]{
                 {"I", "you", "he", "she", "it", "they", "we"},
                 {"I", "You", "He", "She", "It", "They", "We"}};

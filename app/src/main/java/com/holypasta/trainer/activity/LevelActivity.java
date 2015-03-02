@@ -405,10 +405,11 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_GO) { // обрабатываем нажатие кнопки DONE на экранной клавиатуре
-            if (!isChecked)
+            if (!isChecked) {
                 buttonOK(R.id.button2OK);
-            else
+            } else {
                 buttonNext();
+            }
             return true;
         }
         return false;
