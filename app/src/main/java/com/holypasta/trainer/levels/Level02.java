@@ -7,29 +7,23 @@ import java.util.Random;
 public class Level02 extends AbstractLevel {
 
     @Override
-    public MultiSentence makeSentance(int score) {
-        return new MultiSentence(makeSentanceArray(score));
+    public MultiSentence makeSentence(int score, int mode) {
+        return new MultiSentence(makeSentenceArray(score, mode));
     }
 
-    public String[] makeSentanceArray(int score) {
-        int where = new Random().nextInt(9);
-        if (score < 17) {
-            return part01_pronoun(where);
-        } else if (score < 34) {
-            return part02_interrogative(where/3);
-        } else if (score < 50) {
-            return part03_interrogative_pronoun(where/3);
-        } else {
-            switch (new Random().nextInt(3)) {
-                case 0:
-                    return part01_pronoun(where);
-                case 1:
-                    return part02_interrogative(where/3);
-                case 2:
-                    return part03_interrogative_pronoun(where/3);
-            }
+    public String[] makeSentenceArray(int score, int mode) {
+        Random random = new Random();
+        int time = random.nextInt(3);
+        switch (random.nextInt(3)) {
+            case 0:
+                int form = random.nextInt(3);
+                return part01_pronoun(genWhere(form, time));
+            case 1:
+                return part02_interrogative(time);
+            case 2:
+                return part03_interrogative_pronoun(time);
         }
-        return new String[]{"Почему мы знаем его?", "Why do we know him?"};
+        return new String[]{"ошибка", "ошибка"};
     }
 
     private static String[] part01_pronoun(int where) {

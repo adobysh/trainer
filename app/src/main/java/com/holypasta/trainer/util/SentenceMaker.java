@@ -9,11 +9,9 @@ import com.holypasta.trainer.levels.Level01;
 import com.holypasta.trainer.levels.Level02;
 import com.holypasta.trainer.levels.Level03to05;
 
-import java.util.Random;
-
 public class SentenceMaker {
 
-	public static MultiSentence makeSentance(Context context, int levelId, int score) {
+	public static MultiSentence makeSentance(Context context, int levelId, int mode, int score) {
         AbstractLevel level = null;
         String[] badSentance = null;
 		switch (levelId) {
@@ -50,7 +48,7 @@ public class SentenceMaker {
                 break;
         }
         if (level != null) {
-            return level.makeSentance(score);
+            return level.makeSentence(score, mode);
         } else {
             return new MultiSentence(badSentance);
         }

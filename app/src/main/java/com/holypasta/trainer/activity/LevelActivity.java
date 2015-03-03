@@ -57,7 +57,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private TextView button2OK;
     private TextView button3Say;
     private TextView buttonNext;
-    private Animation fielsdAnimation;
+    private Animation fieldsAnimation;
     private Animation messageAnimation;
     private int myScore = 0;
     // переменная для проверки возможности
@@ -184,27 +184,10 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     }
 
 	public void generateText() {
-        switch (mode) {
-            case MODE_HARD:
-                multiSentence = SentenceMaker.makeSentance(this, lessonId, myScore);
-                taskField.setText(multiSentence.getRuSentance());
-                break;
-            case MODE_EASY:
-                boolean isTrue = random.nextBoolean();
-                if (isTrue) {
-                    multiSentence = SentenceMaker.makeSentance(this, lessonId, myScore);
-                    multiSentence = new MultiSentence(multiSentence.getRuSentance(), multiSentence.getEnSentances(), isTrue);
-                    resultField.setText(multiSentence.getEnSentances());
-                } else {
-                    multiSentence = SentenceMaker.makeSentance(this, lessonId, myScore);
-                    MultiSentence en = SentenceMaker.makeSentance(this, lessonId, myScore);
-                    while (multiSentence.getRuSentance().equals(en.getRuSentance())) {
-                        en = SentenceMaker.makeSentance(this, lessonId, myScore);
-                    }
-                    resultField.setText(en.getEnSentances());
-                }
-                taskField.setText(multiSentence.getRuSentance());
-                break;
+        multiSentence = SentenceMaker.makeSentance(this, lessonId, mode, myScore);
+        taskField.setText(multiSentence.getRuSentence());
+        if (mode == MODE_EASY) {
+            resultField.setText(multiSentence.getEnSentences());
         }
 	}
 
@@ -214,7 +197,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 		case R.id.button1Help:
             isHelped = true;
             resultField.setTextColor(tv1darkColor);
-			resultField.setText(multiSentence.getEnSentances());
+			resultField.setText(multiSentence.getEnSentences());
 			if (ttsIsOn && voiceIsOn) {
                 speakNow(resultField.getText().toString());
             }
@@ -236,8 +219,15 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     public void buttonOK(int buttonId){
         if (resultField.getText().length() != 0) {
             String answer = resultField.getText().toString();
-            final boolean checkResult = mode == MODE_HARD ? multiSentence.checkResult(answer)
-                    : multiSentence.checkResult(buttonId == R.id.answer_true);
+            boolean checkResult = multiSentence.checkResult(answer);
+            System.out.println("!!! answer: " + answer);
+            System.out.println("!!! checkResult " + checkResult);
+            if (mode == MODE_EASY) {
+                boolean answerButton = buttonId == R.id.answer_true;
+                System.out.println("!!! answerButton " + answerButton);
+                checkResult = answerButton == checkResult;
+                System.out.println("!!! checkResult " + checkResult);
+            }
             if (checkResult) {
                 resultField.setTextColor(getResources().getColor(R.color.material_green));
                 if (!isHelped) {// если помощи не было
@@ -261,11 +251,11 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
             ed.apply();
             if (mode == MODE_EASY) {
-                fielsdAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);//todo
-                fielsdAnimation.setAnimationListener(this);
-                resultField.startAnimation(fielsdAnimation);
-                taskField.startAnimation(fielsdAnimation);
-                message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true ? "Правильный вариант:\n" + multiSentence.getEnSentances() : "Ошибки небыло"));
+                fieldsAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);//todo
+                fieldsAnimation.setAnimationListener(this);
+                resultField.startAnimation(fieldsAnimation);
+                taskField.startAnimation(fieldsAnimation);
+                message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true ? "Правильный вариант:\n" + multiSentence.getCorrectEnSentence() : "Ошибки небыло"));
                 int drawableId = checkResult ? R.drawable.button_green : R.drawable.button_red;
                 message.setBackgroundResource(drawableId);
                 message.setVisibility(View.VISIBLE);
@@ -423,7 +413,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 
     @Override
     public void onAnimationEnd(Animation animation) {
-        if (animation == fielsdAnimation) {
+        if (animation == fieldsAnimation) {
             resultField.setVisibility(View.INVISIBLE);
             taskField.setVisibility(View.INVISIBLE);
         } else if (animation == messageAnimation) {

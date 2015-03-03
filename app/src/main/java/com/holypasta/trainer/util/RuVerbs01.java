@@ -6,7 +6,7 @@ public class RuVerbs01 {
 		// time [ 1(future) | 2(present) | 3(past) ]
 		String[] tmp;
 		switch (time) {
-		case 1: // future ----------------------------------------
+		case 0: // future ----------------------------------------
 			switch (why) {
 			case 0: // I
 				tmp = new String[] { "буду любить", "буду жить",
@@ -48,7 +48,7 @@ public class RuVerbs01 {
 				break;
 			}
 			return tmp[c];
-		case 2: // present ------------------------------------
+		case 1: // present ------------------------------------
 			switch (why) {
 			case 0: // I
 				tmp = new String[] { "люблю", "живу",
@@ -89,7 +89,7 @@ public class RuVerbs01 {
 				break;
 			}
 			return tmp[c];
-		default: // past -----------------------------------
+        case 2:  // past -----------------------------------
 			switch (why) {
 			case 0: // I
 			case 1: // You
@@ -126,7 +126,7 @@ public class RuVerbs01 {
 			return tmp[c];
 		}
 		
-
+        return "x";
 	}
 
 }
