@@ -1,8 +1,6 @@
 package com.holypasta.trainer.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,7 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.holypasta.trainer.Constants;
-import com.holypasta.trainer.adapter.MyAdapter;
+import com.holypasta.trainer.adapter.LevelsAdapter;
 import com.holypasta.trainer.english.R;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity implements Constants, AdapterView.OnItemClickListener {
 
     private ListView lv1main;
-    private MyAdapter adapter;
+    private LevelsAdapter adapter;
     private List<Integer> myScores;
     private SharedPreferences sPref;
     private int complete;
@@ -50,7 +48,7 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
                 complete++;
             }
         }
-        adapter = new MyAdapter(parts, this, myScores, complete);
+        adapter = new LevelsAdapter(parts, this, myScores, complete);
         lv1main.setAdapter(adapter);
         lv1main.setOnItemClickListener(this);
     }

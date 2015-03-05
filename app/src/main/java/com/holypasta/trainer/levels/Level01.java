@@ -1,9 +1,9 @@
 package com.holypasta.trainer.levels;
 
-import com.holypasta.trainer.data.MultiSentence;
+import com.holypasta.trainer.data.MultiSentenceData;
+import com.holypasta.trainer.data.SentenceParamData;
 import com.holypasta.trainer.util.RuVerbs01;
 
-import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Level01 extends AbstractLevel {
@@ -23,24 +23,13 @@ public class Level01 extends AbstractLevel {
             {"I", "you", "he", "she", "it", "they", "we"},
             {"I", "You", "He", "She", "It", "They", "We"}};
 
-    private MultiSentence generateIncorrectSentence(MultiSentence resultSentence, MultiSentence incorrectSentence) {
-        resultSentence.setIncorrectEnSentences(incorrectSentence.getAllCorrectEnSentences());
-        return resultSentence;
-    }
-
-    private int regenerateParam(Integer param, int scope) {
-        param += new Random().nextInt(scope - 1);
-        param %= scope;
-        return param;
-    }
-
-    public MultiSentence makeSentence(int score, int mode) {
+    public MultiSentenceData makeSentence(int mode) {
         Random random = new Random();
-        int form = random.nextInt(3);
-        int time = random.nextInt(3);
-        int why = random.nextInt(pronounsEN[0].length);
-        int verb = random.nextInt(verbs[0].length);
-        MultiSentence sentence = makeSentence(form, time, why, verb);
+        SentenceParamData form = new SentenceParamData(3);
+        SentenceParamData time = new SentenceParamData(3);
+        SentenceParamData why = new SentenceParamData(pronounsEN[0].length);
+        SentenceParamData verb = new SentenceParamData(verbs[0].length);
+        MultiSentenceData sentence = makeSentence(form.value(), time.value(), why.value(), verb.value());
         if (mode == MODE_HARD) {
             return sentence;
         } else { // MODE_EASY
@@ -49,25 +38,25 @@ public class Level01 extends AbstractLevel {
             }
             System.out.println("!!! false");
             if (random.nextInt(10) != 0) { // 90% change time
-                time = regenerateParam(time, 3);
+                time.nextRandom();
             } else { // 10%
                 switch (random.nextInt(3)) {
                     case 0:
-                        form = regenerateParam(form, 3);
+                        form.nextRandom();
                         break;
                     case 1:
-                        why = regenerateParam(why, pronounsEN[0].length);
+                        why.nextRandom();
                         break;
                     case 2:
-                        verb = regenerateParam(verb, verbs[0].length);
+                        verb.nextRandom();
                         break;
                 }
             }
-            return generateIncorrectSentence(sentence, makeSentence(form, time, why, verb));
+            return genWrongSentence(sentence, makeSentence(form.value(), time.value(), why.value(), verb.value()));
         }
     }
 
-    public MultiSentence makeSentence(int form, int time, int why, int verb) {
+    public MultiSentenceData makeSentence(int form, int time, int why, int verb) {
         System.out.println("!!! make " + form + " " + time + " " + why + " " + verb);
         String sentenceRU = "ошибка";
         String[] sentenceEN = { "ошибка" };
@@ -140,6 +129,6 @@ public class Level01 extends AbstractLevel {
                         pronounsEN[1][why] + " didn't " + verbs[0][verb]};
                 break;
         }
-        return new MultiSentence(sentenceRU, sentenceEN);
+        return new MultiSentenceData(sentenceRU, sentenceEN);
     }
 }

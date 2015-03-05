@@ -3,7 +3,7 @@ package com.holypasta.trainer.util;
 
 import android.content.Context;
 
-import com.holypasta.trainer.data.MultiSentence;
+import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.levels.AbstractLevel;
 import com.holypasta.trainer.levels.Level01;
 import com.holypasta.trainer.levels.Level02;
@@ -11,7 +11,7 @@ import com.holypasta.trainer.levels.Level03to05;
 
 public class SentenceMaker {
 
-	public static MultiSentence makeSentance(Context context, int levelId, int mode, int score) {
+	public static MultiSentenceData makeSentance(Context context, int levelId, int mode, int score) {
         AbstractLevel level = null;
         String[] badSentance = null;
 		switch (levelId) {
@@ -48,9 +48,9 @@ public class SentenceMaker {
                 break;
         }
         if (level != null) {
-            return level.makeSentence(score, mode);
+            return level.makeSentence(mode);
         } else {
-            return new MultiSentence(badSentance);
+            return new MultiSentenceData(badSentance);
         }
 	}
 }

@@ -6,13 +6,13 @@ import java.util.List;
 /**
  * Created by q1bot on 11.01.15.
  */
-public class MultiSentence {
+public class MultiSentenceData {
 
     private String ruSentence;
     private List<String> correctEnSentences;
     private List<String> incorrectEnSentences;
 
-    public MultiSentence(String ruSentence, String... correctEnSentences) {
+    public MultiSentenceData(String ruSentence, String... correctEnSentences) {
         this.ruSentence = ruSentence;
         this.correctEnSentences = new ArrayList<String>();
         for (String enSentence : correctEnSentences) {
@@ -20,7 +20,7 @@ public class MultiSentence {
         }
     }
 
-    public MultiSentence(String[] result) {
+    public MultiSentenceData(String[] result) {
         this.ruSentence = result[0];
         this.correctEnSentences = new ArrayList<String>();
         for (int i = 1; i < result.length; i++) {
@@ -28,9 +28,15 @@ public class MultiSentence {
         }
     }
 
-    public MultiSentence(String ruSentence, List<String> correctEnSentences) {
+    public MultiSentenceData(String ruSentence, List<String> correctEnSentences) {
         this.ruSentence = ruSentence;
         this.correctEnSentences = correctEnSentences;
+    }
+
+    public MultiSentenceData(List<String> sentences) {
+        this.ruSentence = sentences.get(0);
+        sentences.remove(0);
+        this.correctEnSentences = sentences;
     }
 
     public String getRuSentence() {

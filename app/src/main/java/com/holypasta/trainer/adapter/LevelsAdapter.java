@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by q1bot on 24.01.15.
  */
-public class MyAdapter extends BaseAdapter {
+public class LevelsAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private List<Integer> myScores;
@@ -28,7 +28,7 @@ public class MyAdapter extends BaseAdapter {
     private int darkColor = 0;
     private int greenColor = 0;
 
-    public MyAdapter(String[] parts, Activity activity, List<Integer> myScores, int complete) {
+    public LevelsAdapter(String[] parts, Activity activity, List<Integer> myScores, int complete) {
         this.parts = parts;
         this.layoutInflater = activity.getLayoutInflater();
         this.myScores = myScores;

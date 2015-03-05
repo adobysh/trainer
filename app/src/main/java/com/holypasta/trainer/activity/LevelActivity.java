@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.holypasta.trainer.Constants;
-import com.holypasta.trainer.data.MultiSentence;
+import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.MakeScore;
 import com.holypasta.trainer.util.SentenceMaker;
@@ -48,7 +48,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private boolean isChecked = false;
     private int tv1darkColor;
     private SharedPreferences sPref;
-    private MultiSentence multiSentence;
+    private MultiSentenceData multiSentence;
     private TextView tvScore;
     private TextView taskField;
     private TextView resultField;

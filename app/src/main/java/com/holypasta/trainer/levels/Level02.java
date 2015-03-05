@@ -1,32 +1,75 @@
 package com.holypasta.trainer.levels;
 
-import com.holypasta.trainer.data.MultiSentence;
+import com.holypasta.trainer.data.MultiSentenceData;
+import com.holypasta.trainer.data.SentenceParamData;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Level02 extends AbstractLevel {
 
     @Override
-    public MultiSentence makeSentence(int score, int mode) {
-        return new MultiSentence(makeSentenceArray(score, mode));
-    }
-
-    public String[] makeSentenceArray(int score, int mode) {
-        Random random = new Random();
-        int time = random.nextInt(3);
-        switch (random.nextInt(3)) {
+    public MultiSentenceData makeSentence(int mode) {
+        SentenceParamData time = new SentenceParamData(3);
+        SentenceParamData form = new SentenceParamData(3);
+        SentenceParamData partOfLesson = new SentenceParamData(3);//todo temp 1
+        SentenceParamData part1variant = new SentenceParamData(7);
+        SentenceParamData part2variant = new SentenceParamData(18);
+        SentenceParamData part3variant = new SentenceParamData(9);
+        int variant = 0;
+        switch (partOfLesson.value()) {
             case 0:
-                int form = random.nextInt(3);
-                return part01_pronoun(genWhere(form, time));
+                variant = part1variant.value();
+                break;
             case 1:
-                return part02_interrogative(time);
+                variant = part2variant.value();
+                break;
             case 2:
-                return part03_interrogative_pronoun(time);
+                variant = part3variant.value();
+                break;
         }
-        return new String[]{"ошибка", "ошибка"};
+        MultiSentenceData sentence = makeSentence(partOfLesson.value(), time.value(), form.value(), variant, false);
+        if (mode == MODE_HARD) {
+            return sentence;
+        } else { // MODE_EASY
+            Random random = new Random();
+            if (random.nextBoolean()) { // 50% true
+                return sentence;
+            }
+            if (random.nextBoolean()) { // 50% change time
+                time.nextRandom();
+                return genWrongSentence(sentence, makeSentence(partOfLesson.value(), time.value(), form.value(), variant, false));
+            } else { // 50% change key word
+                return genWrongSentence(sentence, makeSentence(partOfLesson.value(), time.value(), form.value(), variant, true));
+            }
+        }
     }
 
-    private static String[] part01_pronoun(int where) {
+    public MultiSentenceData makeSentence(int partOfLesson, int time, int form, int variant, boolean wrong) {
+        System.out.println("!!! time = " + time + ", wrong = " + wrong);
+        List<String> result = new ArrayList<>();
+        switch (partOfLesson) {
+            case 0:
+                result = part01_pronoun(genWhere(form, time), variant);
+                break;
+            case 1:
+                result = part02_interrogative(time, variant);
+                break;
+            case 2:
+                result = part03_interrogative_pronoun(time, variant);
+                break;
+        }
+        if (wrong) {
+            return new MultiSentenceData(result.get(1), result.get(0));
+        } else {
+            result.remove(0);
+            return new MultiSentenceData(result);
+        }
+    }
+
+    private List<String> part01_pronoun(int where, int variant) {
         String[][] result;
         switch (where) {
             case 0: // future ?
@@ -96,7 +139,7 @@ public class Level02 extends AbstractLevel {
                         {"Я знали их?", "Did I know them?"},
                         {"Ты спрашивал её?", "Did you ask her?"},
                         {"Они отвечали нам?", "Did they answer us?"},
-                        {"Ты давала мне?", "Did you give me?"},
+                        {"Ты давал мне?", "Did you give me?"},
                         {"Я говорил им?", "Did I speak them?"}};
                 break;
             case 7: // past +
@@ -106,40 +149,47 @@ public class Level02 extends AbstractLevel {
                         {"Я знали их", "I knew them"},
                         {"Ты спрашивал её", "You asked her"},
                         {"Они отвечали нам", "They answered us"},
-                        {"Ты давала мне", "You gave me"},
+                        {"Ты давал мне", "You gave me"},
                         {"Я говорил им", "I spoke them"}};
                 break;
-            default: // past -
+            case 8: // past -
                 result = new String[][]{
                         {"Она не любила его", "She did not love him", "She didn't love him"},
                         {"Мы не видели тебя", "We did not see you", "We didn't see you"},
-                        {"Я не знали их", "I did not know them", "I didn't know them"},
+                        {"Я не знал их", "I did not know them", "I didn't know them"},
                         {"Ты не спрашивал её", "You did not ask her", "You didn't ask her"},
                         {"Они не отвечали нам", "They did not answer us", "They didn't answer us"},
-                        {"Ты не давала мне", "You did not give me", "You didn't give me"},
+                        {"Ты не давал мне", "You did not give me", "You didn't give me"},
                         {"Я не говорил им", "I did not speak them", "I didn't speak them"}};
                 break;
+            default:
+                result = new String[][]
+                        { { ERROR_MESSAGE }, { ERROR_MESSAGE }, { ERROR_MESSAGE } };
         }
-        return result[new Random().nextInt(result.length)];
+        List<String> resultList = new ArrayList<String>(Arrays.asList(result[variant]));
+        String sentence = resultList.get(resultList.size() - 1);
+        String wrong = replacePronouns(sentence);
+        resultList.add(0, wrong);
+        return resultList;
     }
 
-    private static String[] part02_interrogative(int where) {
+    private List<String> part02_interrogative(int time, int variant) {
         String[][] result;
-        switch (where) {
+        switch (time) {
             case 0: // future ?
                 result = new String[][]{
                         {"Кого ты полюбишь?", "Who Will you love?"},
                         {"Как он будет жить?", "How will he live?"},
-                        {"Когда это будем работать?", "When will it work?"},
+                        {"Когда это будет работать?", "When will it work?"},
                         {"Что она откроет?", "What will she open?"},
                         {"Почему они закроют?", "Why will they close?"},
                         {"Где мы начнем?", "Where will we start?"},
                         {"Когда они закончат?", "When will they finish?"},
                         {"Что я увижу?", "What will I see?"},
-                        {"Куда ты придешь?", "Where will you come?"},
+                        {"Почему ты придешь?", "Why will you come?"},
                         {"Как он будет ходить?", "How will he go?"},
-                        {"Когда мы будем знать?", "When will we know?"},
-                        {"Когда они будут думать?", "When will they think?"},
+                        {"Что мы будем знать?", "What will we know?"},
+                        {"Как они будут думать?", "How will they think?"},
 
                         {"Кого он спросит?", "Who will he ask?"},
                         {"Что она ответит?", "What will she answer?"},
@@ -152,17 +202,23 @@ public class Level02 extends AbstractLevel {
                 result = new String[][]{
                         {"Кого ты любишь?", "Who do you love?"},
                         {"Как он живет?", "How does he live?"},
+                        {"Как это работает?", "How does it work?"},
                         {"Что она открывает?", "What does she open?"},
                         {"Почему они закрывают?", "Why do they close?"},
+                        {"Как мы начинаем?", "How do we start?"},
+                        {"Что они заканчивают?", "What do they finish?"},
                         {"Что я вижу?", "What do I see?"},
+                        {"Почему ты пришел?", "Why do you come?"},
                         {"Как он ходит?", "How does he go?"},
-                        {"Когда они думают?", "When do they think?"},
+                        {"Что мы знаем?", "What do we know?"},
+                        {"Как они думают?", "How do they think?"},
 
                         {"Кого он спрашивает?", "Who does he ask?"},
                         {"Что она отвечает?", "What does she answer?"},
                         {"Что мы даём?", "What do we give?"},
                         {"Почему я надеюсь?", "Why do I hope?"},
-                        {"Как они говорят?", "How do they speak?"}};
+                        {"Как они говорят?", "How do they speak?"},
+                        {"Почему мы путешествуем?", "Why do we travel?"}};
                 break;
             default: // past ?
                 result = new String[][]{
@@ -174,62 +230,110 @@ public class Level02 extends AbstractLevel {
                         {"Где мы начинали?", "Where did we start?"},
                         {"Когда они заканчивали?", "When did they finish?"},
                         {"Что я видел?", "What did I see?"},
-                        {"Куда ты приходил?", "Where did you come?"},
-                        {"Как он ходила?", "How did he go?"},
-                        {"Когда мы знали?", "When did we know?"},
-                        {"Когда они думали?", "When did they think?"},
+                        {"Почему ты приходил?", "Why did you come?"},
+                        {"Как он ходил?", "How did he go?"},
+                        {"Что мы знали?", "What did we know?"},
+                        {"Как они думали?", "How did they think?"},
 
                         {"Кого он спрашивал?", "Who did he ask?"},
                         {"Что она отвечала?", "What did she answer?"},
-                        {"Что мы даём?", "What did we give?"},
+                        {"Что мы давали?", "What did we give?"},
                         {"Почему я надеялся?", "Why did I hope?"},
                         {"Как они говорили?", "How did they speak?"},
                         {"Когда мы путешествовали?", "When did we travel?"}};
                 break;
         }
-        return result[new Random().nextInt(result.length)];
+        List<String> resultList = new ArrayList<>(Arrays.asList(result[variant]));
+        String sentence = resultList.get(resultList.size() - 1);
+        String wrong = replaceQuestion(sentence);
+        resultList.add(0, wrong);
+        return resultList;
     }
 
-    private static String[] part03_interrogative_pronoun(int where) {
+    private List<String> part03_interrogative_pronoun(int time, int variant) {
         String[][] result;
-        switch (where) {
+        switch (time) {
             case 0: // future ?
                 result = new String[][]{
                         {"Когда ты полюбишь их?", "When Will you love them?"},
-                        {"Что она откроет ему?", "What will she open his?"},
+                        {"Что она откроет ему?", "What will she open him?"},
                         {"Почему они закроют нас?", "Why will they close us?"},
-                        {"Когда я увижу его?", "When will I see his?"},
-                        {"Когда мы будем знать её?", "When will we know her?"},
+                        {"Когда я увижу его?", "When will I see him?"},
+                        {"Когда мы узнаем её?", "When will we know her?"},
 
                         {"Когда он спросит её?", "When will he ask her?"},
-                        {"Что она ответит ему?", "What will she answer his?"},
-                        {"Что мы дадим ему?", "What will we give his?"},
+                        {"Что она ответит ему?", "What will she answer him?"},
+                        {"Что мы дадим ему?", "What will we give him?"},
                         {"Как они будут говорить нам?", "How will they speak us?"}};
                 break;
             case 1: // present ?
                 result = new String[][]{
-                        {"Что она открывает ему?", "What does she open his?"},
+                        {"Почему ты любишь их?", "Why do you love them?"},
+                        {"Что она открывает ему?", "What does she open him?"},
                         {"Почему они закрывают нас?", "Why do they close us?"},
+                        {"Почему я вижу его?", "Why do I see him?"},
                         {"Почему мы знаем её?", "Why do we know her?"},
 
                         {"Как он спросит её?", "How does he ask her?"},
-                        {"Что она отвечает ему?", "What does she answer his?"},
-                        {"Что мы даём ему?", "What do we give his?"},
+                        {"Что она отвечает ему?", "What does she answer him?"},
+                        {"Что мы даём ему?", "What do we give him?"},
                         {"Как они говорят нам?", "How do they speak us?"}};
                 break;
             default: // past ?
                 result = new String[][]{
                         {"Когда ты любила их?", "When did you love them?"},
-                        {"Что она открывала ему?", "What did she open his?"},
+                        {"Что она открывала ему?", "What did she open him?"},
                         {"Почему они закрыли нас?", "Why did they close us?"},
-                        {"Когда я видел его?", "When did I see his?"},
+                        {"Когда я видел его?", "When did I see him?"},
+                        {"Когда мы узнали её?", "When did we know her?"},
 
                         {"Когда он спрашивал её?", "When did he ask her?"},
-                        {"Что она отвечала ему?", "What did she answer his?"},
-                        {"Что мы дали ему?", "What did we give his?"},
+                        {"Что она отвечала ему?", "What did she answer him?"},
+                        {"Что мы дали ему?", "What did we give him?"},
                         {"Как они говорили нам?", "How did they speak us?"}};
                 break;
         }
-        return result[new Random().nextInt(result.length)];
+        List<String> resultList = new ArrayList<String>(Arrays.asList(result[variant]));
+        String sentence = resultList.get(resultList.size() - 1);
+        String wrong;
+        if (new Random().nextBoolean()) {
+            wrong = replaceQuestion(sentence);
+        } else {
+            wrong = replacePronouns(sentence);
+        }
+        resultList.add(0, wrong);
+        return resultList;
+    }
+
+    private String replacePronouns(String sentence) {
+        final String[] pronouns = { "me", "you", "him", "her", "us", "them" };
+        for (int i = 0; i < pronouns.length; i++) {
+            if (sentence.endsWith(pronouns[i])
+                    || sentence.endsWith(pronouns[i] + "?")) {
+                boolean question = sentence.endsWith(pronouns[i] + "?");
+                String oldSuffix = pronouns[i];
+                oldSuffix += question ? "?$" : "$";
+                SentenceParamData spd = new SentenceParamData(i, pronouns.length);
+                String newSuffix = pronouns[spd.nextRandom()];
+                newSuffix += question ? "?" : "";
+                String wrong = sentence.replaceAll(oldSuffix, newSuffix);
+                return wrong;
+            }
+        }
+        return ERROR_MESSAGE;
+    }
+
+    private String replaceQuestion(String sentence) {
+        final String[] questions = { "What", "Who", "Where", "When", "Why", "How" };
+        for (int i = 0; i < questions.length; i++) {
+            if (sentence.startsWith(questions[i])) {
+                String oldPrefix = questions[i];
+                SentenceParamData spd = new SentenceParamData(i, questions.length);
+                String newPrefix = questions[spd.nextRandom()];
+                String wrong = sentence.replaceAll("^"+oldPrefix, newPrefix);
+                return wrong;
+            }
+        }
+        return ERROR_MESSAGE;
     }
 }
