@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jar="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-184b20cf0e37d03a6b8abf91b6ec2d341cb272d9.jar" />
+        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-a120c5420a8def15619f0628faff6e040ce31eec.jar" />
     </item>
     <item
-        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-c8582643463ac30414ef86de29c19d50449dd939.jar" />
-    </item>
-    <item
-        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jar="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-2b7bbc1aed186b4daafc3ce87338c835d4ee60c2.jar" />
+        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0dbdcd2c8635d11410234d12cb6afd4d5ccd2015.jar" />
     </item>
     <item
-        jar="C:\Users\q1bot\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jar="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-5508d92995f5cf000f2bf6d1d80c71f5187fa59f.jar" />
+    </item>
+    <item
+        jar="/Users/Mufasa/Android/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-1eaae4bd9a6fe4d72032a2b3ef93be0b142bf620.jar" />
+        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-052ba88c0f8a4c4b7ff6ab040b23e0b8b13defdc.jar" />
     </item>
 
 </items>
