@@ -14,24 +14,24 @@ import java.util.Random;
 /**
  * Created by q1bot on 11.01.15.
  */
-public class Level03to05 extends AbstractLevel {
+public class Level04to05 extends AbstractLevel {
 
     private int levelId;
     private Context context;
 
-    public Level03to05(Context context, int levelId) {
+    public Level04to05(Context context, int levelId) {
         this.levelId = levelId;
         this.context = context;
     }
 
     @Override
     public MultiSentenceData makeSentence(int mode) {
-        List<MultiSentenceData> sentenceList = getAllSentances();
+        List<MultiSentenceData> sentenceList = getAllSentences();
         int random = new Random().nextInt(sentenceList.size());
         return sentenceList.get(random);
     }
 
-    private List<MultiSentenceData> getAllSentances() {
+    private List<MultiSentenceData> getAllSentences() {
         int[] ids = {0, 0, R.raw.sentenses3, R.raw.sentenses4, R.raw.sentenses5};
         String raw = RawReader.getStringFromRawFile(context, ids[levelId]);
         String[] lines = raw.split("\n\n");

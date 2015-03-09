@@ -12,6 +12,8 @@ import android.os.CountDownTimer;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
+import android.text.SpannableStringBuilder;
+import android.text.style.StrikethroughSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -184,7 +186,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     }
 
 	public void generateText() {
-        multiSentence = SentenceMaker.makeSentance(this, lessonId, mode, myScore);
+        multiSentence = SentenceMaker.makeSentence(this, lessonId, mode, myScore);
         taskField.setText(multiSentence.getRuSentence());
         if (mode == MODE_EASY) {
             resultField.setText(multiSentence.getEnSentences());
@@ -251,11 +253,14 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
             ed.apply();
             if (mode == MODE_EASY) {
-                fieldsAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);//todo
+                fieldsAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);
                 fieldsAnimation.setAnimationListener(this);
                 resultField.startAnimation(fieldsAnimation);
                 taskField.startAnimation(fieldsAnimation);
-                message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true ? "Правильный вариант:\n" + multiSentence.getCorrectEnSentence() : "Ошибки небыло"));
+                message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true
+                        ? "Неправильно:\n" + multiSentence.getEnSentences()
+                        + "\n\nПравильно:\n" + multiSentence.getRuSentence() + "\n" + multiSentence.getCorrectEnSentence()
+                        : "Ошибки небыло"));
                 int drawableId = checkResult ? R.drawable.button_green : R.drawable.button_red;
                 message.setBackgroundResource(drawableId);
                 message.setVisibility(View.VISIBLE);
@@ -263,7 +268,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 message.startAnimation(animation);
                 buttonTrue.setEnabled(false);
                 buttonFalse.setEnabled(false);
-                final int timeToNext = checkResult || buttonId == R.id.answer_false ? 3000 : 6000;
+                final int timeToNext = checkResult || buttonId == R.id.answer_false ? 3000 : 9000;
                 new CountDownTimer(timeToNext, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {

@@ -1,13 +1,13 @@
 package com.holypasta.trainer.util;
 
-public class RuVerbs01 {
+public class RuVerbs01 extends RuVerbs {
 
-	public static String make(int time, int why, int c) {
+	public String make(int time, int who, int verb) {
 		// time [ 1(future) | 2(present) | 3(past) ]
 		String[] tmp;
 		switch (time) {
 		case 0: // future ----------------------------------------
-			switch (why) {
+			switch (who) {
 			case 0: // I
 				tmp = new String[] { "буду любить", "буду жить",
 						"буду работать", "буду открывать", "буду закрывать",
@@ -47,9 +47,9 @@ public class RuVerbs01 {
 						"будем думать" };
 				break;
 			}
-			return tmp[c];
+			return tmp[verb];
 		case 1: // present ------------------------------------
-			switch (why) {
+			switch (who) {
 			case 0: // I
 				tmp = new String[] { "люблю", "живу",
 						"работаю", "открываю", "закрываю",
@@ -88,9 +88,9 @@ public class RuVerbs01 {
 						"думаем" };
 				break;
 			}
-			return tmp[c];
+			return tmp[verb];
         case 2:  // past -----------------------------------
-			switch (why) {
+			switch (who) {
 			case 0: // I
 			case 1: // You
 			case 2: // He
@@ -123,9 +123,8 @@ public class RuVerbs01 {
 						"думали" };
 				break;
 			}
-			return tmp[c];
+			return tmp[verb];
 		}
-		
         return "x";
 	}
 

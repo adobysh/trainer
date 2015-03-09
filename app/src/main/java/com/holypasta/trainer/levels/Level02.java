@@ -14,7 +14,7 @@ public class Level02 extends AbstractLevel {
     public MultiSentenceData makeSentence(int mode) {
         SentenceParamData time = new SentenceParamData(3);
         SentenceParamData form = new SentenceParamData(3);
-        SentenceParamData partOfLesson = new SentenceParamData(3);//todo temp 1
+        SentenceParamData partOfLesson = new SentenceParamData(3);
         SentenceParamData part1variant = new SentenceParamData(7);
         SentenceParamData part2variant = new SentenceParamData(18);
         SentenceParamData part3variant = new SentenceParamData(9);
@@ -180,7 +180,7 @@ public class Level02 extends AbstractLevel {
                 result = new String[][]{
                         {"Кого ты полюбишь?", "Who Will you love?"},
                         {"Как он будет жить?", "How will he live?"},
-                        {"Когда это будет работать?", "When will it work?"},
+                        {"Когда ты будешь работать?", "When will you work?"},
                         {"Что она откроет?", "What will she open?"},
                         {"Почему они закроют?", "Why will they close?"},
                         {"Где мы начнем?", "Where will we start?"},
@@ -202,7 +202,7 @@ public class Level02 extends AbstractLevel {
                 result = new String[][]{
                         {"Кого ты любишь?", "Who do you love?"},
                         {"Как он живет?", "How does he live?"},
-                        {"Как это работает?", "How does it work?"},
+                        {"Как ты работаешь?", "How do you work?"},
                         {"Что она открывает?", "What does she open?"},
                         {"Почему они закрывают?", "Why do they close?"},
                         {"Как мы начинаем?", "How do we start?"},
@@ -224,7 +224,7 @@ public class Level02 extends AbstractLevel {
                 result = new String[][]{
                         {"Кого ты любил?", "Who did you love?"},
                         {"Как он жил?", "How did he live?"},
-                        {"Когда это работало?", "When did it work?"},
+                        {"Когда ты работал?", "When did you work?"},
                         {"Что она открыла?", "What did she open?"},
                         {"Почему они закрыли?", "Why did they close?"},
                         {"Где мы начинали?", "Where did we start?"},

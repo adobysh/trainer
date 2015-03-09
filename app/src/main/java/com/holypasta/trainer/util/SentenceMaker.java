@@ -7,13 +7,14 @@ import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.levels.AbstractLevel;
 import com.holypasta.trainer.levels.Level01;
 import com.holypasta.trainer.levels.Level02;
-import com.holypasta.trainer.levels.Level03to05;
+import com.holypasta.trainer.levels.Level03;
+import com.holypasta.trainer.levels.Level04to05;
 
 public class SentenceMaker {
 
-	public static MultiSentenceData makeSentance(Context context, int levelId, int mode, int score) {
+	public static MultiSentenceData makeSentence(Context context, int levelId, int mode, int score) {
         AbstractLevel level = null;
-        String[] badSentance = null;
+        String[] badSentence = null;
 		switch (levelId) {
             case 0:
                 level = new Level01();
@@ -22,9 +23,11 @@ public class SentenceMaker {
                 level = new Level02();
                 break;
             case 2:
+                level = new Level03();
+                break;
             case 3:
             case 4:
-                level = new Level03to05(context, levelId);
+                level = new Level04to05(context, levelId);
                 //                switch (new Random().nextInt(5)) {
 //                    case 0:
 //                        badSentance = new String[] {"Я здесь", "I am here"};
@@ -44,13 +47,13 @@ public class SentenceMaker {
 //                }
                 break;
             default:
-                badSentance = new String[] {"x","y"};
+                badSentence = new String[] {"x","y"};
                 break;
         }
         if (level != null) {
             return level.makeSentence(mode);
         } else {
-            return new MultiSentenceData(badSentance);
+            return new MultiSentenceData(badSentence);
         }
 	}
 }
