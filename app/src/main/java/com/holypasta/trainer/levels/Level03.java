@@ -44,6 +44,12 @@ public class Level03 extends AbstractLevel {
         switch (partOfLesson.value()) {
             case 0:
                 variant = part1variant.value();
+                if (variant == 4) { // "быть твоим другом"
+                    int[] whoEnum = new int[] { 0, 2, 3 };
+                    who = new SentenceParamData(PRONOUNS_IT,
+                            whoEnum[new Random().nextInt(whoEnum.length)],
+                            pronounsEN[0].length, true);
+                }
                 break;
             case 1:
                 variant = part2variant.value();

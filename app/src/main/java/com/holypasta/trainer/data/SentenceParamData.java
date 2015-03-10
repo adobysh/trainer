@@ -10,21 +10,22 @@ public class SentenceParamData {
     private int value = -1;
     private int size;
     private boolean excludedOn;
-    private int excluded;
+    private int excluded = -1;
 
     public SentenceParamData(int size) {
         this(-1, size, false);
     }
 
     public SentenceParamData(int value, int size) {
-        if (size < 2) {
-            throw new IllegalArgumentException("size < 2. size = " + size);
-        }
-        this.value = value;
-        this.size = size;
+        this(-1, value, size, false);
     }
 
     public SentenceParamData(int excluded, int size, boolean excludedOn) {
+        this(excluded, -1, size, excludedOn);
+        nextRandom();
+    }
+
+    public SentenceParamData(int excluded, int value, int size, boolean excludedOn) {
         if (size < 2) {
             throw new IllegalArgumentException("size < 2. size = " + size);
         }
@@ -32,9 +33,9 @@ public class SentenceParamData {
             throw new IllegalArgumentException("excluded is ON and size < 3. size = " + size);
         }
         this.excluded = excluded;
+        this.value = value;
         this.size = size;
         this.excludedOn = excludedOn;
-        nextRandom();
     }
 
     public int value() {
