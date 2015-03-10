@@ -8,7 +8,8 @@ import com.holypasta.trainer.levels.AbstractLevel;
 import com.holypasta.trainer.levels.Level01;
 import com.holypasta.trainer.levels.Level02;
 import com.holypasta.trainer.levels.Level03;
-import com.holypasta.trainer.levels.Level04to05;
+import com.holypasta.trainer.levels.Level04;
+import com.holypasta.trainer.levels.LevelFromList;
 
 public class SentenceMaker {
 
@@ -26,25 +27,10 @@ public class SentenceMaker {
                 level = new Level03();
                 break;
             case 3:
+                level = new Level04();
+                break;
             case 4:
-                level = new Level04to05(context, levelId);
-                //                switch (new Random().nextInt(5)) {
-//                    case 0:
-//                        badSentance = new String[] {"Я здесь", "I am here"};
-//                        break;
-//                    case 1:
-//                        badSentance = new String[] {"Я был здесь", "I was here"};
-//                        break;
-//                    case 2:
-//                        badSentance = new String[] {"Я буду здесь", "I will be here"};
-//                        break;
-//                    case 3:
-//                        badSentance = new String[] {"Мне нравится летать", "I like to fly"};
-//                        break;
-//                    case 4:
-//                        badSentance = new String[] {"Ему хочется летать", "He wants to fly"};
-//                        break;
-//                }
+                level = new LevelFromList(context, levelId);
                 break;
             default:
                 badSentence = new String[] {"x","y"};

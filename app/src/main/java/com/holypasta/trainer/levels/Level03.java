@@ -21,7 +21,7 @@ public class Level03 extends AbstractLevel {
             { "здесь", "в Индии", "в Москве", "c ней", "твоим другом" },
             { "here", "in India", "in Moscow", "with her", "your friend" }};
     private final String[][] VARIANTS_2_WANT_LIKE = new String[][] {
-            { "", "летать", "говорить", "танцевать", "быть твоим другом" },//todo
+            { "", "летать", "говорить", "танцевать", "быть твоим другом" },
             { "", "to fly", "to speak", "to dance", "to be your friend" }};
     private final int VARIANTS_3_SIZE = 11;
 

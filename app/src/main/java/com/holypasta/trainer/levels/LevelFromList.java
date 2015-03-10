@@ -14,12 +14,12 @@ import java.util.Random;
 /**
  * Created by q1bot on 11.01.15.
  */
-public class Level04to05 extends AbstractLevel {
+public class LevelFromList extends AbstractLevel {
 
     private int levelId;
     private Context context;
 
-    public Level04to05(Context context, int levelId) {
+    public LevelFromList(Context context, int levelId) {
         this.levelId = levelId;
         this.context = context;
     }
