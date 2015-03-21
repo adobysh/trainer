@@ -7,7 +7,7 @@
         style="@style/TextLittleBlack"
         android:id="@+id/tvScore"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingRight="12dp"
         android:paddingTop="12dp"
@@ -19,7 +19,7 @@
         style="@style/TextLittleBlack"
         android:id="@+id/textView1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="2"
         android:gravity="center"
         android:text="ru sentence"/>
