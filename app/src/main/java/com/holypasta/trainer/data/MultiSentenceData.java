@@ -43,7 +43,7 @@ public class MultiSentenceData {
         return ruSentence;
     }
 
-    public String getEnSentences() {
+    public String getEnSentence() {
         List<String> enSentences = incorrectEnSentences == null ? correctEnSentences : incorrectEnSentences;
         enSentences.add(enSentences.get(0));
         enSentences.remove(0);
@@ -60,8 +60,17 @@ public class MultiSentenceData {
         return correctEnSentences;
     }
 
+    // todo delete this method
+    public List<String> getAllIncorrectEnSentences() {
+        return incorrectEnSentences;
+    }
+
     public void setIncorrectEnSentences(List<String> incorrectEnSentences) {
         this.incorrectEnSentences = incorrectEnSentences;
+    }
+
+    public void clearIncorrectEnSentences() {
+        incorrectEnSentences = null;
     }
 
     public boolean checkResult(String answer) {

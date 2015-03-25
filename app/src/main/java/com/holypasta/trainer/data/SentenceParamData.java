@@ -44,12 +44,7 @@ public class SentenceParamData {
 
     public int nextRandom() {
         int value = new Random().nextInt(size);
-        value %= size;
-        if (this.value == value) {
-            value++;
-            value %= size;
-        }
-        if (excludedOn && excluded == value) {
+        while (this.value == value || (excludedOn && excluded == value)) {
             value++;
             value %= size;
         }

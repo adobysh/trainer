@@ -12,8 +12,6 @@ import android.os.CountDownTimer;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
-import android.text.SpannableStringBuilder;
-import android.text.style.StrikethroughSpan;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -189,7 +187,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         multiSentence = SentenceMaker.makeSentence(this, lessonId, mode, myScore);
         taskField.setText(multiSentence.getRuSentence());
         if (mode == MODE_EASY) {
-            resultField.setText(multiSentence.getEnSentences());
+            resultField.setText(multiSentence.getEnSentence());
         }
 	}
 
@@ -199,7 +197,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 		case R.id.button1Help:
             isHelped = true;
             resultField.setTextColor(tv1darkColor);
-			resultField.setText(multiSentence.getEnSentences());
+			resultField.setText(multiSentence.getEnSentence());
 			if (ttsIsOn && voiceIsOn) {
                 speakNow(resultField.getText().toString());
             }
@@ -258,7 +256,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 resultField.startAnimation(fieldsAnimation);
                 taskField.startAnimation(fieldsAnimation);
                 message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true
-                        ? "Неправильно:\n" + multiSentence.getEnSentences()
+                        ? "Неправильно:\n" + multiSentence.getEnSentence()
                         + "\n\nПравильно:\n" + multiSentence.getRuSentence() + "\n" + multiSentence.getCorrectEnSentence()
                         : "Ошибки небыло"));
                 int drawableId = checkResult ? R.drawable.button_green : R.drawable.button_red;

@@ -15,6 +15,22 @@ import java.util.List;
  */
 public abstract class AbstractLevel implements Constants {
 
+    enum Verbs { Love, Live, Work, Open, Close, Start, Finish,
+            See, Come, Go, Know, Think }
+
+    protected static final int TIME_FUTURE = 0;
+    protected static final int TIME_PRESENT = 1;
+    protected static final int TIME_PAST = 2;
+    protected static final int FORM_QUESTION = 0;
+    protected static final int FORM_POSITIVE = 1;
+    protected static final int FORM_NEGATIVE = 2;
+    protected static final int PRONOUN_I = 0;
+    protected static final int PRONOUN_YOU = 1;
+    protected static final int PRONOUN_HE = 2;
+    protected static final int PRONOUN_SHE = 3;
+    protected static final int PRONOUN_IT = 4;
+    protected static final int PRONOUN_THEY = 5;
+    protected static final int PRONOUN_WE = 6;
     protected final String[][] verbs01 = new String[][]{
             // infinitive
             {"love", "live", "work", "open", "close", "start", "finish",
@@ -32,12 +48,13 @@ public abstract class AbstractLevel implements Constants {
             {"wants", "likes"},
             // past +
             {"wanted", "liked"}};
-    protected final String[] pronounsRU = new String[]{"Я", "Ты", "Он", "Она", "Это", "Они", "Мы"};
-    protected final String[] pronounsRU3 = new String[]{"Мне", "Тебе", "Ему", "Ей", "Этому", "Им", "Нам"};
+    protected final String[] pronounsRU = new String[]{"Я", "Ты", "Он", "Она", "Это", "Они", "Мы"}; // Кто?
+    protected final String[] pronounsRU2 = new String[]{"Меня", "Тебя", "Его", "Её", "Этого", "Их", "Нас"}; // Кого?
+    protected final String[] pronounsRU3 = new String[]{"Мне", "Тебе", "Ему", "Ей", "Этому", "Им", "Нам"}; // Кому?
     protected final  String[][] pronounsEN = new String[][]{
             {"I", "you", "he", "she", "it", "they", "we"},
             {"I", "You", "He", "She", "It", "They", "We"}};
-    protected final int PRONOUNS_IT = 4;
+    protected final  String[] pronounsEN2 = new String[]{"Me", "You", "Him", "Her", "It", "Them", "Us"}; // todo - It ?
 
     public abstract MultiSentenceData makeSentence(int mode);
 
@@ -53,9 +70,16 @@ public abstract class AbstractLevel implements Constants {
         return resultSentence;
     }
 
-    protected MultiSentenceData makeBaseForm(RuVerbs ruVerbs, String[][] verbs, int form, int time, int who0, int who1, int verb, String[] pronounsRU) {
-        return makeBaseForm(ruVerbs, verbs, form, time, who0, who1, verb
-                , pronounsRU, null, null);
+    protected MultiSentenceData makeBaseForm(RuVerbs ruVerbs, String[][] verbs, int time, int who,
+                                             int verb, String suffixRus, String suffixEng) {
+        return makeBaseForm(ruVerbs, verbs, FORM_POSITIVE, time, who, who, verb,
+                pronounsRU, suffixRus, suffixEng);
+    }
+
+    protected MultiSentenceData makeBaseForm(RuVerbs ruVerbs, String[][] verbs, int form, int time,
+                                             int who0, int who1, int verb, String[] pronounsRU) {
+        return makeBaseForm(ruVerbs, verbs, form, time, who0, who1, verb,
+                pronounsRU, null, null);
     }
 
     protected MultiSentenceData makeBaseForm(RuVerbs ruVerbs, String[][] verbs
@@ -271,6 +295,26 @@ public abstract class AbstractLevel implements Constants {
             }
         }
         return new MultiSentenceData(sentenceRU, sentenceEN);
+    }
+
+    protected String getToBeWithSpaces(int who) {
+        String result = null;
+        switch (who) {
+            case PRONOUN_I:
+                result = "am";
+                break;
+            case PRONOUN_YOU:
+            case PRONOUN_THEY:
+            case PRONOUN_WE:
+                result = "are";
+                break;
+            case PRONOUN_HE:
+            case PRONOUN_SHE:
+            case PRONOUN_IT:
+                result = "is";
+                break;
+        }
+        return " " + result + " ";
     }
 
 }

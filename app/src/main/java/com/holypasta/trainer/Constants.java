@@ -24,12 +24,5 @@ public interface Constants {
             "2x4WP4owvkw", "vkO2B8p_jy4", "mq0Bz4YR45k", "bSVEllZUFTw", "ASz1-RT-zgc",
             "rW6YhEjABbw", "KAP66olZSQA", "kY4_9sXfcSo" };
 
-    static final int TIME_FUTURE = 0;
-    static final int TIME_PRESENT = 1;
-    static final int TIME_PAST = 2;
-    static final int FORM_QUESTION = 0;
-    static final int FORM_POSITIVE = 1;
-    static final int FORM_NEGATIVE = 2;
-
     static final String ERROR_MESSAGE = "ошибка :(";
 }

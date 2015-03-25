@@ -9,6 +9,7 @@ import com.holypasta.trainer.levels.Level01;
 import com.holypasta.trainer.levels.Level02;
 import com.holypasta.trainer.levels.Level03;
 import com.holypasta.trainer.levels.Level04;
+import com.holypasta.trainer.levels.Level05;
 import com.holypasta.trainer.levels.LevelFromList;
 
 public class SentenceMaker {
@@ -30,10 +31,10 @@ public class SentenceMaker {
                 level = new Level04();
                 break;
             case 4:
-                level = new LevelFromList(context, levelId);
+                level = new Level05();
                 break;
             default:
-                badSentence = new String[] {"x","y"};
+                level = new LevelFromList(context, levelId);
                 break;
         }
         if (level != null) {

@@ -30,7 +30,7 @@ public class Level03 extends AbstractLevel {
         SentenceParamData time = new SentenceParamData(3);
         SentenceParamData form = new SentenceParamData(3);
         SentenceParamData verb = new SentenceParamData(2);
-        SentenceParamData who = new SentenceParamData(PRONOUNS_IT, pronounsEN[0].length, true);
+        SentenceParamData who = new SentenceParamData(PRONOUN_IT, pronounsEN[0].length, true);
         who.nextRandom();
         int who0 = who.value();
         SentenceParamData partOfLesson = new SentenceParamData(3);
@@ -46,7 +46,7 @@ public class Level03 extends AbstractLevel {
                 variant = part1variant.value();
                 if (variant == 4) { // "быть твоим другом"
                     int[] whoEnum = new int[] { 0, 2, 3 };
-                    who = new SentenceParamData(PRONOUNS_IT,
+                    who = new SentenceParamData(PRONOUN_IT,
                             whoEnum[new Random().nextInt(whoEnum.length)],
                             pronounsEN[0].length, true);
                 }
