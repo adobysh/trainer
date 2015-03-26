@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:textColor="@color/material_green"
             android:gravity="center"
-            android:textSize="28sp" />
+            android:textSize="@dimen/text_big"
+            android:text="1"/>
 
         <TextView
             android:id="@+id/textHard"
@@ -27,7 +28,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="урок"
-            android:textSize="16sp" />
+            android:layout_marginTop="-8dp"
+            android:textSize="@dimen/text_normal" />
 
     </LinearLayout>
 
@@ -42,13 +44,16 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:text="\u2606 0.0"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_normal"
+            android:textColor="@android:color/black"/>
 
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp" />
+            android:textSize="@dimen/text_normal"
+            android:textColor="@android:color/black"
+            android:text="Базовая форма глагола"/>
     </LinearLayout>
 
 
