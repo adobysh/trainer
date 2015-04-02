@@ -1,7 +1,6 @@
 package com.holypasta.trainer.activity;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,6 +8,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
@@ -34,7 +34,6 @@ import com.holypasta.trainer.util.SentenceMaker;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 import static android.view.View.GONE;
 
@@ -47,7 +46,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private boolean failNow = false;
     private boolean isChecked = false;
     private int tv1darkColor;
-    private SharedPreferences sPref;
+    private SharedPreferences sharedPreferences;
     private MultiSentenceData multiSentence;
     private TextView tvScore;
     private TextView taskField;
@@ -59,7 +58,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private TextView buttonNext;
     private Animation fieldsAnimation;
     private Animation messageAnimation;
-    private int myScore = 0;
+    private int score = 0;
     // переменная для проверки возможности
     // распознавания голоса в телефоне
     private final int VR_REQUEST = 999;
@@ -72,7 +71,6 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private int mode;
     private Button buttonTrue;
     private Button buttonFalse;
-    private Random random = new Random();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,17 +80,17 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         mode = extras.getInt(EXTRA_MODE);
         setContentView(mode == MODE_HARD ? R.layout.activity_level_hard : R.layout.activity_level_easy);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        sPref = getSharedPreferences(Constants.SCORES, Context.MODE_PRIVATE);
-        myScore = sPref.getInt(Constants.SCORE_0_15 + lessonId, 0);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        score = sharedPreferences.getInt(Constants.PREF_SCORE_0_15 + lessonId, 0);
         voiceIsOn = mode == MODE_HARD;
         prepareToDialog();
         tv1darkColor = taskField.getCurrentTextColor();
-        tvScore.setText(MakeScore.make(myScore));
-//        getSupportActionBar().setTitle(getResources().getStringArray(R.array.contents)[lessonId]);
+        tvScore.setText(MakeScore.make(score));
         getSupportActionBar().setTitle((lessonId+1) + " урок");
         resultField.setOnEditorActionListener(this);
         buttonNext();
 	}
+
 
     protected void prepareToDialog() {
         taskField = (TextView) findViewById(R.id.textView1);
@@ -184,7 +182,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     }
 
 	public void generateText() {
-        multiSentence = SentenceMaker.makeSentence(this, lessonId, mode, myScore);
+        multiSentence = SentenceMaker.makeSentence(this, lessonId, mode, score);
         taskField.setText(multiSentence.getRuSentence());
         if (mode == MODE_EASY) {
             resultField.setText(multiSentence.getEnSentence());
@@ -231,8 +229,10 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             if (checkResult) {
                 resultField.setTextColor(getResources().getColor(R.color.material_green));
                 if (!isHelped) {// если помощи не было
-                    if (myScore < Constants.MAX_SCORE) {
-                        myScore++;
+                    if (score < Constants.MAX_SCORE) {
+                        score++;
+                    } else {
+                        openNextLevel();
                     }
                 }
                 isChecked = true;
@@ -241,14 +241,14 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 if (!failNow) { // если еще не фэйлил
                     failNow = true;
                 }
-                if (myScore > 0) {
-                    myScore--;
+                if (score > 1) {
+                    score--;
                 }
             }
             buttonsEnabled(false);
-            tvScore.setText(MakeScore.make(myScore));
-            SharedPreferences.Editor ed = sPref.edit();
-            ed.putInt(Constants.SCORE_0_15 + lessonId, myScore);
+            tvScore.setText(MakeScore.make(score));
+            SharedPreferences.Editor ed = sharedPreferences.edit();
+            ed.putInt(Constants.PREF_SCORE_0_15 + lessonId, score);
             ed.apply();
             if (mode == MODE_EASY) {
                 fieldsAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_out);
@@ -311,6 +311,18 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         } else {
             buttonTrue.setEnabled(isEnabled);
             buttonFalse.setEnabled(isEnabled);
+        }
+    }
+
+    private void openNextLevel() {
+        if (lessonId == LAST_LEVEL) {
+            return;
+        }
+        int nextLevelSore = sharedPreferences.getInt(PREF_SCORE_0_15 + (lessonId+1), -1);
+        if (nextLevelSore == -1) {
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putInt(PREF_SCORE_0_15 + (lessonId+1), 0);
+            edit.commit();
         }
     }
 

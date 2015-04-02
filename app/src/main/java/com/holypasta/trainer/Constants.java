@@ -2,17 +2,35 @@ package com.holypasta.trainer;
 
 public interface Constants {
 
+    static final boolean DEBUG_MODE = false;
+
+    static final String PACKAGE_NAME = "com.holypasta.trainer.";
+    static final String PREF = PACKAGE_NAME + "pref.";
+    static final String EXTRA = PACKAGE_NAME + "extra.";
+    static final String ACTION = PACKAGE_NAME + "action.";
+
     static final int MODE_EASY = 0;
     static final int MODE_HARD = 1;
 
-    static final String EXTRA_LESSON_ID = "extra.lesson.id";
-    static final String EXTRA_MODE = "extra.mode";
+    static final int REMINDER_HOUR = 12;
+    static final int REMINDER_MINUTE = 0;
+    static final int DEGRADATION_HOUR = 0;
+    static final int DEGRADATION_MINUTE = 0;
+
+    static final int DEGRADATION_STEP = 33;
 
     static final int COMPLETE = 5;
-    static final String SCORE_0_15 = "SCORE_";
-    static final String SCORES = "SCORES";
+    static final int LAST_LEVEL = 15;
 
-    static final String PREF_HARDCORE_MODE = "PREF_HARDCORE_MODE";
+    static final String ACTION_REMINDER = ACTION + "reminder";
+    static final String ACTION_DEGRADATION = ACTION + "degradation";
+
+    static final String EXTRA_LESSON_ID = EXTRA + "lesson.id";
+    static final String EXTRA_MODE = EXTRA + "mode";
+
+    static final String PREF_SCORE_0_15 = PREF + "score_";
+    static final String PREF_HARDCORE_MODE = PREF + "hardcore.mode";
+    static final String PREF_LAST_VISIT = PREF + "last.visit";
 
     static final int MAX_SCORE = 100;
     static final int PASS_SCORE = 100;

@@ -1,7 +1,6 @@
 package com.holypasta.trainer.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,17 +21,15 @@ import java.util.List;
 public class LevelsAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
-    private List<Integer> myScores;
+    private List<Integer> scores;
     private String[] parts;
-    private int complete;
     private int darkColor = 0;
     private int greenColor = 0;
 
-    public LevelsAdapter(String[] parts, Activity activity, List<Integer> myScores, int complete) {
+    public LevelsAdapter(String[] parts, Activity activity, List<Integer> scores) {
         this.parts = parts;
         this.layoutInflater = activity.getLayoutInflater();
-        this.myScores = myScores;
-        this.complete = complete;
+        this.scores = scores;
     }
 
     @Override
@@ -74,30 +71,24 @@ public class LevelsAdapter extends BaseAdapter {
         }
 
         holder.textNumber.setText((position + 1) + "");
-        holder.textScore.setText(MakeScore.make(myScores.get(position)));
-        if (position <= complete) {
+        holder.textScore.setText(MakeScore.make(scores.get(position)));
+        if (scores.get(position) > -1) {
             holder.textTitle.setText(parts[position]);
 
-            holder.textNumber.setTextColor(greenColor);
-            holder.textHard.setTextColor(greenColor);
+            holder.textNumber.setTextColor(darkColor);
+            holder.textHard.setTextColor(darkColor);
             holder.textScore.setTextColor(darkColor);
             holder.textTitle.setTextColor(darkColor);
         } else {
             if (position < Constants.COMPLETE) {
                 holder.textTitle.setText(parts[position]);
-
-                holder.textNumber.setTextColor(darkColor);
-                holder.textHard.setTextColor(darkColor);
-                holder.textScore.setTextColor(darkColor);
-                holder.textTitle.setTextColor(darkColor);
             } else {
                 holder.textTitle.setText("В разработке");
-
-                holder.textNumber.setTextColor(Color.LTGRAY);
-                holder.textHard.setTextColor(Color.LTGRAY);
-                holder.textScore.setTextColor(Color.LTGRAY);
-                holder.textTitle.setTextColor(Color.LTGRAY);
             }
+            holder.textNumber.setTextColor(Color.LTGRAY);
+            holder.textHard.setTextColor(Color.LTGRAY);
+            holder.textScore.setTextColor(Color.LTGRAY);
+            holder.textTitle.setTextColor(Color.LTGRAY);
         }
         return view;
     }
