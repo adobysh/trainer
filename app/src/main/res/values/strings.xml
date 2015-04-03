@@ -7,6 +7,7 @@
     <string name="button_say">!</string>
     <string name="button_ok">\u2713</string>
     <string name="button_next">\u279C</string>
+    <string name="button_start_lesson">Начать урок!</string>
 
     <string name="action_theory">Теория</string>
     <string name="action_video">Видеоурок</string>

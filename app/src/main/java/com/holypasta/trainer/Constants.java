@@ -27,6 +27,7 @@ public interface Constants {
 
     static final String EXTRA_LESSON_ID = EXTRA + "lesson.id";
     static final String EXTRA_MODE = EXTRA + "mode";
+    static final String EXTRA_FIRST_OPEN = EXTRA + "first.open";
 
     static final String PREF_SCORE_0_15 = PREF + "score_";
     static final String PREF_HARDCORE_MODE = PREF + "hardcore.mode";

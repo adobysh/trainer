@@ -95,11 +95,18 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int levelId, long arg3) {
         if (levelId < Constants.COMPLETE) {
-            if (scores.get(levelId) > -1 || DEBUG_MODE) {
+            int score = scores.get(levelId);
+            if (score > -1 || DEBUG_MODE) {
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_LESSON_ID, levelId);
                 intent.putExtra(EXTRA_MODE, mode);
-                intent.setClass(this, LevelActivity.class);
+                if (firstOpen(score)) {
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.putExtra(EXTRA_FIRST_OPEN, true);
+                    intent.setClass(this, TheoryActivity.class);
+                } else {
+                    intent.setClass(this, LevelActivity.class);
+                }
                 startActivity(intent);
             } else {
                 final AlertDialog aboutDialog = new AlertDialog.Builder(
@@ -113,6 +120,10 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
                 aboutDialog.show();
             }
         }
+    }
+
+    private boolean firstOpen(int score) {
+        return score == 0;
     }
 
     @Override
