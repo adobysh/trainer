@@ -1,10 +1,11 @@
 package com.holypasta.trainer.util;
 
+import android.graphics.Bitmap;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ViewHolder {
     public TextView textNumber;
-    public TextView textHard;
-    public TextView textScore;
 	public TextView textTitle;
+    public ImageView image;
 }

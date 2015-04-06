@@ -17,7 +17,8 @@ public interface Constants {
     static final int DEGRADATION_HOUR = 0;
     static final int DEGRADATION_MINUTE = 0;
 
-    static final int DEGRADATION_STEP = 33;
+    static final int MAX_SCORE = 20;
+    static final int DEGRADATION_STEP = MAX_SCORE;
 
     static final int COMPLETE = 5;
     static final int LAST_LEVEL = 15;
@@ -32,9 +33,6 @@ public interface Constants {
     static final String PREF_SCORE_0_15 = PREF + "score_";
     static final String PREF_HARDCORE_MODE = PREF + "hardcore.mode";
     static final String PREF_LAST_VISIT = PREF + "last.visit";
-
-    static final int MAX_SCORE = 100;
-    static final int PASS_SCORE = 100;
 
     static final String YOUTUBE_BASE_URL = "vnd.youtube:";
     static final String VIDEO_BASE_URL = "https://www.youtube.com/watch?v=";

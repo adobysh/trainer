@@ -22,6 +22,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,6 +72,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private int mode;
     private Button buttonTrue;
     private Button buttonFalse;
+    private ProgressBar progressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +147,10 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             message.setBackgroundResource(R.drawable.button_green);
             buttonTrue.setOnClickListener(this);
             buttonFalse.setOnClickListener(this);
+            progressBar = (ProgressBar) findViewById(R.id.progressBar);
+            progressBar.setMax(MAX_SCORE);
+            progressBar.setProgress(score);
+            tvScore.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -229,10 +235,11 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             if (checkResult) {
                 resultField.setTextColor(getResources().getColor(R.color.material_green));
                 if (!isHelped) {// если помощи не было
-                    if (score < Constants.MAX_SCORE) {
+                    if (score < MAX_SCORE) {
                         score++;
-                    } else {
-                        openNextLevel();
+                        if (score == MAX_SCORE) {
+                            openNextLevel();
+                        }
                     }
                 }
                 isChecked = true;
@@ -241,10 +248,14 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 if (!failNow) { // если еще не фэйлил
                     failNow = true;
                 }
-                if (score > 1) {
-                    score--;
+                if (mode == MODE_EASY && score > 1) {
+//                    score--; todo
                 }
             }
+            if (mode == MODE_EASY) {
+                progressBar.setProgress(score);
+            }
+            System.out.println("!!! score = " + score);
             buttonsEnabled(false);
             tvScore.setText(MakeScore.make(score));
             SharedPreferences.Editor ed = sharedPreferences.edit();
@@ -323,6 +334,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             SharedPreferences.Editor edit = sharedPreferences.edit();
             edit.putInt(PREF_SCORE_0_15 + (lessonId+1), 0);
             edit.commit();
+            System.out.println("!!! next level opened");
         }
     }
 

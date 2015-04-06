@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.holypasta.trainer.activity.MainActivity" >
 
-    <item android:id="@+id/action_video"
-        android:title="@string/action_video"
-        android:icon="@drawable/ic_play_arrow_black_24dp"
-        android:orderInCategory="100"
-        app:showAsAction="always" />
-
     <item android:id="@+id/action_theory"
         android:title="@string/action_theory"
         android:icon="@drawable/ic_info_outline_black_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_video"
+        android:title="@string/action_video"
+        android:icon="@drawable/ic_play_arrow_black_24dp"
         android:orderInCategory="100"
         app:showAsAction="always" />
 </menu>

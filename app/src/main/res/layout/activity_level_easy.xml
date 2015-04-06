@@ -21,17 +21,12 @@
                 android:layout_weight="3"
                 layout="@layout/level_header"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/material_divider"/>
-
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
+                android:id="@+id/progressBar"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/material_green"
-                android:id="@+id/progressBar" />
+                android:progressDrawable="@drawable/progress"/>
 
             <TextView
                 style="@style/TextLittleBlack"
