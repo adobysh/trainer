@@ -2,8 +2,6 @@ package com.holypasta.trainer;
 
 public interface Constants {
 
-    static final boolean DEBUG_MODE = false;
-
     static final String PACKAGE_NAME = "com.holypasta.trainer.";
     static final String PREF = PACKAGE_NAME + "pref.";
     static final String EXTRA = PACKAGE_NAME + "extra.";
@@ -17,8 +15,9 @@ public interface Constants {
     static final int DEGRADATION_HOUR = 0;
     static final int DEGRADATION_MINUTE = 0;
 
-    static final int MAX_SCORE = 20;
+    static final int MAX_SCORE = 10;
     static final int DEGRADATION_STEP = MAX_SCORE;
+    static final int UNIQUE_COUNT = 10; // 20 take looping
 
     static final int COMPLETE = 5;
     static final int LAST_LEVEL = 15;
@@ -33,6 +32,7 @@ public interface Constants {
     static final String PREF_SCORE_0_15 = PREF + "score_";
     static final String PREF_HARDCORE_MODE = PREF + "hardcore.mode";
     static final String PREF_LAST_VISIT = PREF + "last.visit";
+    static final String PREF_SPEECH_RECOGNITION_FIRST_CHECK = PREF + "speech.recognition.first.check";
 
     static final String YOUTUBE_BASE_URL = "vnd.youtube:";
     static final String VIDEO_BASE_URL = "https://www.youtube.com/watch?v=";

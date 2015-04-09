@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.util.SharedPreferencesUtil;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -16,16 +17,33 @@ public class Degradation extends BroadcastReceiver implements Constants {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        System.out.println("!!! Degradation now");
+        if (!isDegradationTime()) {
+            System.out.println("!!! Degradation not now!");
+            return;
+        }
         List<Integer> scores = SharedPreferencesUtil.getScores(context);
-        for (int i = 0; i < scores.size(); i++) {
-            int score = scores.get(i);
+        for (int levelId = 0; levelId < scores.size(); levelId++) {
+            int score = scores.get(levelId);
+            System.out.println("!!! Degradation level " + (levelId+1) + " with score " + score);
             if (score > 1) {
                 score = score - DEGRADATION_STEP;
                 if (score < 1) {
                     score = 1;
                 }
+                SharedPreferencesUtil.saveScore(context, levelId, score);
             }
-            scores.set(i, score);
         }
+    }
+
+    private boolean isDegradationTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        if (calendar.get(Calendar.HOUR_OF_DAY) == DEGRADATION_HOUR) {
+            if (calendar.get(Calendar.MINUTE) == DEGRADATION_MINUTE) {
+                return true;
+            }
+        }
+        return false;
     }
 }

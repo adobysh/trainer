@@ -136,31 +136,31 @@ public class Level02 extends AbstractLevel {
                 result = new String[][]{
                         {"Она любила его?", "Did she love him?"},
                         {"Мы видели тебя?", "Did we see you?"},
-                        {"Я знали их?", "Did I know them?"},
+                        {"Он знал их?", "Did he know them?"},
                         {"Ты спрашивал её?", "Did you ask her?"},
                         {"Они отвечали нам?", "Did they answer us?"},
                         {"Ты давал мне?", "Did you give me?"},
-                        {"Я говорил им?", "Did I speak them?"}};
+                        {"Она говорила им?", "Did she speak them?"}};
                 break;
             case 7: // past +
                 result = new String[][]{
                         {"Она любила его", "She loved him"},
                         {"Мы видели тебя", "We saw you"},
-                        {"Я знали их", "I knew them"},
+                        {"Он знал их", "He knew them"},
                         {"Ты спрашивал её", "You asked her"},
                         {"Они отвечали нам", "They answered us"},
                         {"Ты давал мне", "You gave me"},
-                        {"Я говорил им", "I spoke them"}};
+                        {"Она говорила им", "She spoke them"}};
                 break;
             case 8: // past -
                 result = new String[][]{
                         {"Она не любила его", "She did not love him", "She didn't love him"},
                         {"Мы не видели тебя", "We did not see you", "We didn't see you"},
-                        {"Я не знал их", "I did not know them", "I didn't know them"},
+                        {"Он не знал их", "He did not know them", "He didn't know them"},
                         {"Ты не спрашивал её", "You did not ask her", "You didn't ask her"},
                         {"Они не отвечали нам", "They did not answer us", "They didn't answer us"},
                         {"Ты не давал мне", "You did not give me", "You didn't give me"},
-                        {"Я не говорил им", "I did not speak them", "I didn't speak them"}};
+                        {"Она не говорила им", "She did not speak them", "She didn't speak them"}};
                 break;
             default:
                 result = new String[][]
@@ -178,7 +178,7 @@ public class Level02 extends AbstractLevel {
         switch (time) {
             case 0: // future ?
                 result = new String[][]{
-                        {"Кого ты полюбишь?", "Who Will you love?"},
+                        {"Когда ты полюбишь?", "When Will you love?"},
                         {"Как он будет жить?", "How will he live?"},
                         {"Когда ты будешь работать?", "When will you work?"},
                         {"Что она откроет?", "What will she open?"},
@@ -191,7 +191,7 @@ public class Level02 extends AbstractLevel {
                         {"Что мы будем знать?", "What will we know?"},
                         {"Как они будут думать?", "How will they think?"},
 
-                        {"Кого он спросит?", "Who will he ask?"},
+                        {"Что он спросит?", "What will he ask?"},
                         {"Что она ответит?", "What will she answer?"},
                         {"Что мы дадим?", "What will we give?"},
                         {"Почему я буду надеяться?", "Why will I hope?"},
@@ -200,7 +200,7 @@ public class Level02 extends AbstractLevel {
                 break;
             case 1: // present ?
                 result = new String[][]{
-                        {"Кого ты любишь?", "Who do you love?"},
+                        {"Почему ты любишь?", "Why do you love?"},
                         {"Как он живет?", "How does he live?"},
                         {"Как ты работаешь?", "How do you work?"},
                         {"Что она открывает?", "What does she open?"},
@@ -213,7 +213,7 @@ public class Level02 extends AbstractLevel {
                         {"Что мы знаем?", "What do we know?"},
                         {"Как они думают?", "How do they think?"},
 
-                        {"Кого он спрашивает?", "Who does he ask?"},
+                        {"Что он спрашивает?", "What does he ask?"},
                         {"Что она отвечает?", "What does she answer?"},
                         {"Что мы даём?", "What do we give?"},
                         {"Почему я надеюсь?", "Why do I hope?"},
@@ -222,23 +222,23 @@ public class Level02 extends AbstractLevel {
                 break;
             default: // past ?
                 result = new String[][]{
-                        {"Кого ты любил?", "Who did you love?"},
+                        {"Как ты любил?", "How did you love?"},
                         {"Как он жил?", "How did he live?"},
                         {"Когда ты работал?", "When did you work?"},
                         {"Что она открыла?", "What did she open?"},
                         {"Почему они закрыли?", "Why did they close?"},
                         {"Где мы начинали?", "Where did we start?"},
                         {"Когда они заканчивали?", "When did they finish?"},
-                        {"Что я видел?", "What did I see?"},
+                        {"Что он видел?", "What did he see?"},
                         {"Почему ты приходил?", "Why did you come?"},
                         {"Как он ходил?", "How did he go?"},
                         {"Что мы знали?", "What did we know?"},
                         {"Как они думали?", "How did they think?"},
 
-                        {"Кого он спрашивал?", "Who did he ask?"},
+                        {"Что он спрашивал?", "What did he ask?"},
                         {"Что она отвечала?", "What did she answer?"},
                         {"Что мы давали?", "What did we give?"},
-                        {"Почему я надеялся?", "Why did I hope?"},
+                        {"Почему он надеялся?", "Why did he hope?"},
                         {"Как они говорили?", "How did they speak?"},
                         {"Когда мы путешествовали?", "When did we travel?"}};
                 break;
@@ -255,7 +255,7 @@ public class Level02 extends AbstractLevel {
         switch (time) {
             case 0: // future ?
                 result = new String[][]{
-                        {"Когда ты полюбишь их?", "When Will you love them?"},
+                        {"Когда ты полюбишь их?", "When will you love them?"},
                         {"Что она откроет ему?", "What will she open him?"},
                         {"Почему они закроют нас?", "Why will they close us?"},
                         {"Когда я увижу его?", "When will I see him?"},
@@ -284,7 +284,7 @@ public class Level02 extends AbstractLevel {
                         {"Когда ты любила их?", "When did you love them?"},
                         {"Что она открывала ему?", "What did she open him?"},
                         {"Почему они закрыли нас?", "Why did they close us?"},
-                        {"Когда я видел его?", "When did I see him?"},
+                        {"Когда она видела его?", "When did she see him?"},
                         {"Когда мы узнали её?", "When did we know her?"},
 
                         {"Когда он спрашивал её?", "When did he ask her?"},

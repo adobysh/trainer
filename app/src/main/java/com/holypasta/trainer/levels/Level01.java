@@ -13,7 +13,9 @@ public class Level01 extends AbstractLevel {
         SentenceParamData form = new SentenceParamData(3);
         SentenceParamData time = new SentenceParamData(3);
         SentenceParamData who = new SentenceParamData(PRONOUN_IT, pronounsEN[0].length, true);
-        who.nextRandom();
+        do {
+            who.nextRandom();
+        } while (time.value() == TIME_PAST && who.value() == PRONOUN_I);
         SentenceParamData verb = new SentenceParamData(verbs01[0].length);
         MultiSentenceData sentence = makeSentence(form.value(), time.value(), who.value(), who.value(), verb.value());
         if (mode == MODE_HARD) {

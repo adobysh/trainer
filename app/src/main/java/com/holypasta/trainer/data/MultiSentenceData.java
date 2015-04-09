@@ -77,7 +77,21 @@ public class MultiSentenceData {
         for (String enSentence : correctEnSentences) {
             if (enSentence.equalsIgnoreCase(answer)) {
                 return true;
+            } else if (enSentence.endsWith("?") && enSentence.equalsIgnoreCase(answer + "?")) {
+                return true;
             }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        } else if (!(o instanceof MultiSentenceData)) {
+            return false;
+        } else if (ruSentence.equals(((MultiSentenceData) o).ruSentence)) {
+            return true;
         }
         return false;
     }

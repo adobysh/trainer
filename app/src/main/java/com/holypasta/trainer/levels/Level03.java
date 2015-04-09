@@ -31,7 +31,9 @@ public class Level03 extends AbstractLevel {
         SentenceParamData form = new SentenceParamData(3);
         SentenceParamData verb = new SentenceParamData(2);
         SentenceParamData who = new SentenceParamData(PRONOUN_IT, pronounsEN[0].length, true);
-        who.nextRandom();
+        do {
+            who.nextRandom();
+        } while (time.value() == TIME_PAST && who.value() == PRONOUN_I);
         int who0 = who.value();
         SentenceParamData partOfLesson = new SentenceParamData(3);
         if (partOfLesson.value() == 2) { // part 3 ~ 11%
@@ -44,8 +46,8 @@ public class Level03 extends AbstractLevel {
         switch (partOfLesson.value()) {
             case 0:
                 variant = part1variant.value();
-                if (variant == 4) { // "быть твоим другом"
-                    int[] whoEnum = new int[] { 0, 2, 3 };
+                if (variant == 4) { // "быть твоим другом" только с "я" "он" "она"
+                    int[] whoEnum = new int[] { PRONOUN_I, PRONOUN_HE, PRONOUN_SHE };
                     who = new SentenceParamData(PRONOUN_IT,
                             whoEnum[new Random().nextInt(whoEnum.length)],
                             pronounsEN[0].length, true);
@@ -108,7 +110,12 @@ public class Level03 extends AbstractLevel {
     }
 
     private MultiSentenceData part01_to_be(int form, int time, int who, int who1, int variant) {
-        return makeToBe(form, time, who, who1, VARIANTS_1_TOBE[0][variant], VARIANTS_1_TOBE[1][variant]);
+        String suffixRus = VARIANTS_1_TOBE[0][variant];
+        String suffixEng = VARIANTS_1_TOBE[1][variant];
+        if (variant == 4 && time == TIME_PRESENT) { // "твоим другом"
+            suffixRus = "твой друг";
+        }
+        return makeToBe(form, time, who, who1, suffixRus, suffixEng);
     }
 
     private MultiSentenceData part02_want_like(int form, int time, int who, int who1, int verb, int variant) {

@@ -1,6 +1,8 @@
 package com.holypasta.trainer.activity;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -24,7 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.data.MultiSentenceData;
@@ -49,14 +50,15 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     private int tv1darkColor;
     private SharedPreferences sharedPreferences;
     private MultiSentenceData multiSentence;
+    private List<MultiSentenceData> pastMultiSentences;
     private TextView tvScore;
     private TextView taskField;
     private TextView resultField;
     private TextView message;
-    private TextView button1Help;
-    private TextView button2OK;
-    private TextView button3Say;
-    private TextView buttonNext;
+    private View button1Help;
+    private View button2OK;
+    private View button3Say;
+    private View buttonNext;
     private Animation fieldsAnimation;
     private Animation messageAnimation;
     private int score = 0;
@@ -98,37 +100,31 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
         taskField = (TextView) findViewById(R.id.textView1);
         tvScore = (TextView) findViewById(R.id.tvScore);
         resultField = mode == MODE_HARD ? (EditText) findViewById(R.id.editText1) : (TextView) findViewById(R.id.result_easy);
-        resultField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Toast.makeText(LevelActivity.this, "Edit", Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
         if (mode == MODE_HARD) {
-            button1Help = (TextView) findViewById(R.id.button1Help);
-            button2OK = (TextView) findViewById(R.id.button2OK);
-            button3Say = (TextView) findViewById(R.id.button3Say);
-            buttonNext = (TextView) findViewById(R.id.buttonNext);
+            button1Help = findViewById(R.id.button1Help);
+            button2OK = findViewById(R.id.button2OK);
+            button3Say = findViewById(R.id.button3Say);
+            buttonNext = findViewById(R.id.buttonNext);
             button1Help.setOnClickListener(this);
             button2OK.setOnClickListener(this);
             buttonNext.setOnClickListener(this);
             if (voiceIsOn) {
-                // проверяем, поддерживается ли распознование речи
-                PackageManager packManager = getPackageManager();
-                List<ResolveInfo> intActivities = packManager.queryIntentActivities(
-                        new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-                if (intActivities.size() != 0) {
-                    // распознавание поддерживается, будем отслеживать событие щелчка по
-                    // кнопке
+                if (checkSpeechRecognition()) {
                     button3Say.setOnClickListener(this);
                 } else {
-                    // распознавание не работает. Заблокируем
-                    // кнопку и выведем соответствующее
-                    // предупреждение.
-                    button3Say.setEnabled(false);
-                    Toast.makeText(this, "Упс - Распознавание речи не поддерживается!",
-                            Toast.LENGTH_LONG).show();
+                    button3Say.setVisibility(View.GONE);
+                    button1Help.setVisibility(View.GONE);
+                    if (firstCheckSpeechRecognition()) {
+                        AlertDialog aboutDialog = new AlertDialog.Builder(
+                                this)
+                                .setMessage("Распознавание речи не поддерживается!")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                }).create();
+                        aboutDialog.show();
+                    }
                 }
                 // подготовка движка TTS для проговаривания слов
                 Intent checkTTSIntent = new Intent();
@@ -152,6 +148,23 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
             progressBar.setProgress(score);
             tvScore.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private boolean checkSpeechRecognition() { // проверяем, поддерживается ли распознование речи
+        PackageManager packManager = getPackageManager();
+        List<ResolveInfo> intActivities = packManager.queryIntentActivities(
+                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+        return intActivities.size() != 0;
+    }
+
+    private boolean firstCheckSpeechRecognition() {
+        boolean first = sharedPreferences.getBoolean(PREF_SPEECH_RECOGNITION_FIRST_CHECK, true);
+        if (first) {
+            SharedPreferences.Editor ed = sharedPreferences.edit();
+            ed.putBoolean(PREF_SPEECH_RECOGNITION_FIRST_CHECK, false);
+            ed.apply();
+        }
+        return first;
     }
 
     protected void installTTSfromGooglePlay() {
@@ -188,7 +201,16 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
     }
 
 	public void generateText() {
-        multiSentence = SentenceMaker.makeSentence(this, lessonId, mode, score);
+        if (pastMultiSentences == null) {
+            pastMultiSentences = new ArrayList<>();
+        }
+        do {
+            multiSentence = SentenceMaker.makeSentence(this, lessonId, mode, score);
+        } while (pastMultiSentences.contains(multiSentence));
+        pastMultiSentences.add(multiSentence);
+        if (pastMultiSentences.size() >= UNIQUE_COUNT) {
+            pastMultiSentences.remove(0);
+        }
         taskField.setText(multiSentence.getRuSentence());
         if (mode == MODE_EASY) {
             resultField.setText(multiSentence.getEnSentence());
@@ -200,10 +222,8 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 		switch (v.getId()) {
 		case R.id.button1Help:
             isHelped = true;
-            resultField.setTextColor(tv1darkColor);
-			resultField.setText(multiSentence.getEnSentence());
 			if (ttsIsOn && voiceIsOn) {
-                speakNow(resultField.getText().toString());
+                speakNow(multiSentence.getEnSentence());
             }
             break;
         case R.id.button2OK:
@@ -237,14 +257,17 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
                 if (!isHelped) {// если помощи не было
                     if (score < MAX_SCORE) {
                         score++;
-                        if (score == MAX_SCORE) {
-                            openNextLevel();
-                        }
+                    }
+                    if (score >= MAX_SCORE) {
+                        openNextLevel();
                     }
                 }
-                isChecked = true;
             } else {
                 resultField.setTextColor(getResources().getColor(R.color.material_red));
+                if (mode == MODE_HARD) {
+                    taskField.setText(multiSentence.getRuSentence() +
+                            "\n" + multiSentence.getEnSentence());
+                }
                 if (!failNow) { // если еще не фэйлил
                     failNow = true;
                 }
@@ -252,6 +275,7 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 //                    score--; todo
                 }
             }
+            isChecked = true;
             if (mode == MODE_EASY) {
                 progressBar.setProgress(score);
             }
@@ -346,21 +370,19 @@ public class LevelActivity extends ActionBarActivity implements Constants, OnCli
 			ArrayList<String> suggestedWords = data
 					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String resultString = suggestedWords.get(0).intern();
-            if (lessonId < 2) {
-                    String[] tmp = resultString.split(" ");
-			        if (tmp[0].equalsIgnoreCase("will")
-					    || tmp[0].equalsIgnoreCase("do")
-					    || tmp[0].equalsIgnoreCase("does")
-					    || tmp[0].equalsIgnoreCase("did")
-                        || tmp[0].equalsIgnoreCase("what")
-                        || tmp[0].equalsIgnoreCase("who")
-                        || tmp[0].equalsIgnoreCase("where")
-                        || tmp[0].equalsIgnoreCase("when")
-                        || tmp[0].equalsIgnoreCase("why")
-                        || tmp[0].equalsIgnoreCase("how")) {
-                        resultString+="?";
-			        }
-			}
+            String[] tmp = resultString.split(" ");
+            if (tmp[0].equalsIgnoreCase("will")
+                || tmp[0].equalsIgnoreCase("do")
+                || tmp[0].equalsIgnoreCase("does")
+                || tmp[0].equalsIgnoreCase("did")
+                || tmp[0].equalsIgnoreCase("what")
+                || tmp[0].equalsIgnoreCase("who")
+                || tmp[0].equalsIgnoreCase("where")
+                || tmp[0].equalsIgnoreCase("when")
+                || tmp[0].equalsIgnoreCase("why")
+                || tmp[0].equalsIgnoreCase("how")) {
+                resultString+="?";
+            }
             resultField.setText(resultString);
 		}
 		if (requestCode == MY_DATA_CHECK_CODE) {

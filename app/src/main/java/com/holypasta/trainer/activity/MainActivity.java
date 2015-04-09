@@ -54,14 +54,14 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
         Intent intent = new Intent(ACTION_REMINDER);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC, timeToMillis(REMINDER_HOUR, REMINDER_MINUTE), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeToMillis(REMINDER_HOUR, REMINDER_MINUTE), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private void startDegradation() {
         Intent intent = new Intent(ACTION_DEGRADATION);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC, timeToMillis(DEGRADATION_HOUR, DEGRADATION_MINUTE), AlarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeToMillis(DEGRADATION_HOUR, DEGRADATION_MINUTE), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private long timeToMillis(int hour, int minute) {
@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
     public void onItemClick(AdapterView<?> arg0, View arg1, int levelId, long arg3) {
         if (levelId < Constants.COMPLETE) {
             int score = scores.get(levelId);
-            if (score > -1 || DEBUG_MODE) {
+            if (score > -1) {
                 Intent intent = new Intent();
                 intent.putExtra(EXTRA_LESSON_ID, levelId);
                 intent.putExtra(EXTRA_MODE, mode);

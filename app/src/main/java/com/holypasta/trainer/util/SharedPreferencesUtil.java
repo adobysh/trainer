@@ -18,14 +18,21 @@ public class SharedPreferencesUtil implements Constants {
     public static List<Integer> getScores(Context context) {
         int size = LAST_LEVEL + 1;
         List<Integer> scores = new ArrayList<Integer>();
-        SharedPreferences sPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         for (int i = 0; i < size; i++) {
-            int score = sPref.getInt(Constants.PREF_SCORE_0_15 + i, i == 0 ? 0 : -1);
+            int score = sharedPreferences.getInt(Constants.PREF_SCORE_0_15 + i, i == 0 ? 0 : -1);
             if (score > MAX_SCORE) {
                 score = MAX_SCORE;
             }
             scores.add(score);
         }
         return scores;
+    }
+
+    public static void saveScore(Context context, int level, int score) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor ed = sharedPreferences.edit();
+        ed.putInt(Constants.PREF_SCORE_0_15 + level, score);
+        ed.apply();
     }
 }

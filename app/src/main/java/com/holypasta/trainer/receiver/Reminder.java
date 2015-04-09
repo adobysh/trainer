@@ -27,7 +27,7 @@ public class Reminder extends BroadcastReceiver implements Constants {
     @Override
     public void onReceive(Context context, Intent intent) {
         System.out.println("!!! broadcast Reminder");
-        if (!lastVisitToday(context) || DEBUG_MODE) {
+        if (!lastVisitToday(context)) {
             sendNotification(context);
         }
     }
@@ -71,11 +71,6 @@ public class Reminder extends BroadcastReceiver implements Constants {
                         .setContentText("Нажмите, чтобы начать занятие.")
                         .setContentIntent(pendingIntent)
                         .setAutoCancel(true);
-//        Notification notification = new Notification(R.drawable.united_kingdom, "Notification "
-//                + id, System.currentTimeMillis());
-//        notification.flags |= Notification.FLAG_AUTO_CANCEL;
-//        PendingIntent pendingIntent = createPendingIntent(context);
-//        notification.setLatestEventInfo(context, "Title " + id, "Content " + id, pendingIntent);
         NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(id, mBuilder.build());
     }
