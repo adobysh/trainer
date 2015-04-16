@@ -2,32 +2,186 @@
 <items version="2" >
 
     <item
-        jar="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-a120c5420a8def15619f0628faff6e040ce31eec.jar" />
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-d5e4be753671b495723ca08795c18f9a70cf991a.jar" />
     </item>
     <item
-        jar="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-81cafa2b4688d411cea604f140a62e7e87d23fa0.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-638dc488f10aaddf32bb181789776eba15e3732e.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-eda29c053d3af6e414fad07cb3dc33896fe112ca.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-0dbdcd2c8635d11410234d12cb6afd4d5ccd2015.jar" />
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\internal_impl-21.0.3-2b7bbc1aed186b4daafc3ce87338c835d4ee60c2.jar" />
     </item>
     <item
-        jar="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-5508d92995f5cf000f2bf6d1d80c71f5187fa59f.jar" />
-    </item>
-    <item
-        jar="/Users/Mufasa/Android/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="C:\Users\q1bot\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/Mufasa/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-052ba88c0f8a4c4b7ff6ab040b23e0b8b13defdc.jar" />
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\support-annotations-21.0.3-1eaae4bd9a6fe4d72032a2b3ef93be0b142bf620.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-5dc1508756e312aece951d04b555f9ce47ccdbf8.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-57be212f636ae7bca621ee392bad75d08ca50685.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\classes-c8582643463ac30414ef86de29c19d50449dd939.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-853332549cb3d1d9db158bfc795a2680d5a03c4f.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\classes-184b20cf0e37d03a6b8abf91b6ec2d341cb272d9.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-389e2544047f59aee8d5eb3ab03e144fc53bd8d2.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-d0161e255df0c9ccb776f0d93f7cd0776cea40c3.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-f7c8e5db08773908891842bec57715959e16acc8.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-684eaa6f875cbbd32f2f48e9443d7c36f72b4070.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-970c0736578e0aefa89fcf80d2d49f5f0e2e09f4.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-ae5b6eab72c81e5d930d8369d57fc7d379a74c94.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-b902ec1f3b62f9091a35a0af60cb2c7bc8c6519c.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-9a54db81235166685a21b79864609fe18146a700.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-973b867d6dbb1af56ee0299b826dffc4227f605f.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-87b717452606ce1eff03f1c1cbb312871a697204.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-b088cfd69d1cde2c93eadd62c57f9d577c5e9d5c.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-626ab164016d2f6a3793f9b73aaefe0ca0a4f0fd.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-64c06cf85258c1105601001226e08f2d8d632318.jar" />
+    </item>
+    <item
+        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-5136603848ab260a839a4e90344107104d57f801.jar" />
+    </item>
+    <item
+        jar="C:\Users\q1bot\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-b6cc1430872402ae9d2a37078e1700a5f8045d8c.jar" />
     </item>
 
 </items>

@@ -9,6 +9,9 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.english.R;
 
@@ -35,6 +38,11 @@ public class TheoryActivity extends ActionBarActivity implements Constants {
                     startActivity(intent);
                     }
             });
+        } else {
+            AdView mAdView = (AdView) findViewById(R.id.adView);
+            mAdView.setVisibility(View.VISIBLE);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
         }
         WebView web = (WebView)findViewById(R.id.webTheory);
         web.loadUrl("file:///android_res/raw/lesson" + (ID_LESSON+1) + ".html");

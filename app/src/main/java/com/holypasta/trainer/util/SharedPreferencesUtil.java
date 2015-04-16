@@ -21,12 +21,26 @@ public class SharedPreferencesUtil implements Constants {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         for (int i = 0; i < size; i++) {
             int score = sharedPreferences.getInt(Constants.PREF_SCORE_0_15 + i, i == 0 ? 0 : -1);
-            if (score > MAX_SCORE) {
+            if (score >= MAX_SCORE) {
                 score = MAX_SCORE;
+                openNextLevel(i, sharedPreferences);
             }
             scores.add(score);
         }
         return scores;
+    }
+
+    private static void openNextLevel(int lessonId, SharedPreferences sharedPreferences) {
+        if (lessonId == LAST_LEVEL) {
+            return;
+        }
+        int nextLevelSore = sharedPreferences.getInt(PREF_SCORE_0_15 + (lessonId+1), -1);
+        if (nextLevelSore == -1) {
+            SharedPreferences.Editor edit = sharedPreferences.edit();
+            edit.putInt(PREF_SCORE_0_15 + (lessonId+1), 0);
+            edit.commit();
+            System.out.println("!!! next level opened");
+        }
     }
 
     public static void saveScore(Context context, int level, int score) {
