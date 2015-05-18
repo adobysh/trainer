@@ -7,13 +7,23 @@
     <string name="button_say">!</string>
     <string name="button_ok">\u2713</string>
     <string name="button_next">\u279C</string>
+    <string name="button_video_lesson">Смотреть</string>
+    <string name="button_theory">Читать</string>
     <string name="button_start_lesson">Начать урок!</string>
+    <string name="button_next_lesson">следующий урок ></string>
+    <string name="button_positive">OK</string>
+    <string name="button_negative">Отмена</string>
 
+    <string name="action_dictionary">Словарь</string>
     <string name="action_theory">Теория</string>
     <string name="action_video">Видеоурок</string>
     <string name="action_hard_mode">Hardcore Mode</string>
 
     <string name="title_activity_theory">Теория</string>
+    <string name="title_activity_dictionary">Словарь</string>
+    <string name="title_dialog_next_lesson">Перейти на следующий урок?</string>
+    <string name="title_dialog_complete_available_levels">Поздравляю!\nВы закончили все доступные уроки.</string>
+    <string name="title_dialog_complete_all_levels">Поздравляю!\nВы закончили все уроки.</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-3369297231287003/6928841575</string>
 

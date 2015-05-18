@@ -1,91 +1,107 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white">
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@android:color/black"
-            android:orientation="vertical">
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                layout="@layout/level_header"/>
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:id="@+id/progressBar"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:progressDrawable="@drawable/progress"/>
-
-            <TextView
-                style="@style/TextLittleBlack"
-                android:id="@+id/result_easy"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="en sentense"/>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_green"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:padding="8dp"
-                android:textColor="@android:color/white"
-                android:text="+1"/>
-        </RelativeLayout>
-    </FrameLayout>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="12dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white">
 
-        <Button
-            android:id="@+id/answer_false"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_red_clickable"
-            android:textColor="@android:color/white"
-            android:layout_margin="4dp"
-            android:text="ОШИБКА"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/answer_true"
-            android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/black"
+                android:orientation="vertical">
+
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    layout="@layout/level_header"/>
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:progressDrawable="@drawable/progress"/>
+
+                <TextView
+                    style="@style/TextLittleBlack"
+                    android:id="@+id/result_easy"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="en sentense"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_green"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:textColor="@android:color/white"
+                    android:text="+1"/>
+            </RelativeLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/button_green_clickable"
-            android:textColor="@android:color/white"
-            android:layout_margin="4dp"
-            android:text="ВЕРНО" />
+            android:orientation="horizontal"
+            android:layout_margin="12dp">
+
+            <Button
+                android:id="@+id/answer_false"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_red_clickable"
+                android:textColor="@android:color/white"
+                android:layout_margin="4dp"
+                android:text="ОШИБКА"/>
+
+            <Button
+                android:id="@+id/answer_true"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_green_clickable"
+                android:textColor="@android:color/white"
+                android:layout_margin="4dp"
+                android:text="ВЕРНО" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    <include
+        android:id="@+id/welcome"
+        android:visibility="gone"
+        layout="@layout/level_welcome"/>
+
+    <FrameLayout
+        android:id="@+id/button_next_fullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+</FrameLayout>

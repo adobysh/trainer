@@ -14,24 +14,13 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.holypasta.trainer.activity.MainActivity"
-            android:label="@string/app_name"
+            android:name="com.holypasta.trainer.activity.SingleActivity"
+            android:windowSoftInputMode="adjustResize"
             android:configChanges="keyboardHidden|orientation|fontScale|keyboard|layoutDirection|locale|mcc|mnc|navigation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" >>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.holypasta.trainer.activity.LevelActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:configChanges="keyboardHidden|orientation|fontScale|keyboard|layoutDirection|locale|mcc|mnc|navigation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" >
-        </activity>
-        <activity
-            android:name="com.holypasta.trainer.activity.TheoryActivity"
-            android:label="@string/title_activity_theory"
-            android:configChanges="keyboardHidden|orientation|fontScale|keyboard|layoutDirection|locale|mcc|mnc|navigation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" >
         </activity>
         <receiver
             android:name="com.holypasta.trainer.receiver.Reminder"

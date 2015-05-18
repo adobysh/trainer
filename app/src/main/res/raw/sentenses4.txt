@@ -11,7 +11,7 @@ I am a writer
 I am actor
 
 Я работаю в театре
-I work in thetre
+I work in theater
 
 Привет
 Hello

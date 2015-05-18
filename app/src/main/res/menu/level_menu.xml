@@ -14,4 +14,11 @@
         android:icon="@drawable/ic_youtube_play"
         android:orderInCategory="100"
         app:showAsAction="always" />
+
+    <item android:id="@+id/action_dictionary"
+        android:title="@string/action_dictionary"
+        android:icon="@drawable/ic_book_black_24dp"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
 </menu>

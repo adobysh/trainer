@@ -1,5 +1,6 @@
-package com.holypasta.trainer.activity;
+package com.holypasta.trainer.fragment;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -9,14 +10,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.holypasta.trainer.Constants;
+import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.adapter.LevelsAdapter;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.SharedPreferencesUtil;
@@ -24,26 +29,37 @@ import com.holypasta.trainer.util.SharedPreferencesUtil;
 import java.util.Calendar;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity implements Constants, AdapterView.OnItemClickListener {
+public class MainFragment extends Fragment implements Constants, AdapterView.OnItemClickListener {
 
     private ListView lv1main;
     private LevelsAdapter adapter;
     private List<Integer> scores;
     private SharedPreferences sPref;
     private int mode;
+    private SingleActivity activity;
+
+    public MainFragment() {}
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        lv1main = (ListView) findViewById(R.id.lv1main);
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.activity = (SingleActivity)activity;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        activity.getSupportActionBar().setTitle(getString(R.string.app_name));
+        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+        lv1main = (ListView) rootView.findViewById(R.id.lv1main);
         regVisit();
         startReminder();
         startDegradation();
+        return rootView;
     }
 
     private void regVisit() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor edit = sharedPreferences.edit();
         long time = System.currentTimeMillis();
         edit.putLong(PREF_LAST_VISIT, time);
@@ -52,15 +68,15 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
 
     private void startReminder() {
         Intent intent = new Intent(ACTION_REMINDER);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeToMillis(REMINDER_HOUR, REMINDER_MINUTE), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     private void startDegradation() {
         Intent intent = new Intent(ACTION_DEGRADATION);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, timeToMillis(DEGRADATION_HOUR, DEGRADATION_MINUTE), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
@@ -74,19 +90,19 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         String[] parts = getResources().getStringArray(R.array.contents);
-        scores = SharedPreferencesUtil.getScores(this);
-        adapter = new LevelsAdapter(parts, this, scores);
+        scores = SharedPreferencesUtil.getScores(activity);
+        adapter = new LevelsAdapter(parts, activity, scores);
         lv1main.setAdapter(adapter);
         lv1main.setOnItemClickListener(this);
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
-        sPref = PreferenceManager.getDefaultSharedPreferences(this);
+        sPref = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putInt(Constants.PREF_HARDCORE_MODE, mode);
         ed.commit();
@@ -97,20 +113,17 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
         if (levelId < Constants.COMPLETE) {
             int score = scores.get(levelId);
             if (score > -1) {
-                Intent intent = new Intent();
-                intent.putExtra(EXTRA_LESSON_ID, levelId);
-                intent.putExtra(EXTRA_MODE, mode);
-                if (firstOpen(score)) {
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    intent.putExtra(EXTRA_FIRST_OPEN, true);
-                    intent.setClass(this, TheoryActivity.class);
-                } else {
-                    intent.setClass(this, LevelActivity.class);
-                }
-                startActivity(intent);
+                Bundle arguments = new Bundle();
+                arguments.putInt(EXTRA_LESSON_ID, levelId);
+                arguments.putInt(EXTRA_MODE, mode);
+                Fragment fragment = new LevelFragment();
+                fragment.setArguments(arguments);
+                activity.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, fragment)
+                        .addToBackStack(null)
+                        .commit();
             } else {
-                final AlertDialog aboutDialog = new AlertDialog.Builder(
-                        MainActivity.this)
+                final AlertDialog aboutDialog = new AlertDialog.Builder(activity)
                         .setMessage("Вам необходимо завершить предыдущие уроки")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -122,20 +135,15 @@ public class MainActivity extends ActionBarActivity implements Constants, Adapte
         }
     }
 
-    private boolean firstOpen(int score) {
-        return score == 0;
-    }
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        sPref = PreferenceManager.getDefaultSharedPreferences(this);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu, menu);
+        sPref = PreferenceManager.getDefaultSharedPreferences(activity);
         mode = sPref.getInt(Constants.PREF_HARDCORE_MODE, 0);
         if (mode == 1) {
             menu.findItem(R.id.action_hardcore_mode).setChecked(true);
         }
-        return true;
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override

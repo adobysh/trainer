@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="default_padding">5dp</dimen>
+
     <dimen name="divider_easy_mode">128dp</dimen>
     <dimen name="divider_hard_mode">64dp</dimen>
 
@@ -11,5 +13,6 @@
     <dimen name="text_big">24sp</dimen>
 
     <dimen name="button_padding">32dp</dimen>
+    <dimen name="button_width">192sp</dimen>
 
 </resources>

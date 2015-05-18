@@ -1,72 +1,84 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white" >
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        layout="@layout/level_header"/>
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@android:color/white" >
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            layout="@layout/level_header"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="8sp"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                style="@style/ImageLittleButton"
+                android:id="@+id/button1Help"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/text_button"
+                android:src="@drawable/ic_volume_up_black_18dp"
+                android:visibility="gone"/>
+
+            <EditText
+                style="@style/TextLittleBlack"
+                android:id="@+id/editText1"
+                android:imeOptions="actionDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:singleLine="true">
+
+                <requestFocus />
+
+            </EditText>
+
+            <ImageView
+                style="@style/ImageLittleButton"
+                android:id="@+id/button3Say"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/text_button"
+                android:src="@drawable/ic_mic_black_18dp"
+                android:visibility="gone"/>
+
+            <TextView
+                style="@style/TextLittleButton"
+                android:id="@+id/button2OK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_ok" />
+
+            <TextView
+                style="@style/TextLittleButton"
+                android:id="@+id/buttonNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/button_next" />
+
+        </LinearLayout>
 
         <View
-            android:layout_width="8sp"
-            android:layout_height="wrap_content"/>
-
-        <ImageView
-            style="@style/ImageLittleButton"
-            android:id="@+id/button1Help"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/text_button"
-            android:src="@drawable/ic_volume_up_black_18dp"/>
-
-        <EditText
-            style="@style/TextLittleBlack"
-            android:id="@+id/editText1"
-            android:imeOptions="actionGo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:singleLine="true">
-
-            <requestFocus />
-
-        </EditText>
-
-        <ImageView
-            style="@style/ImageLittleButton"
-            android:id="@+id/button3Say"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/text_button"
-            android:src="@drawable/ic_mic_black_18dp"/>
-
-        <TextView
-            style="@style/TextLittleButton"
-            android:id="@+id/button2OK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_ok" />
-
-        <TextView
-            style="@style/TextLittleButton"
-            android:id="@+id/buttonNext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_next" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
-</LinearLayout>
+    <include
+        android:id="@+id/welcome"
+        android:visibility="gone"
+        layout="@layout/level_welcome"/>
+</FrameLayout>

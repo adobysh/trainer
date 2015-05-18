@@ -8,16 +8,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.holypasta.trainer.Constants;
-import com.holypasta.trainer.activity.MainActivity;
+import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.english.R;
 
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by q1bot on 30.03.2015.
@@ -56,7 +54,7 @@ public class Reminder extends BroadcastReceiver implements Constants {
     }
 
     private PendingIntent createPendingIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, SingleActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         return pendingIntent;
     }

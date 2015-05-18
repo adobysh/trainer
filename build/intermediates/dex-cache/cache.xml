@@ -30,20 +30,6 @@
         <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-eda29c053d3af6e414fad07cb3dc33896fe112ca.jar" />
     </item>
     <item
-        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\internal_impl-21.0.3-2b7bbc1aed186b4daafc3ce87338c835d4ee60c2.jar" />
-    </item>
-    <item
-        jar="C:\Users\q1bot\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\support-annotations-21.0.3-1eaae4bd9a6fe4d72032a2b3ef93be0b142bf620.jar" />
-    </item>
-    <item
         jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -70,13 +56,6 @@
         revision="21.1.2"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
         <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\debug\classes-853332549cb3d1d9db158bfc795a2680d5a03c4f.jar" />
-    </item>
-    <item
-        jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\pre-dexed\release\classes-184b20cf0e37d03a6b8abf91b6ec2d341cb272d9.jar" />
     </item>
     <item
         jar="E:\Workspaces\HolyPasta\trainer\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.0.0\classes.jar"

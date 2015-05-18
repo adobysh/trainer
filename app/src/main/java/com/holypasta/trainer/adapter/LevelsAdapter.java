@@ -77,17 +77,12 @@ public class LevelsAdapter extends BaseAdapter implements Constants {
             } else {
                 holder.image.setImageDrawable(levelOpened);
             }
-            holder.textTitle.setText(parts[position]);
             holder.textTitle.setTextColor(Color.BLACK);
         } else {
-            if (position < Constants.COMPLETE) {
-                holder.textTitle.setText(parts[position]);
-            } else {
-                holder.textTitle.setText("В разработке");
-            }
             holder.image.setImageDrawable(levelClosed);
             holder.textTitle.setTextColor(Color.LTGRAY);
         }
+        holder.textTitle.setText(parts[position]);
         return view;
     }
 }
