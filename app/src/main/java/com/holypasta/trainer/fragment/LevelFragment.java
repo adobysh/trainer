@@ -43,9 +43,8 @@ import java.util.List;
 import static android.view.View.GONE;
 
 public class LevelFragment extends Fragment implements Constants, OnClickListener,
-        Animation.AnimationListener, TextView.OnEditorActionListener
+        Animation.AnimationListener, TextView.OnEditorActionListener {
 //        TextToSpeech.OnInitListener todo speech
-    {
 
 	private int lessonId;
     private boolean voiceIsOn = false;
@@ -132,7 +131,11 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         tvScore.setText(MakeScore.make(score));
         activity.getSupportActionBar().setTitle((lessonId + 1) + " урок");
         resultField.setOnEditorActionListener(this);
-        buttonNext();
+        if (multiSentence == null) {
+            buttonNext();
+        } else {
+            setSentence();
+        }
         return rootView;
 	}
 
@@ -245,22 +248,6 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         startActivityForResult(listenIntent, VR_REQUEST);
     }
 */
-	public void generateText() {
-        if (pastMultiSentences == null) {
-            pastMultiSentences = new ArrayList<>();
-        }
-        do {
-            multiSentence = SentenceMaker.makeSentence(activity, lessonId, mode, score);
-        } while (pastMultiSentences.contains(multiSentence));
-        pastMultiSentences.add(multiSentence);
-        if (pastMultiSentences.size() >= UNIQUE_COUNT) {
-            pastMultiSentences.remove(0);
-        }
-        taskField.setText(multiSentence.getRuSentence());
-        if (mode == MODE_EASY) {
-            resultField.setText(multiSentence.getEnSentence());
-        }
-	}
 
 	@Override
 	public void onClick(View v) {
@@ -401,6 +388,27 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         isHelped = false;
         failNow = false;
         isChecked = false;
+    }
+
+    public void generateText() {
+        if (pastMultiSentences == null) {
+            pastMultiSentences = new ArrayList<>();
+        }
+        do {
+            multiSentence = SentenceMaker.makeSentence(activity, lessonId, mode, score);
+        } while (pastMultiSentences.contains(multiSentence));
+        pastMultiSentences.add(multiSentence);
+        if (pastMultiSentences.size() >= UNIQUE_COUNT) {
+            pastMultiSentences.remove(0);
+        }
+        setSentence();
+    }
+
+    private void setSentence() {
+        taskField.setText(multiSentence.getRuSentence());
+        if (mode == MODE_EASY) {
+            resultField.setText(multiSentence.getEnSentence());
+        }
     }
 
     public void buttonsEnabled(boolean isEnabled){
