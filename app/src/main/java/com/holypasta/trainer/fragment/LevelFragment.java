@@ -147,6 +147,12 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         if (mode == MODE_HARD) {
             hideSoftKeyboard((EditText) resultField);
         }
+        if (rootView != null) { // lolfix
+            ViewGroup parentViewGroup = (ViewGroup) rootView.getParent();
+            if (parentViewGroup != null) {
+                parentViewGroup.removeAllViews();
+            }
+        }
     }
 
     private boolean firstOpen(int score) {
@@ -156,7 +162,9 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        showSoftKeyboard((EditText) resultField);
+        if (mode == MODE_HARD) {
+            showSoftKeyboard((EditText) resultField);
+        }
     }
 
     protected void prepareToDialog(View rootView) {
