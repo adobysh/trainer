@@ -3,6 +3,7 @@ package com.holypasta.trainer.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,9 +23,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -64,7 +67,6 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
 //    private View button3Say; todo speech
     private View buttonNext;
     private View buttonNextFullscreen;
-    private View buttonNextLevel;
     private Animation fieldsAnimation;
     private Animation messageAnimation;
     private int score = 0;
@@ -82,6 +84,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     private Button buttonFalse;
     private ProgressBar progressBar;
     private SingleActivity activity;
+    private View rootView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -91,12 +94,15 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (rootView != null) {
+            return rootView;
+        }
         setHasOptionsMenu(true);
         Bundle extras = getArguments();
         lessonId = extras.getInt(EXTRA_LESSON_ID);
         mode = extras.getInt(EXTRA_MODE);
         int layoutId = mode == MODE_HARD ? R.layout.activity_level_hard : R.layout.activity_level_easy;
-        View rootView = inflater.inflate(layoutId, container, false);
+        rootView = inflater.inflate(layoutId, container, false);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         score = sharedPreferences.getInt(Constants.PREF_SCORE_0_15 + lessonId, 0);
         final boolean isFirstOpen = firstOpen(score);
@@ -131,23 +137,33 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         tvScore.setText(MakeScore.make(score));
         activity.getSupportActionBar().setTitle((lessonId + 1) + " урок");
         resultField.setOnEditorActionListener(this);
-        if (multiSentence == null) {
-            buttonNext();
-        } else {
-            setSentence();
-        }
+        buttonNext();
         return rootView;
 	}
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mode == MODE_HARD) {
+            hideSoftKeyboard((EditText) resultField);
+        }
+    }
 
     private boolean firstOpen(int score) {
         return score == 0;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        showSoftKeyboard((EditText) resultField);
+    }
+
     protected void prepareToDialog(View rootView) {
         taskField = (TextView) rootView.findViewById(R.id.textView1);
         tvScore = (TextView) rootView.findViewById(R.id.tvScore);
-        resultField = mode == MODE_HARD ? (EditText) rootView.findViewById(R.id.editText1) : (TextView) rootView.findViewById(R.id.result_easy);
         if (mode == MODE_HARD) {
+            resultField = (EditText) rootView.findViewById(R.id.editText1);
 //            button1Help = rootView.findViewById(R.id.button1Help); todo speech
             button2OK = rootView.findViewById(R.id.button2OK);
 //            button3Say = rootView.findViewById(R.id.button3Say); todo speech
@@ -183,6 +199,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
 //                button3Say.setVisibility(GONE);
 //            }
         } else if (mode == MODE_EASY) {
+            resultField = (TextView) rootView.findViewById(R.id.result_easy);
             buttonNextFullscreen = rootView.findViewById(R.id.button_next_fullscreen);
             buttonTrue = (Button) rootView.findViewById(R.id.answer_true);
             buttonFalse = (Button) rootView.findViewById(R.id.answer_false);
@@ -197,6 +214,18 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
             tvScore.setVisibility(View.INVISIBLE);
         }
     }
+
+    private void showSoftKeyboard(EditText editText) {
+        resultField.requestFocus();
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    }
+
+    private void hideSoftKeyboard(EditText editText) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+    }
+
 /* todo speech
     private boolean checkSpeechRecognition() { // проверяем, поддерживается ли распознование речи
         PackageManager packManager = activity.getPackageManager();
@@ -414,8 +443,8 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     public void buttonsEnabled(boolean isEnabled){
         if (mode == MODE_HARD) {
 //            button3Say.setEnabled(isEnabled); todo speech
-            button2OK.setVisibility(isEnabled ? View.VISIBLE : GONE);
-            buttonNext.setVisibility(isEnabled ? GONE : View.VISIBLE);
+            button2OK.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            buttonNext.setVisibility(isEnabled ? View.GONE : View.VISIBLE);
         } else {
             buttonTrue.setEnabled(isEnabled);
             buttonFalse.setEnabled(isEnabled);
