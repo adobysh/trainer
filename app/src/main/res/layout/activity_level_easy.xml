@@ -53,6 +53,7 @@
                 android:layout_height="match_parent">
 
                 <Button
+                    style="@style/MaterialButton"
                     android:id="@+id/message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,7 +62,6 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:textColor="@android:color/white"
                     android:text="+1"/>
             </RelativeLayout>
         </FrameLayout>
@@ -73,22 +73,22 @@
             android:layout_margin="12dp">
 
             <Button
+                style="@style/MaterialButton"
                 android:id="@+id/answer_false"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_red_clickable"
-                android:textColor="@android:color/white"
                 android:layout_margin="4dp"
                 android:text="ОШИБКА"/>
 
             <Button
+                style="@style/MaterialButton"
                 android:id="@+id/answer_true"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_green_clickable"
-                android:textColor="@android:color/white"
                 android:layout_margin="4dp"
                 android:text="ВЕРНО" />
         </LinearLayout>

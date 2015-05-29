@@ -10,7 +10,7 @@
 
     <dimen name="text_normal">16sp</dimen>
     <dimen name="text_button">20sp</dimen>
-    <dimen name="text_big">24sp</dimen>
+    <dimen name="text_level_number">24sp</dimen>
 
     <dimen name="button_padding">32dp</dimen>
     <dimen name="button_width">192sp</dimen>

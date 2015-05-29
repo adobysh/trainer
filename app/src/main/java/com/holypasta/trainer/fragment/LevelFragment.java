@@ -344,7 +344,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                     failNow = true;
                 }
                 if (mode == MODE_EASY && score > 1) {
-//                    score--; todo
+                    score--;
                 }
             }
             isChecked = true;

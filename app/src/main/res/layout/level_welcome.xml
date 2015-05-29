@@ -13,43 +13,45 @@
         android:layout_weight="1">
 
         <TextView
+            style="@style/TextNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_button"
             android:text="@string/title_activity_theory" />
 
         <Button
+            style="@style/MaterialButton"
             android:id="@+id/button_video_lesson"
             android:text="@string/button_video_lesson"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_green_clickable"
-            android:textColor="@android:color/white"/>
+            android:background="@drawable/button_green_clickable"/>
 
         <TextView
+            style="@style/TextNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_button"
             android:text="или" />
 
         <Button
+            style="@style/MaterialButton"
             android:id="@+id/button_theory"
             android:text="@string/button_theory"
             android:layout_width="@dimen/button_width"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_green_clickable"
-            android:textColor="@android:color/white"/>
+            android:background="@drawable/button_green_clickable"/>
 
     </LinearLayout>
 
     <Button
+        style="@style/MaterialButton"
         android:id="@+id/button_start_lesson"
         android:text="@string/button_start_lesson"
         android:layout_gravity="center_horizontal"
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_vertical_margin"
-        android:background="@drawable/button_green_clickable"
-        android:textColor="@android:color/white"/>
+        android:background="@drawable/button_green_clickable"/>
 
 </LinearLayout>
