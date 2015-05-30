@@ -85,6 +85,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     private ProgressBar progressBar;
     private SingleActivity activity;
     private View rootView;
+    boolean isFirstOpen;
 
     @Override
     public void onAttach(Activity activity) {
@@ -105,7 +106,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         rootView = inflater.inflate(layoutId, container, false);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         score = sharedPreferences.getInt(Constants.PREF_SCORE_0_15 + lessonId, 0);
-        final boolean isFirstOpen = firstOpen(score);
+        isFirstOpen = firstOpen(score);
         if (isFirstOpen) {
             final View welcomeView = rootView.findViewById(R.id.welcome);
             welcomeView.setVisibility(View.VISIBLE);
@@ -116,6 +117,9 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                 @Override
                 public void onClick(View v) {
                     welcomeView.setVisibility(View.GONE);
+                    if (mode == MODE_HARD) {
+                        showSoftKeyboard((EditText) resultField);
+                    }
                 }
             });
             videoButton.setOnClickListener(new OnClickListener() {
@@ -162,7 +166,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        if (mode == MODE_HARD) {
+        if (mode == MODE_HARD && !isFirstOpen) {
             showSoftKeyboard((EditText) resultField);
         }
     }
