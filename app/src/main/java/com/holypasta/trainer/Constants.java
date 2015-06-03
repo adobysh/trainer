@@ -19,7 +19,7 @@ public interface Constants {
     static final int DEGRADATION_STEP = MAX_SCORE;
     static final int UNIQUE_COUNT = 10; // 20 take looping
 
-    static final int COMPLETE = 5;
+    static final int COMPLETE = 8;
     static final int LAST_LEVEL = 15;
 
     static final String ACTION_REMINDER = ACTION + "reminder";

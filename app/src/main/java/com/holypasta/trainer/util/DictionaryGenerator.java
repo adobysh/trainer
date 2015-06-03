@@ -1,9 +1,5 @@
 package com.holypasta.trainer.util;
 
-import com.holypasta.trainer.data.DictionaryItemData;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

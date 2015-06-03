@@ -50,11 +50,12 @@ public class DictionaryFragment extends Fragment implements Constants
         final Bundle extras = getArguments();
         int levelId = extras.getInt(EXTRA_LESSON_ID);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
-        final WordsAdapter wordsAdapter = new WordsAdapter(getDictionaryItems(levelId), activity);
+        List<String> words = getDictionaryItems(levelId);
+        if (words == null) return rootView;
+        final WordsAdapter wordsAdapter = new WordsAdapter(words, activity);
         listView.setAdapter(wordsAdapter);
         AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
         mAdView.setVisibility(View.VISIBLE);
-        View view = new View(activity);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { todo speech

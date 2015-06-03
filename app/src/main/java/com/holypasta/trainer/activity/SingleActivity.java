@@ -12,6 +12,8 @@ import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.fragment.MainFragment;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by q1bot on 03.05.2015.

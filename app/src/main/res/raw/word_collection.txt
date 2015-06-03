@@ -1,0 +1,169 @@
+######################### 1 глагол делать ##################
+@ 7 8 @
+will
+do
+does
+did
+do not
+don't
+did not
+didn't
+will not
+won't
+does not
+doesn't
+
+######################### 2 pronouns | местоимения ##################
+@ 8 @
+me
+you
+him
+her
+it
+them
+us
+
+######################### 3 to be ##################
+@ 8 @
+be
+am
+is
+are
+was
+were
+
+######################### 6.1 much, many ##################
+@ 6 @
+much
+many
+
+######################### 6.x nouns | имя существительное, множественное и единственное число  ##
+@ 6 @
+time
+dollars
+boys
+money
+love
+numbers
+music
+pictures
+flowers
+milk
+ships
+chairs
+cars
+tea
+sugar
+hours
+food
+cheese
+girls
+pencils
+
+######################### 1.x pronouns | местоимения #############################
+@ 6 7 8 @
+I
+you
+he
+she
+it
+they
+we
+
+######################### 6.2 ############################
+@ 6 @
+everybody
+somebody
+nobody
+something
+nothing
+somewhere
+nowhere
+
+######################### 6.3 ############################
+@ 6 @
+always
+sometimes
+never
+
+######################### 7 глаголы ############################
+@ 7 8 @
+help
+buy
+pay
+play
+change
+choose
+drive
+have dinner
+watch
+come
+####### 8 ###
+look
+listen
+made
+speak
+hope
+think
+tell
+flies
+went out
+
+######################### 8 существительные ############################
+@ 8 @
+letter
+great pleasure
+book
+plane
+library
+bed
+cat
+hat
+
+######################### 8 состояния ############################
+@ 8 @
+there
+embarrassed
+far
+
+######################### 7 let's давай/пусть ############################
+@ 7 @
+let's
+go
+do
+
+######################### 7 фразы ############################
+@ 7 @
+lately
+to shoot(shot)
+shot
+war movie
+to wear(wore)
+starring in a movie
+to play a role
+based on the story
+plot
+screen
+screen version
+to make a screen version
+battle scene
+to fall(fell)
+to fall in love
+stuntman
+to miss
+to release
+to cut
+not so important
+most important
+to torture
+he tortures me
+torture
+revenge
+look
+it looked real
+refuse
+
+######################### 8 c, вместе с ############################
+@ 8 @
+without
+with

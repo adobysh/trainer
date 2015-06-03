@@ -36,18 +36,22 @@ import android.widget.TextView;
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.data.MultiSentenceData;
+import com.holypasta.trainer.data.MultiSentenceDataV2;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.MakeScore;
 import com.holypasta.trainer.util.SentenceMaker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.view.View.GONE;
 
 public class LevelFragment extends Fragment implements Constants, OnClickListener,
         Animation.AnimationListener, TextView.OnEditorActionListener {
 //        TextToSpeech.OnInitListener todo speech
+
+    private final int BAD_LESSONS_COUNT = 5;
 
 	private int lessonId;
     private boolean voiceIsOn = false;
@@ -57,6 +61,8 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     private int tv1darkColor;
     private SharedPreferences sharedPreferences;
     private MultiSentenceData multiSentence;
+    private MultiSentenceDataV2 multiSentenceV2;
+    private SentenceMaker sentenceMaker;
     private List<MultiSentenceData> pastMultiSentences;
     private TextView tvScore;
     private TextView taskField;
@@ -141,6 +147,9 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         tvScore.setText(MakeScore.make(score));
         activity.getSupportActionBar().setTitle((lessonId + 1) + " урок");
         resultField.setOnEditorActionListener(this);
+        if (lessonId >= BAD_LESSONS_COUNT) {
+            sentenceMaker = new SentenceMaker(activity, lessonId);
+        }
         buttonNext();
         return rootView;
 	}
@@ -316,7 +325,9 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     public void buttonOK(int buttonId) {
         if (resultField.getText().length() != 0) {
             String answer = resultField.getText().toString();
-            boolean checkResult = multiSentence.checkResult(answer);
+            boolean checkResult = lessonId < BAD_LESSONS_COUNT ?
+                    multiSentence.checkResult(answer) :
+                    multiSentenceV2.checkResult(answer);
             System.out.println("!!! answer: " + answer);
             System.out.println("!!! checkResult " + checkResult);
             if (mode == MODE_EASY) {
@@ -341,14 +352,19 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
             } else {
                 resultField.setTextColor(getResources().getColor(R.color.material_red));
                 if (mode == MODE_HARD) {
-                    taskField.setText(multiSentence.getRuSentence() +
-                            "\n" + multiSentence.getEnSentence());
+                    if (lessonId < BAD_LESSONS_COUNT) {
+                        taskField.setText(multiSentence.getRuSentence() +
+                                "\n" + multiSentence.getEnSentence());
+                    } else {
+                        taskField.setText(multiSentenceV2.getRuSentence() +
+                                "\n" + multiSentenceV2.getEnSentence());
+                    }
                 }
                 if (!failNow) { // если еще не фэйлил
                     failNow = true;
                 }
                 if (mode == MODE_EASY && score > 1) {
-                    score--;
+//                    score--;
                 }
             }
             isChecked = true;
@@ -375,10 +391,17 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                 fieldsAnimation.setAnimationListener(this);
                 resultField.startAnimation(fieldsAnimation);
                 taskField.startAnimation(fieldsAnimation);
-                message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true
-                        ? "Неправильно:\n" + multiSentence.getEnSentence()
-                        + "\n\nПравильно:\n" + multiSentence.getRuSentence() + "\n" + multiSentence.getCorrectEnSentence()
-                        : "Ошибки небыло"));
+                if (lessonId < BAD_LESSONS_COUNT) {
+                    message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true
+                            ? "Неправильно:\n" + multiSentence.getEnSentence()
+                            + "\n\nПравильно:\n" + multiSentence.getRuSentence() + "\n" + multiSentence.getCorrectEnSentence()
+                            : "Ошибки небыло"));
+                } else {
+                    message.setText(checkResult ? "+1" : (buttonId == R.id.answer_true
+                            ? "Неправильно:\n" + answer
+                            + "\n\nПравильно:\n" + multiSentenceV2.getRuSentence() + "\n" + multiSentenceV2.getEnSentence()
+                            : "Ошибки небыло"));
+                }
                 int drawableId = checkResult ? R.drawable.button_green : R.drawable.button_red;
                 message.setBackgroundResource(drawableId);
                 message.setVisibility(View.VISIBLE);
@@ -432,23 +455,40 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     }
 
     public void generateText() {
-        if (pastMultiSentences == null) {
-            pastMultiSentences = new ArrayList<>();
-        }
-        do {
-            multiSentence = SentenceMaker.makeSentence(activity, lessonId, mode, score);
-        } while (pastMultiSentences.contains(multiSentence));
-        pastMultiSentences.add(multiSentence);
-        if (pastMultiSentences.size() >= UNIQUE_COUNT) {
-            pastMultiSentences.remove(0);
+        if (lessonId < BAD_LESSONS_COUNT) {
+            // todo | Refactor It! Do It!!
+            if (pastMultiSentences == null) {
+                pastMultiSentences = new ArrayList<>();
+            }
+            do {
+                multiSentence = SentenceMaker.makeSentence(activity, lessonId, mode, score);
+            } while (pastMultiSentences.contains(multiSentence));
+            pastMultiSentences.add(multiSentence);
+            if (pastMultiSentences.size() >= UNIQUE_COUNT) {
+                pastMultiSentences.remove(0);
+            }
+        } else {
+            multiSentenceV2 = sentenceMaker.makeSentence();
         }
         setSentence();
     }
 
     private void setSentence() {
-        taskField.setText(multiSentence.getRuSentence());
-        if (mode == MODE_EASY) {
-            resultField.setText(multiSentence.getEnSentence());
+        if (lessonId < BAD_LESSONS_COUNT) {
+            // todo | Refactor It! Do It!!
+            taskField.setText(multiSentence.getRuSentence());
+            if (mode == MODE_EASY) {
+                resultField.setText(multiSentence.getEnSentence());
+            }
+        } else {
+            taskField.setText(multiSentenceV2.getRuSentence());
+            if (mode == MODE_EASY) {
+                if (new Random().nextBoolean()) { // 50% wrong
+                    resultField.setText(multiSentenceV2.getEnSentence());
+                } else {
+                    resultField.setText(multiSentenceV2.getWrongSentence());
+                }
+            }
         }
     }
 

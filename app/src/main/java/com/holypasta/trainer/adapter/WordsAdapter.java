@@ -1,12 +1,10 @@
 package com.holypasta.trainer.adapter;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.holypasta.trainer.Constants;
@@ -14,9 +12,6 @@ import com.holypasta.trainer.english.R;
 
 import java.util.List;
 
-/**
- * Created by q1bot on 24.01.15.
- */
 public class WordsAdapter extends BaseAdapter implements Constants {
 
     private class ViewHolder {
@@ -29,7 +24,6 @@ public class WordsAdapter extends BaseAdapter implements Constants {
     public WordsAdapter(List<String> words, Activity activity) {
         this.words = words;
         this.layoutInflater = activity.getLayoutInflater();
-        Resources resources = layoutInflater.getContext().getResources();
     }
 
     @Override
@@ -50,7 +44,7 @@ public class WordsAdapter extends BaseAdapter implements Constants {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        final ViewHolder holder;
+        ViewHolder holder;
         if (convertView == null) {
             view = layoutInflater.inflate(R.layout.item_dictionary, parent, false);
             holder = new ViewHolder();
