@@ -21,15 +21,12 @@ public class MultiSentenceDataV2 {
         this.isQuestion = checkIsQuestion(enSentence);
     }
     
-    private boolean checkIsQuestion(String enSentence) {
-        String[] exceptions = new String[] { "don't go" };
-        for (String word : exceptions) {
-            if (enSentence.equals(word)) return false;
-        }
+    public static boolean checkIsQuestion(String enSentence) {
+        enSentence = enSentence.toLowerCase();
         String[] questionWords = new String[] {"will","do","does","did","what","who","where",
                 "when","why","how"};
         for (String questionWord : questionWords) {
-            if (enSentence.startsWith(questionWord)) return true;
+            if (enSentence.startsWith(questionWord + " ")) return true;
         }
         return false;
     }
@@ -44,12 +41,15 @@ public class MultiSentenceDataV2 {
     }
 
     public String getWrongSentence() {
-//        lessonId
-        if (new Random().nextBoolean()) {
-            return getSentence(wrongSentence(enSentence) + " LIE!");
+        if (onlyOneWord() || new Random().nextBoolean()) {
+            return getSentence(wrongSentence(enSentence) + " LIE! wrong");
         } else {
-            return getSentence(wrongSentence(enSentence) + " LIE!"); // todo | change this
+            return getSentence(wordMixing(enSentence) + " LIE! mix");
         }
+    }
+
+    private boolean onlyOneWord() {
+        return !enSentence.contains(" ");
     }
 
     private String wrongSentence(String rightSentence) {

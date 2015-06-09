@@ -49,7 +49,7 @@ import static android.view.View.GONE;
 
 public class LevelFragment extends Fragment implements Constants, OnClickListener,
         Animation.AnimationListener, TextView.OnEditorActionListener {
-//        TextToSpeech.OnInitListener todo speech
+//        TextToSpeech.OnInitListener todo speech -
 
     private final int BAD_LESSONS_COUNT = 5;
 
@@ -68,23 +68,23 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     private TextView taskField;
     private TextView resultField;
     private TextView message;
-//    private View button1Help; todo speech
+//    private View button1Help; todo speech +
     private View button2OK;
-//    private View button3Say; todo speech
+//    private View button3Say; todo speech +
     private View buttonNext;
     private View buttonNextFullscreen;
     private Animation fieldsAnimation;
     private Animation messageAnimation;
     private int score = 0;
-    // переменная для проверки возможности
-    // распознавания голоса в телефоне
-    private final int VR_REQUEST = 999;
-    // переменные для работы TTS:
-    // переменная для проверки данных для TTS
-    private int MY_DATA_CHECK_CODE = 0;
-    // Text To Speech интерфейс
-    protected TextToSpeech repeatTTS;
-    protected boolean ttsIsOn = false;
+//    // переменная для проверки возможности todo speech -
+//    // распознавания голоса в телефоне
+//    private final int VR_REQUEST = 999;
+//    // переменные для работы TTS:
+//    // переменная для проверки данных для TTS
+//    private int MY_DATA_CHECK_CODE = 0;
+//    // Text To Speech интерфейс
+//    protected TextToSpeech repeatTTS;
+//    protected boolean ttsIsOn = false;
     private int mode;
     private Button buttonTrue;
     private Button buttonFalse;
@@ -185,14 +185,14 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         tvScore = (TextView) rootView.findViewById(R.id.tvScore);
         if (mode == MODE_HARD) {
             resultField = (EditText) rootView.findViewById(R.id.editText1);
-//            button1Help = rootView.findViewById(R.id.button1Help); todo speech
+//            button1Help = rootView.findViewById(R.id.button1Help); todo speech +
             button2OK = rootView.findViewById(R.id.button2OK);
-//            button3Say = rootView.findViewById(R.id.button3Say); todo speech
+//            button3Say = rootView.findViewById(R.id.button3Say); todo speech +
             buttonNext = rootView.findViewById(R.id.buttonNext);
-//            button1Help.setOnClickListener(this); todo speech
+//            button1Help.setOnClickListener(this); todo speech +
             button2OK.setOnClickListener(this);
             buttonNext.setOnClickListener(this);
-//            if (voiceIsOn) { todo speech
+//            if (voiceIsOn) { todo speech -
 //                if (checkSpeechRecognition()) {
 //                    button3Say.setOnClickListener(this);
 //                } else {
@@ -247,7 +247,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-/* todo speech
+/* todo speech -
     private boolean checkSpeechRecognition() { // проверяем, поддерживается ли распознование речи
         PackageManager packManager = activity.getPackageManager();
         List<ResolveInfo> intActivities = packManager.queryIntentActivities(
@@ -574,7 +574,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         manager.popBackStack();
     }
 
-//	@Override // Получаем результат распознавания todo speech
+//	@Override // Получаем результат распознавания todo speech -
 //	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //		// проверяем результат распознавания речи
 //        try {
