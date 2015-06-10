@@ -9,6 +9,7 @@ public interface Constants {
 
     int MODE_EASY = 0;
     int MODE_HARD = 1;
+    int MODE_SPEECH = 2;
 
     int REMINDER_HOUR = 12;
     int REMINDER_MINUTE = 0;
@@ -24,10 +25,12 @@ public interface Constants {
 
     String ACTION_REMINDER = ACTION + "reminder";
     String ACTION_DEGRADATION = ACTION + "degradation";
+    String ACTION_SPEECH_RECOGNITION_RESULT = ACTION + "speech.recognition.result";
 
     String EXTRA_LESSON_ID = EXTRA + "lesson.id";
     String EXTRA_MODE = EXTRA + "mode";
     String EXTRA_FIRST_OPEN = EXTRA + "first.open";
+    String EXTRA_RECOGNITION_RESULT = EXTRA + "recognition.result";
 
     String PREF_SCORE_0_15 = PREF + "score_";
     String PREF_HARDCORE_MODE = PREF + "hardcore.mode";

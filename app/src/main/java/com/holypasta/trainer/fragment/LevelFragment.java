@@ -49,12 +49,10 @@ import static android.view.View.GONE;
 
 public class LevelFragment extends Fragment implements Constants, OnClickListener,
         Animation.AnimationListener, TextView.OnEditorActionListener {
-//        TextToSpeech.OnInitListener todo speech -
 
     private final int BAD_LESSONS_COUNT = 5;
 
 	private int lessonId;
-    private boolean voiceIsOn = false;
     private boolean isHelped = false;
     private boolean failNow = false;
     private boolean isChecked = false;
@@ -68,23 +66,14 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     private TextView taskField;
     private TextView resultField;
     private TextView message;
-//    private View button1Help; todo speech +
+    private View button1Help;
     private View button2OK;
-//    private View button3Say; todo speech +
+    private View button3Say;
     private View buttonNext;
     private View buttonNextFullscreen;
     private Animation fieldsAnimation;
     private Animation messageAnimation;
     private int score = 0;
-//    // переменная для проверки возможности todo speech -
-//    // распознавания голоса в телефоне
-//    private final int VR_REQUEST = 999;
-//    // переменные для работы TTS:
-//    // переменная для проверки данных для TTS
-//    private int MY_DATA_CHECK_CODE = 0;
-//    // Text To Speech интерфейс
-//    protected TextToSpeech repeatTTS;
-//    protected boolean ttsIsOn = false;
     private int mode;
     private Button buttonTrue;
     private Button buttonFalse;
@@ -141,7 +130,6 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                 }
             });
         }
-        voiceIsOn = mode == MODE_HARD;
         prepareToDialog(rootView);
         tv1darkColor = taskField.getCurrentTextColor();
         tvScore.setText(MakeScore.make(score));

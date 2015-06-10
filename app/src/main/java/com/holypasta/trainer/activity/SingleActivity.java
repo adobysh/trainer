@@ -137,7 +137,7 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
             if (MultiSentenceDataV2.checkIsQuestion(resultString)) {
                 resultString+="?";
             }
-            resultField.setText(resultString);
+            sendRecognitionResult(resultString);
 		}
 		if (requestCode == MY_DATA_CHECK_CODE) {
 			if (isTTSInstalled(resultCode)) {
@@ -148,6 +148,12 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
 			}
 		}
 	}
+
+    private void sendRecognitionResult(String result) {
+        Intent intent = new Intent(ACTION_SPEECH_RECOGNITION_RESULT);
+        intent.putExtra(EXTRA_RECOGNITION_RESULT, result);
+        sendBroadcast(intent);
+    }
 
     private boolean isTTSInstalled(int resultCode) {
         return resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS;
