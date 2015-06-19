@@ -2,16 +2,27 @@
 
 grammar digits;
 
-<digit> = oh    |
-          zero  |
-          one   |
-          two   |
-          three |
-          four  |
-          five  |
-          six   |
-          seven |
-          eight |
-          nine  ;
+<digit> = much     |
+                   many     |
+                   time     |
+                   dollars  |
+                   boys     |
+                   money    |
+                   love     |
+                   numbers  |
+                   music    |
+                   pictures |
+                   flowers  |
+                   milk     |
+                   ships    |
+                   chairs   |
+                   cars     |
+                   tea      |
+                   sugar    |
+                   hours    |
+                   food     |
+                   cheese   |
+                   girls    |
+                   pencils  ;
 
 public <digits> = <digit>+;

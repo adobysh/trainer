@@ -124,7 +124,7 @@ public class SingleActivity extends ActionBarActivity implements Constants,
                     ((TextView) findViewById(R.id.editText1))
                             .setText("Failed to init recognizer " + result);
                 } else {
-                    switchSearch(WORDS_SEARCH);
+                    switchSearch(DIGITS_SEARCH);
                 }
             }
         }.execute();
@@ -181,7 +181,9 @@ public class SingleActivity extends ActionBarActivity implements Constants,
     }
 
     @Override // Pocketsphinx | CMU Sphinx
-    public void onBeginningOfSpeech() { }
+    public void onBeginningOfSpeech() {
+        System.out.println("!!! onBeginningOfSpeech");
+    }
 
     // Pocketsphinx | CMU Sphinx
     /**
@@ -189,6 +191,7 @@ public class SingleActivity extends ActionBarActivity implements Constants,
      */
     @Override
     public void onEndOfSpeech() {
+        System.out.println("!!! onEndOfSpeech");
 //        if (!recognizer.getSearchName().equals(WORDS_SEARCH))
 //            switchSearch(WORDS_SEARCH);
     }
@@ -203,8 +206,8 @@ public class SingleActivity extends ActionBarActivity implements Constants,
     public void onPartialResult(Hypothesis hypothesis) {
         if (hypothesis == null)
             return;
-
         String text = hypothesis.getHypstr();
+        System.out.println("!!! onPartialResult. " + text);
         ((TextView) findViewById(R.id.editText1)).setText(text);
     }
 
@@ -214,7 +217,8 @@ public class SingleActivity extends ActionBarActivity implements Constants,
      */
     @Override
     public void onResult(Hypothesis hypothesis) {
-        ((TextView) findViewById(R.id.editText1)).setText("");
+        System.out.println("!!! onResult");
+//        ((TextView) findViewById(R.id.editText1)).setText("");
         if (hypothesis != null) {
             String text = hypothesis.getHypstr();
             makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
@@ -223,15 +227,18 @@ public class SingleActivity extends ActionBarActivity implements Constants,
 
     @Override // Pocketsphinx | CMU Sphinx
     public void onError(Exception error) {
+        System.out.println("!!! onError");
         ((TextView) findViewById(R.id.editText1)).setText(error.getMessage());
     }
 
     @Override // Pocketsphinx | CMU Sphinx
     public void onTimeout() {
+        System.out.println("!!! onTimeout");
 //        switchSearch(WORDS_SEARCH);
     }
 
     private void setupRecognizer(File assetsDir) throws IOException {
+        System.out.println("!!! setupRecognizer");
         // The recognizer can be configured to perform multiple searches
         // of different kind and switch between them
 
@@ -269,8 +276,8 @@ public class SingleActivity extends ActionBarActivity implements Constants,
         recognizer.addGrammarSearch(DIGITS_SEARCH, digitsGrammar);
 
 //        // Create grammar-based search for word recognition
-        File wordsGrammar = new File(assetsDir, "words.gram");
-        recognizer.addGrammarSearch(WORDS_SEARCH, wordsGrammar);
+//        File wordsGrammar = new File(assetsDir, "words.gram");
+//        recognizer.addGrammarSearch(WORDS_SEARCH, wordsGrammar);
 
 //      какойто фонетический поиск, хз как он работает
 //        // Create language model search
@@ -283,6 +290,7 @@ public class SingleActivity extends ActionBarActivity implements Constants,
     }
 
     private void switchSearch(String searchName) {
+        System.out.println("!!! switchSearch");
         recognizer.stop();
 
         // If we are not spotting, start listening with timeout (10000 ms or 10 seconds).

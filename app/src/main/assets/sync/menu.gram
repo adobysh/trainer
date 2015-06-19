@@ -2,4 +2,25 @@
 
 grammar menu;
 
-public <item> = digits | forecast | phones;
+public <item> = much     |
+                         many     |
+                         time     |
+                         dollars  |
+                         boys     |
+                         money    |
+                         love     |
+                         numbers  |
+                         music    |
+                         pictures |
+                         flowers  |
+                         milk     |
+                         ships    |
+                         chairs   |
+                         cars     |
+                         tea      |
+                         sugar    |
+                         hours    |
+                         food     |
+                         cheese   |
+                         girls    |
+                         pencils;
