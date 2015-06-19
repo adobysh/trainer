@@ -1,17 +1,12 @@
 package com.holypasta.trainer.fragment;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.Button;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -34,7 +29,7 @@ public class TheoryFragment extends Fragment implements Constants {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity.getSupportActionBar().setTitle(getString(R.string.title_activity_theory));
-        View rootView = inflater.inflate(R.layout.activity_theory, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_theory, container, false);
         final Bundle extras = getArguments();
         ID_LESSON = extras.getInt(EXTRA_LESSON_ID);
         FIRST_OPEN = extras.getBoolean(EXTRA_FIRST_OPEN, false);

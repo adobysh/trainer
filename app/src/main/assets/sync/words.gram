@@ -1,0 +1,26 @@
+#JSGF V1.0;
+
+grammar words;
+
+public <item> = much     |
+         many     |
+         time     |
+         dollars  |
+         boys     |
+         money    |
+         love     |
+         numbers  |
+         music    |
+         pictures |
+         flowers  |
+         milk     |
+         ships    |
+         chairs   |
+         cars     |
+         tea      |
+         sugar    |
+         hours    |
+         food     |
+         cheese   |
+         girls    |
+         pencils  ;

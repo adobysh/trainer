@@ -1,16 +1,11 @@
 package com.holypasta.trainer.fragment;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -22,7 +17,6 @@ import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.DictionaryGenerator;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by q1bot on 16.04.2015.
@@ -46,7 +40,7 @@ public class DictionaryFragment extends Fragment implements Constants
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity.getSupportActionBar().setTitle(getString(R.string.title_activity_dictionary));
         setHasOptionsMenu(true);
-        View rootView = inflater.inflate(R.layout.activity_dictionary, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dictionary, container, false);
         final Bundle extras = getArguments();
         int levelId = extras.getInt(EXTRA_LESSON_ID);
         ListView listView = (ListView) rootView.findViewById(R.id.list);

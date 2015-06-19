@@ -44,6 +44,13 @@
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-35b86c2e88a6cc6fbfcf487ec2d33d60748663e2.jar" />
     </item>
     <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/pocketsphinx-android-5prealpha-nolib.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="37db255d6c7c93be6a71f95ef9d829415f0015e0">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/pocketsphinx-android-5prealpha-nolib-1434ba656f9dae2f83616f6bce5dd8fe529cbdb1.jar" />
+    </item>
+    <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.2"

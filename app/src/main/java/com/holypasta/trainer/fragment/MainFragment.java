@@ -50,7 +50,7 @@ public class MainFragment extends Fragment implements Constants, AdapterView.OnI
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         activity.getSupportActionBar().setTitle(getString(R.string.app_name));
-        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         lv1main = (ListView) rootView.findViewById(R.id.lv1main);
         regVisit();
         startReminder();

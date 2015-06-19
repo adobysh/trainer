@@ -3,9 +3,11 @@ package com.holypasta.trainer.fragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
@@ -80,7 +81,14 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     private ProgressBar progressBar;
     private SingleActivity activity;
     private View rootView;
-    boolean isFirstOpen;
+    private boolean isFirstOpen;
+
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            resultField.setText(intent.getStringExtra(EXTRA_RECOGNITION_RESULT));
+        }
+    };
 
     @Override
     public void onAttach(Activity activity) {
@@ -97,7 +105,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         Bundle extras = getArguments();
         lessonId = extras.getInt(EXTRA_LESSON_ID);
         mode = extras.getInt(EXTRA_MODE);
-        int layoutId = mode == MODE_HARD ? R.layout.activity_level_hard : R.layout.activity_level_easy;
+        int layoutId = mode == MODE_HARD ? R.layout.fragment_level_hard : R.layout.fragment_level_easy;
         rootView = inflater.inflate(layoutId, container, false);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         score = sharedPreferences.getInt(Constants.PREF_SCORE_0_15 + lessonId, 0);
@@ -139,8 +147,19 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
             sentenceMaker = new SentenceMaker(activity, lessonId);
         }
         buttonNext();
+        registerReceiver();
         return rootView;
 	}
+
+    private void registerReceiver() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION_SPEECH_RECOGNITION_RESULT);
+        try {
+
+            activity.registerReceiver(broadcastReceiver, intentFilter);
+        } catch (Exception e) {} // todo
+
+    }
 
     @Override
     public void onDestroyView() {
@@ -173,39 +192,18 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         tvScore = (TextView) rootView.findViewById(R.id.tvScore);
         if (mode == MODE_HARD) {
             resultField = (EditText) rootView.findViewById(R.id.editText1);
-//            button1Help = rootView.findViewById(R.id.button1Help); todo speech +
+            button1Help = rootView.findViewById(R.id.button1Help);
             button2OK = rootView.findViewById(R.id.button2OK);
-//            button3Say = rootView.findViewById(R.id.button3Say); todo speech +
+            button3Say = rootView.findViewById(R.id.button3Say);
             buttonNext = rootView.findViewById(R.id.buttonNext);
-//            button1Help.setOnClickListener(this); todo speech +
+            button1Help.setOnClickListener(this);
             button2OK.setOnClickListener(this);
             buttonNext.setOnClickListener(this);
-//            if (voiceIsOn) { todo speech -
-//                if (checkSpeechRecognition()) {
-//                    button3Say.setOnClickListener(this);
-//                } else {
-//                    button3Say.setVisibility(View.GONE);
-//                    button1Help.setVisibility(View.GONE);
-//                    if (firstCheckSpeechRecognition()) {
-//                        AlertDialog aboutDialog = new AlertDialog.Builder(
-//                                activity)
-//                                .setMessage("Распознавание речи не поддерживается!")
-//                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                    }
-//                                }).create();
-//                        aboutDialog.show();
-//                    }
-//                }
-//                // подготовка движка TTS для проговаривания слов
-//                Intent checkTTSIntent = new Intent();
-//                // проверка наличия TTS
-//                checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-//                // запуск checkTTSIntent интента
-//                startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
+//            if (activity.isRecognitionIsOn()) { // todo
+                button3Say.setOnClickListener(this);
 //            } else {
-//                button3Say.setVisibility(GONE);
+//                button3Say.setVisibility(View.GONE);
+//                button1Help.setVisibility(View.GONE);
 //            }
         } else if (mode == MODE_EASY) {
             resultField = (TextView) rootView.findViewById(R.id.result_easy);
@@ -235,75 +233,25 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-/* todo speech -
-    private boolean checkSpeechRecognition() { // проверяем, поддерживается ли распознование речи
-        PackageManager packManager = activity.getPackageManager();
-        List<ResolveInfo> intActivities = packManager.queryIntentActivities(
-                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
-        return intActivities.size() != 0;
-    }
-
-    private boolean firstCheckSpeechRecognition() {
-        boolean first = sharedPreferences.getBoolean(PREF_SPEECH_RECOGNITION_FIRST_CHECK, true);
-        if (first) {
-            SharedPreferences.Editor ed = sharedPreferences.edit();
-            ed.putBoolean(PREF_SPEECH_RECOGNITION_FIRST_CHECK, false);
-            ed.apply();
-        }
-        return first;
-    }
-
-    protected void installTTSfromGooglePlay() {
-        Intent installTTSIntent = new Intent();
-        installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-        startActivity(installTTSIntent);
-    }
-
-    @Override
-    public void onInit(int initStatus) {
-        if (voiceIsOn && initStatus == TextToSpeech.SUCCESS) {
-            repeatTTS.setLanguage(Locale.US); // Язык
-        }
-    }
-
-    private void listenToSpeech() {
-        // запускаем интент, распознающий речь и передаем ему требуемые данные
-        Intent listenIntent = new Intent(
-                RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        // указываем пакет
-        listenIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,
-                getClass().getPackage().getName());
-        // В процессе распознования выводим сообщение
-        listenIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Говорите!");
-        // set language
-        listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
-        // устанавливаем модель речи
-        listenIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        // указываем число результатов, которые могут быть получены
-        listenIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
-        // начинаем прослушивание
-        startActivityForResult(listenIntent, VR_REQUEST);
-    }
-*/
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-//		case R.id.button1Help: todo speech
-//            isHelped = true;
-//			if (ttsIsOn && voiceIsOn) {
-//                speakNow(multiSentence.getEnSentence());
-//            }
-//            break;
+		case R.id.button1Help:
+            isHelped = true;
+            try {
+
+                activity.speakNow(multiSentence.getEnSentence());
+            } catch (Exception e) {}
+            System.out.println("!!! activity == null " + (activity == null));
+            break;
         case R.id.button2OK:
         case R.id.answer_false:
         case R.id.answer_true:
 			buttonOK(v.getId());
 			break;
-//		case R.id.button3Say: todo speech
-//			listenToSpeech();
-//			break;
+		case R.id.button3Say:
+			activity.listenToSpeech();
+			break;
         case R.id.buttonNext:
             buttonNext();
             break;
@@ -352,7 +300,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                     failNow = true;
                 }
                 if (mode == MODE_EASY && score > 1) {
-//                    score--;
+                    score--;
                 }
             }
             isChecked = true;
@@ -482,7 +430,7 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
 
     public void buttonsEnabled(boolean isEnabled){
         if (mode == MODE_HARD) {
-//            button3Say.setEnabled(isEnabled); todo speech
+            button3Say.setEnabled(isEnabled);
             button2OK.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             buttonNext.setVisibility(isEnabled ? View.GONE : View.VISIBLE);
         } else {
@@ -505,8 +453,9 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
     }
 
     private void showNextLevelDialog() {
+        AlertDialog aboutDialog;
         if (lessonId == LAST_LEVEL) {
-            AlertDialog aboutDialog = new AlertDialog.Builder(activity)
+            aboutDialog = new AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.title_dialog_complete_all_levels))
                     .setPositiveButton(getString(R.string.button_positive), new DialogInterface.OnClickListener() {
                         @Override
@@ -515,16 +464,15 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                     }).create();
         } else if (lessonId == COMPLETE - 1) {
             // Congratulation! Wait more levels and repeating!
-            AlertDialog aboutDialog = new AlertDialog.Builder(activity)
+            aboutDialog = new AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.title_dialog_complete_available_levels))
                     .setPositiveButton(getString(R.string.button_positive), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).create();
-            aboutDialog.show();
         } else {
-            AlertDialog aboutDialog = new AlertDialog.Builder(activity)
+            aboutDialog = new AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.title_dialog_next_lesson))
                     .setPositiveButton(getString(R.string.button_positive), new DialogInterface.OnClickListener() {
                         @Override
@@ -537,8 +485,8 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).create();
-            aboutDialog.show();
         }
+        aboutDialog.show();
     }
 
     private void openNextLevel() {
@@ -561,60 +509,6 @@ public class LevelFragment extends Fragment implements Constants, OnClickListene
         trans.commit();
         manager.popBackStack();
     }
-
-//	@Override // Получаем результат распознавания todo speech -
-//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		// проверяем результат распознавания речи
-//        try {
-//            ArrayList<String> suggestedWords = data
-//                    .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-//            String resultString = suggestedWords.get(0).intern();
-//            System.out.println("!!! " + resultString);
-//        } catch (Exception e) {
-//            System.out.println("!!! on result error");
-//            System.out.println("!!! VR_REQUEST = " + VR_REQUEST + " requestCode = " + requestCode);
-//            System.out.println("!!! RESULT_OK = " + activity.RESULT_OK + " resultCode = " + resultCode);
-//        }
-//
-//        System.out.println("!!! on result fragment");
-//		if (requestCode == VR_REQUEST && resultCode == activity.RESULT_OK) {
-//            System.out.println("!!! on result word");
-//			// Добавляем распознанные слова в список результатов
-//            ArrayList<String> suggestedWords = data
-//					.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-//            String resultString = suggestedWords.get(0).intern();
-//            String[] tmp = resultString.split(" ");
-//            if (tmp[0].equalsIgnoreCase("will")
-//                || tmp[0].equalsIgnoreCase("do")
-//                || tmp[0].equalsIgnoreCase("does")
-//                || tmp[0].equalsIgnoreCase("did")
-//                || tmp[0].equalsIgnoreCase("what")
-//                || tmp[0].equalsIgnoreCase("who")
-//                || tmp[0].equalsIgnoreCase("where")
-//                || tmp[0].equalsIgnoreCase("when")
-//                || tmp[0].equalsIgnoreCase("why")
-//                || tmp[0].equalsIgnoreCase("how")) {
-//                resultString+="?";
-//            }
-//            resultField.setText(resultString);
-//		}
-//		if (requestCode == MY_DATA_CHECK_CODE) {
-//			if (isTTSInstalled(resultCode)) {
-//				repeatTTS = new TextToSpeech(activity, this);
-//				ttsIsOn = true;
-//			} else {
-//				installTTSfromGooglePlay();
-//			}
-//		}
-//	}
-//
-//    private boolean isTTSInstalled(int resultCode) {
-//        return resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS;
-//    }
-//
-//	public void speakNow(String text) {
-//		repeatTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-//	}
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
