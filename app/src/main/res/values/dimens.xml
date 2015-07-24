@@ -15,4 +15,6 @@
     <dimen name="button_padding">32dp</dimen>
     <dimen name="button_width">192sp</dimen>
 
+    <integer name="progress_max">10</integer>
+
 </resources>

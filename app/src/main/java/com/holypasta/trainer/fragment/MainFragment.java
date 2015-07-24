@@ -11,12 +11,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -26,12 +24,18 @@ import com.holypasta.trainer.adapter.LevelsAdapter;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.SharedPreferencesUtil;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+
 import java.util.Calendar;
 import java.util.List;
 
+@EFragment(R.layout.fragment_main)
 public class MainFragment extends Fragment implements Constants, AdapterView.OnItemClickListener {
 
-    private ListView lv1main;
+    @ViewById
+    protected ListView lv1main;
     private LevelsAdapter adapter;
     private List<Integer> scores;
     private SharedPreferences sPref;
@@ -46,16 +50,13 @@ public class MainFragment extends Fragment implements Constants, AdapterView.OnI
         this.activity = (SingleActivity)activity;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @AfterViews
+    void calledAfterViewInjection() {
         setHasOptionsMenu(true);
         activity.getSupportActionBar().setTitle(getString(R.string.app_name));
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        lv1main = (ListView) rootView.findViewById(R.id.lv1main);
         regVisit();
         startReminder();
         startDegradation();
-        return rootView;
     }
 
     private void regVisit() {
@@ -63,7 +64,7 @@ public class MainFragment extends Fragment implements Constants, AdapterView.OnI
         SharedPreferences.Editor edit = sharedPreferences.edit();
         long time = System.currentTimeMillis();
         edit.putLong(PREF_LAST_VISIT, time);
-        edit.commit();
+        edit.apply();
     }
 
     private void startReminder() {
@@ -105,7 +106,7 @@ public class MainFragment extends Fragment implements Constants, AdapterView.OnI
         sPref = PreferenceManager.getDefaultSharedPreferences(activity);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putInt(Constants.PREF_HARDCORE_MODE, mode);
-        ed.commit();
+        ed.apply();
     }
 
     @Override
@@ -116,10 +117,20 @@ public class MainFragment extends Fragment implements Constants, AdapterView.OnI
                 Bundle arguments = new Bundle();
                 arguments.putInt(EXTRA_LESSON_ID, levelId);
                 arguments.putInt(EXTRA_MODE, mode);
-                Fragment fragment = new LevelFragment();
-                fragment.setArguments(arguments);
+                AbstractLevelFragment levelFragment;
+                switch (mode) {
+                    case MODE_HARD:
+                        levelFragment = new LevelHardFragment();
+                        break;
+                    case MODE_EASY:
+                        levelFragment = new LevelEasyFragment();
+                        break;
+                    default:
+                        return;
+                }
+                levelFragment.setArguments(arguments);
                 activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, fragment)
+                        .replace(R.id.container, levelFragment)
                         .addToBackStack(null)
                         .commit();
             } else {

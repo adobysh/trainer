@@ -8,19 +8,16 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-    <!-- next for speech recognition -->
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-        <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
     <application
+        android:name="com.holypasta.trainer.App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.holypasta.trainer.activity.SingleActivity"
+            android:name="com.holypasta.trainer.activity.SingleActivity_"
             android:windowSoftInputMode="adjustResize"
-            android:configChanges="keyboardHidden|orientation|fontScale|keyboard|layoutDirection|locale|mcc|mnc|navigation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" >>
+            android:configChanges="keyboardHidden|orientation|fontScale|keyboard|layoutDirection|locale|mcc|mnc|navigation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

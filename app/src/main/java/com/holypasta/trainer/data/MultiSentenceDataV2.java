@@ -1,13 +1,10 @@
 package com.holypasta.trainer.data;
 
-import com.holypasta.trainer.util.Wronger;
+import com.holypasta.trainer.levels.Wronger;
 
 import java.util.Random;
 
-/**
- * Created by q1bot on 11.01.15.
- */
-public class MultiSentenceDataV2 {
+public class MultiSentenceDataV2 extends AbstractMultiSentence {
 
     private String ruSentence;
     private String enSentence;
@@ -37,6 +34,14 @@ public class MultiSentenceDataV2 {
     }
 
     public String getEnSentence() {
+        if (new Random().nextBoolean()) { // 50% wrong
+            return getCorrectEnSentence();
+        } else {
+            return getWrongSentence();
+        }
+    }
+
+    public String getCorrectEnSentence() {
         return getSentence(enSentence);
     }
 

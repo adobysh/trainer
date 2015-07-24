@@ -2,7 +2,6 @@ package com.holypasta.trainer.levels;
 
 import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.data.SentenceParamData;
-import com.holypasta.trainer.util.RuVerbs03WantLike;
 
 import java.util.Random;
 
@@ -10,6 +9,10 @@ import java.util.Random;
  * Created by q1bot on 05.03.2015.
  */
 public class Level03 extends AbstractLevel {
+
+    public Level03(int mode) {
+        super(mode);
+    }
 
     private enum PronounsI      { I, Me, My };
     private enum PronounsYou    { You, Your };
@@ -26,7 +29,7 @@ public class Level03 extends AbstractLevel {
     private final int VARIANTS_3_SIZE = 11;
 
     @Override
-    public MultiSentenceData makeSentence(int mode) {
+    public MultiSentenceData makeSentence() {
         SentenceParamData time = new SentenceParamData(3);
         SentenceParamData form = new SentenceParamData(3);
         SentenceParamData verb = new SentenceParamData(2);
@@ -120,7 +123,7 @@ public class Level03 extends AbstractLevel {
 
     private MultiSentenceData part02_want_like(int form, int time, int who, int who1, int verb, int variant) {
         if (time == TIME_FUTURE) {
-            return new MultiSentenceData(ERROR_MESSAGE, ERROR_MESSAGE);
+            throw new IllegalArgumentException("time can not be future");
         }
         RuVerbs03WantLike ruVerbs = new RuVerbs03WantLike();
         MultiSentenceData sentence = makeBaseForm(ruVerbs, verbs03, form, time, who, who1, verb
@@ -130,8 +133,8 @@ public class Level03 extends AbstractLevel {
     }
 
     private MultiSentenceData part03_my_your_his_her_our_their(int who0, int who1, int variant) {
-        String wrongSentence = ERROR_MESSAGE;
-        String[] sentence = new String[] { ERROR_MESSAGE, ERROR_MESSAGE };
+        String wrongSentence;
+        String[] sentence;
         switch (variant) {
             case 0:
                 sentence = new String[] { "Его зовут Олег", "His name is Oleg" };
@@ -178,6 +181,8 @@ public class Level03 extends AbstractLevel {
                 sentence = new String[] { "Он ее друг", "He is her friend" };
                 wrongSentence = "He is " + wrong(PronounsHeShe.Her).toLowerCase() + " friend";
                 break;
+            default:
+                throw new IllegalArgumentException("incorrect variant. variant = " + variant);
         }
         if (who0 == who1) {
             return new MultiSentenceData(sentence);

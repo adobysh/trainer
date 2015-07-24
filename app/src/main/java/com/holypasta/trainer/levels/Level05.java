@@ -2,7 +2,6 @@ package com.holypasta.trainer.levels;
 
 import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.data.SentenceParamData;
-import com.holypasta.trainer.util.RuVerbs01;
 
 import java.util.Random;
 
@@ -10,6 +9,10 @@ import java.util.Random;
  * Created by q1bot on 10.03.2015.
  */
 public class Level05 extends AbstractLevel {
+
+    public Level05(int mode) {
+        super(mode);
+    }
 
     enum Parts {
         comparison_x_then_x,
@@ -34,7 +37,7 @@ public class Level05 extends AbstractLevel {
     final int PARTS_COUNT = 5;
 
     @Override
-    public MultiSentenceData makeSentence(int mode) {
+    public MultiSentenceData makeSentence() {
         SentenceParamData partOfLesson = new SentenceParamData(PARTS_COUNT);
         SentenceParamData verb = new SentenceParamData(TIME_VERBS.length);
         SentenceParamData time = new SentenceParamData(TIME_PRESENT, 3, true);
@@ -234,7 +237,7 @@ public class Level05 extends AbstractLevel {
 
     // todo !add last next this | before after
     private MultiSentenceData part_time_dayOfWeek_month_season(boolean isWrong) {
-        MultiSentenceData sentence = new Level05Time_DayOfWeek_Month_Season().makeSentence();
+        MultiSentenceData sentence = new Level05Time_DayOfWeek_Month_Season(mode).makeSentence();
         if (isWrong) {
             return sentence;
         } else {

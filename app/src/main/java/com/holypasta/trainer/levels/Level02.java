@@ -10,8 +10,12 @@ import java.util.Random;
 
 public class Level02 extends AbstractLevel {
 
+    public Level02(int mode) {
+        super(mode);
+    }
+
     @Override
-    public MultiSentenceData makeSentence(int mode) {
+    public MultiSentenceData makeSentence() {
         SentenceParamData time = new SentenceParamData(3);
         SentenceParamData form = new SentenceParamData(3);
         SentenceParamData partOfLesson = new SentenceParamData(3);
@@ -163,8 +167,7 @@ public class Level02 extends AbstractLevel {
                         {"Она не говорила им", "She did not speak them", "She didn't speak them"}};
                 break;
             default:
-                result = new String[][]
-                        { { ERROR_MESSAGE }, { ERROR_MESSAGE }, { ERROR_MESSAGE } };
+                throw new IllegalStateException("where < 0 or > 8. where = " + where);
         }
         List<String> resultList = new ArrayList<String>(Arrays.asList(result[variant]));
         String sentence = resultList.get(resultList.size() - 1);
@@ -274,7 +277,7 @@ public class Level02 extends AbstractLevel {
                         {"Почему я вижу его?", "Why do I see him?"},
                         {"Почему мы знаем её?", "Why do we know her?"},
 
-                        {"Как он спросит её?", "How does he ask her?"},
+                        {"Почему он спрашивает ее?", "Why does he ask her?"},
                         {"Что она отвечает ему?", "What does she answer him?"},
                         {"Что мы даём ему?", "What do we give him?"},
                         {"Как они говорят нам?", "How do they speak us?"}};
@@ -320,7 +323,7 @@ public class Level02 extends AbstractLevel {
                 return wrong;
             }
         }
-        return ERROR_MESSAGE;
+        throw new IllegalStateException("have not correct pronoun in this sentence: " + sentence);
     }
 
     private String replaceQuestion(String sentence) {
@@ -334,6 +337,6 @@ public class Level02 extends AbstractLevel {
                 return wrong;
             }
         }
-        return ERROR_MESSAGE;
+        throw new IllegalStateException("have not correct question word in this sentence: " + sentence);
     }
 }

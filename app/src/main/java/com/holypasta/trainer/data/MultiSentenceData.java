@@ -3,10 +3,7 @@ package com.holypasta.trainer.data;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by q1bot on 11.01.15.
- */
-public class MultiSentenceData {
+public class MultiSentenceData extends AbstractMultiSentence {
 
     private String ruSentence;
     private List<String> correctEnSentences;

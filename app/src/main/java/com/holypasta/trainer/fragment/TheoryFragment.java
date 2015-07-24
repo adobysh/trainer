@@ -3,6 +3,7 @@ package com.holypasta.trainer.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,17 @@ import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.english.R;
 
+import org.androidannotations.annotations.*;
+
+@EFragment(R.layout.fragment_theory)
 public class TheoryFragment extends Fragment implements Constants {
 
-    private int ID_LESSON;
-    private boolean FIRST_OPEN;
+    @FragmentArg(EXTRA_LESSON_ID)
+    protected int ID_LESSON;
+
+    @ViewById(R.id.webTheory)
+    protected WebView web;
+
     private SingleActivity activity;
 
     @Override
@@ -26,22 +34,12 @@ public class TheoryFragment extends Fragment implements Constants {
         this.activity = (SingleActivity)activity;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        activity.getSupportActionBar().setTitle(getString(R.string.title_activity_theory));
-        View rootView = inflater.inflate(R.layout.fragment_theory, container, false);
-        final Bundle extras = getArguments();
-        ID_LESSON = extras.getInt(EXTRA_LESSON_ID);
-        FIRST_OPEN = extras.getBoolean(EXTRA_FIRST_OPEN, false);
-        if (!FIRST_OPEN) {
-            AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
-            mAdView.setVisibility(View.VISIBLE);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            mAdView.loadAd(adRequest);
+    @AfterViews
+    protected void calledAfterViewInjection() {
+        ActionBar actionBar = activity.getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(getString(R.string.title_activity_theory));
         }
-        WebView web = (WebView)rootView.findViewById(R.id.webTheory);
         web.loadUrl("file:///android_res/raw/lesson" + (ID_LESSON+1) + ".html");
-        return rootView;
     }
-
 }

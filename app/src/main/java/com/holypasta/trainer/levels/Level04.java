@@ -3,12 +3,17 @@ package com.holypasta.trainer.levels;
 import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.data.SentenceParamData;
 
+import java.util.IllegalFormatCodePointException;
 import java.util.Random;
 
 /**
  * Created by q1bot on 10.03.2015.
  */
 public class Level04 extends AbstractLevel {
+
+    public Level04(int mode) {
+        super(mode);
+    }
 
     enum Parts { ABOUT_MYSELF, STABLE_EXPRESSIONS, GOOD_TIME_OF_DAY, PLEASE_WELCOME }
 
@@ -37,7 +42,7 @@ public class Level04 extends AbstractLevel {
     };
 
     @Override
-    public MultiSentenceData makeSentence(int mode) {
+    public MultiSentenceData makeSentence() {
         SentenceParamData partOfLesson = new SentenceParamData(Parts.values().length);
         SentenceParamData part1variant = new SentenceParamData(VARIANTS_1_ABOUT_MYSELF);
         SentenceParamData part2variant = new SentenceParamData(VARIANTS_2_STABLE_EXPRESSIONS.length);
@@ -101,8 +106,8 @@ public class Level04 extends AbstractLevel {
     }
 
     private MultiSentenceData part01_about_myself(int variant, boolean isWrong) {
-        String[] wrongSentences = { ERROR_MESSAGE };
-        String[] correctSentences = { ERROR_MESSAGE, ERROR_MESSAGE };
+        String[] wrongSentences;
+        String[] correctSentences;
         switch (variant) {
             case 0:
                 wrongSentences = new String[] { "I study art history" };
@@ -136,6 +141,8 @@ public class Level04 extends AbstractLevel {
                 wrongSentences = new String[] { "I work on theatre", "I work for theatre" };
                 correctSentences = new String[] { "Я работаю в театре", "I work in theatre" };
                 break;
+            default:
+                throw new IllegalArgumentException("incorrect variant! variant = " + variant);
         }
         if (isWrong) {
             return new MultiSentenceData(correctSentences[0], wrongSentences[new Random().nextInt(wrongSentences.length)]);

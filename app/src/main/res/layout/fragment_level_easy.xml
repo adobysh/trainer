@@ -30,7 +30,8 @@
                     android:id="@+id/progressBar"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:progressDrawable="@drawable/progress"/>
+                    android:progressDrawable="@drawable/progress"
+                    android:max="@integer/progress_max"/>
 
                 <TextView
                     style="@style/TextLittleBlack"
@@ -62,7 +63,8 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:text="+1"/>
+                    android:text="+1"
+                    android:visibility="gone"/>
             </RelativeLayout>
         </FrameLayout>
 
@@ -84,7 +86,7 @@
 
             <Button
                 style="@style/MaterialButton"
-                android:id="@+id/answer_true"
+                android:id="@+id/button2OK"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -100,7 +102,7 @@
         layout="@layout/level_welcome"/>
 
     <FrameLayout
-        android:id="@+id/button_next_fullscreen"
+        android:id="@+id/buttonNext"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"/>

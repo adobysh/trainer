@@ -2,13 +2,16 @@ package com.holypasta.trainer.levels;
 
 import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.data.SentenceParamData;
-import com.holypasta.trainer.util.RuVerbs01;
 
 import java.util.Random;
 
 public class Level01 extends AbstractLevel {
 
-    public MultiSentenceData makeSentence(int mode) {
+    public Level01(int mode) {
+        super(mode);
+    }
+
+    public MultiSentenceData makeSentence() {
         Random random = new Random();
         SentenceParamData form = new SentenceParamData(3);
         SentenceParamData time = new SentenceParamData(3);

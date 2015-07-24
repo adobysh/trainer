@@ -2,7 +2,6 @@ package com.holypasta.trainer.levels;
 
 import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.data.SentenceParamData;
-import com.holypasta.trainer.util.RuVerbs01;
 
 import java.util.Random;
 
@@ -10,6 +9,10 @@ import java.util.Random;
  * Created by q1bot on 25.03.2015.
  */
 public class Level05Time_DayOfWeek_Month_Season extends Level05 {
+
+    public Level05Time_DayOfWeek_Month_Season(int mode) {
+        super(mode);
+    }
 
     private enum DayOfWeekRus { Понедельник, Вторник, Среда, Четверг, Пятница, Суббота, Воскресенье }
     private enum DayOfWeekRus_1 { Понедельник, Вторник, Среду, Четверг, Пятницу, Субботу, Воскресенье }

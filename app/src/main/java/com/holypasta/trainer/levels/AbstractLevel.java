@@ -1,19 +1,15 @@
 package com.holypasta.trainer.levels;
 
 import com.holypasta.trainer.Constants;
+import com.holypasta.trainer.data.AbstractMultiSentence;
 import com.holypasta.trainer.data.MultiSentenceData;
-import com.holypasta.trainer.util.RuVerbs;
-import com.holypasta.trainer.util.RuVerbs01;
-import com.holypasta.trainer.util.RuVerbs03ToBe;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by q1bot on 11.01.15.
  */
 public abstract class AbstractLevel implements Constants {
+
+    protected int mode;
 
     enum Verbs { Love, Live, Work, Open, Close, Start, Finish,
             See, Come, Go, Know, Think }
@@ -56,7 +52,11 @@ public abstract class AbstractLevel implements Constants {
             {"I", "You", "He", "She", "It", "They", "We"}};
     protected final  String[] pronounsEN2 = new String[]{"Me", "You", "Him", "Her", "It", "Them", "Us"}; // todo - It ?
 
-    public abstract MultiSentenceData makeSentence(int mode);
+    public AbstractLevel(int mode) {
+        this.mode = mode;
+    }
+
+    public abstract AbstractMultiSentence makeSentence();
 
     // | ? + - | future
     // | ? + - | present
