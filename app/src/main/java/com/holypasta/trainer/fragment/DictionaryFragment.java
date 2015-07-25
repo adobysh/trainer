@@ -19,11 +19,10 @@ import com.holypasta.trainer.util.DictionaryGenerator;
 
 import java.util.List;
 
-/**
- * Created by q1bot on 16.04.2015.
- */
-public class DictionaryFragment extends Fragment implements Constants {
+public class DictionaryFragment extends AbstractFragment {
+
     private SingleActivity activity;
+    private int lessonId;
 
     @Override
     public void onAttach(Activity activity) {
@@ -33,20 +32,15 @@ public class DictionaryFragment extends Fragment implements Constants {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        activity.getSupportActionBar().setTitle(getString(R.string.title_activity_dictionary));
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_dictionary, container, false);
         final Bundle extras = getArguments();
-        int levelId = extras.getInt(EXTRA_LESSON_ID);
+        lessonId = extras.getInt(EXTRA_LESSON_ID);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
-        List<String> words = getDictionaryItems(levelId);
+        List<String> words = getDictionaryItems(lessonId);
         if (words == null) return rootView;
         final WordsAdapter wordsAdapter = new WordsAdapter(words, activity);
         listView.setAdapter(wordsAdapter);
-        AdView mAdView = (AdView) rootView.findViewById(R.id.adView);
-        mAdView.setVisibility(View.VISIBLE);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -60,5 +54,10 @@ public class DictionaryFragment extends Fragment implements Constants {
     private List<String> getDictionaryItems(int levelId) {
         DictionaryGenerator generator = new DictionaryGenerator(levelId);
         return generator.getDictionaryItems();
+    }
+
+    @Override
+    protected void setTitle() {
+        activity.getSupportActionBar().setTitle(getString(R.string.title_activity_dictionary) + ". " + (lessonId+1) + " урок ");
     }
 }

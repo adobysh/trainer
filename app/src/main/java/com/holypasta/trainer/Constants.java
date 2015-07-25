@@ -15,18 +15,20 @@ public interface Constants {
     int DEGRADATION_HOUR = 0;
     int DEGRADATION_MINUTE = 0;
 
-    int MAX_SCORE = 10;
+    int MAX_SCORE = 16;
     int DEGRADATION_STEP = MAX_SCORE;
 
+    int LAST_OLD_LOGIC_LESSON = 4;
     int COMPLETE = 8;
     int LAST_LEVEL = 15;
+    int REPEAT_LESSONS_LESSON = -2;
 
     String ACTION_REMINDER = ACTION + "reminder";
     String ACTION_DEGRADATION = ACTION + "degradation";
 
     String EXTRA_LESSON_ID = EXTRA + "lesson.id";
-    String EXTRA_MODE = EXTRA + "mode";
 
+    String PREF_SCORE_REPEAT = PREF + "repeat";
     String PREF_SCORE_0_15 = PREF + "score_";
     String PREF_HARDCORE_MODE = PREF + "hardcore.mode";
     String PREF_LAST_VISIT = PREF + "last.visit";

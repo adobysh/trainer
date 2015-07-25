@@ -1,6 +1,7 @@
 package com.holypasta.trainer.fragment;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,18 +19,21 @@ import com.holypasta.trainer.util.MakeScore;
 public class LevelHardFragment extends AbstractLevelFragment implements TextView.OnEditorActionListener {
 
     private TextView textProgress;
+    private int colorGreen;
+    private int colorRed;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView != null) { // lolfix
             return rootView;
         }
-        Bundle extras = getArguments();
-        lessonId = extras.getInt(EXTRA_LESSON_ID);
         rootView = inflater.inflate(R.layout.fragment_level_hard, container, false);
 
         super.findCommonViews(rootView);
         findViews(rootView);
+        Resources resources = getResources();
+        colorGreen = resources.getColor(R.color.material_green);
+        colorRed = resources.getColor(R.color.material_red);
         sentenceMaker = new SentenceMaker(activity, lessonId, MODE_HARD);
         super.postFindViews();
         return rootView;
@@ -80,7 +84,10 @@ public class LevelHardFragment extends AbstractLevelFragment implements TextView
     protected boolean check(int buttonId) {
         String answer = resultField.getText().toString();
         boolean checkResult = multiSentence.checkResult(answer);
-        if (!checkResult) {
+        if (checkResult) {
+            resultField.setTextColor(colorGreen);
+        } else {
+            resultField.setTextColor(colorRed);
             taskField.setText(multiSentence.getRuSentence() + "\n" + multiSentence.getCorrectEnSentence());
         }
         return checkResult;
@@ -98,9 +105,10 @@ public class LevelHardFragment extends AbstractLevelFragment implements TextView
         }
     }
 
-    public void buttonNext(){
+    public void buttonNext() {
         generateText();
         resultField.setText(null);
+        resultField.setTextColor(taskField.getCurrentTextColor());
         buttonsEnabled(true);
     }
 

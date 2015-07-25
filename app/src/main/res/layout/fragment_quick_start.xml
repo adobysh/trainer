@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_image">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:src="@drawable/landmarks_of_the_earth"/>
+
+    <Button
+        style="@style/MaterialButton"
+        android:id="@+id/buttonQuickStart"
+        android:text="Начать"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/button_green_clickable"/>
+
+    <Button
+        style="@style/MaterialButton"
+        android:id="@+id/buttonChoiceLesson"
+        android:text="Выбрать урок"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/button_green_clickable"/>
+
+    <Button
+        style="@style/MaterialButton"
+        android:id="@+id/buttonHardcoreMode"
+        android:text="Hardcore mode"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@drawable/button_green_clickable"/>
+</LinearLayout>

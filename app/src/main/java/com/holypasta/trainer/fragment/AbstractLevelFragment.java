@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
@@ -25,7 +26,10 @@ import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.levels.SentenceMaker;
 import com.holypasta.trainer.util.SharedPreferencesUtil;
 
-public abstract class AbstractLevelFragment extends Fragment implements Constants, View.OnClickListener {
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+public abstract class AbstractLevelFragment extends AbstractFragment implements View.OnClickListener {
 
     protected SingleActivity activity;
     protected View rootView;
@@ -36,8 +40,6 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
     protected View welcomeView;
     protected int lessonId;
     protected int score = 0;
-    protected int colorGreen;
-    protected int colorRed;
     protected AbstractMultiSentence multiSentence;
     protected SentenceMaker sentenceMaker;
 
@@ -57,7 +59,13 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
         this.activity = (SingleActivity)activity;
     }
 
+    protected void preFindCommonViews() {
+        Bundle extras = getArguments();
+        lessonId = extras.getInt(EXTRA_LESSON_ID);
+    }
+
     protected void findCommonViews(View rootView) {
+        preFindCommonViews();
         taskField = (TextView) rootView.findViewById(R.id.textView1);
         buttonCheck = rootView.findViewById(R.id.button2OK);
         buttonNext = rootView.findViewById(R.id.buttonNext);
@@ -66,13 +74,9 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
     protected void postFindViews() {
         buttonNext.setOnClickListener(this);
         buttonCheck.setOnClickListener(this);
-        Resources resources = getResources();
-        colorGreen = resources.getColor(R.color.material_green);
-        colorRed = resources.getColor(R.color.material_red);
-        score = SharedPreferencesUtil.getLessonScore(activity, lessonId);
+        score = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(lessonId);
         setHasOptionsMenu(true);
         setProgress(score);
-        activity.getSupportActionBar().setTitle((lessonId + 1) + " урок");
         boolean isFirstOpen = firstOpen(score);
         if (isFirstOpen) {
             welcomeView = rootView.findViewById(R.id.welcome);
@@ -104,7 +108,23 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
         }
     }
 
+    @Override
+    protected void setTitle() {
+        activity.getSupportActionBar().setTitle(getTitle());
+    }
+
+    protected String getTitle() {
+        if (lessonId == REPEAT_LESSONS_LESSON) {
+            return "Повторение";
+        } else {
+            return (lessonId + 1) + " урок";
+        }
+    }
+
     protected boolean firstOpen(int score) {
+        if (lessonId == REPEAT_LESSONS_LESSON) {
+            return false;
+        }
         return score == 0;
     }
 
@@ -121,7 +141,6 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
         if (resultField.getText().length() == 0) return;
         boolean checkResult = check(buttonId);
         if (checkResult) {
-            resultField.setTextColor(colorGreen);
             if (score < MAX_SCORE) {
                 score++;
                 if (score == MAX_SCORE) {
@@ -131,16 +150,14 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
             if (score >= MAX_SCORE) {
                 unlockNextLesson();
             }
-        } else {
-            resultField.setTextColor(colorRed);
         }
         buttonsEnabled(false);
         setProgress(score);
-        SharedPreferencesUtil.saveScore(activity, lessonId, score);
+        SharedPreferencesUtil.getInstance(getActivity()).saveScore(lessonId, score);
     }
 
     protected void unlockNextLesson() {
-        SharedPreferencesUtil.unlockNextLesson(activity, lessonId);
+        SharedPreferencesUtil.getInstance(getActivity()).unlockNextLesson(lessonId);
     }
 
     protected void showNextLevelDialog() {
@@ -179,8 +196,23 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
     private void openNextLevel() {
         removeFragmentFromBackStack();
         Bundle arguments = new Bundle();
-        arguments.putInt(EXTRA_LESSON_ID, lessonId + 1);
-        Fragment fragment = this;
+        int nextLessonId;
+        if (lessonId == REPEAT_LESSONS_LESSON) {
+            nextLessonId = SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId();
+        } else {
+            nextLessonId = lessonId + 1;
+        }
+        arguments.putInt(EXTRA_LESSON_ID, nextLessonId);
+        Class cls = this.getClass();
+        Constructor constructor;
+        Fragment fragment;
+        try {
+            constructor = cls.getConstructor(null);
+            fragment = (Fragment) constructor.newInstance(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("error");
+        }
         fragment.setArguments(arguments);
         activity.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
@@ -231,7 +263,7 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
 
     protected void openInformationFragment(Fragment fragment) {
         Bundle arguments = new Bundle();
-        arguments.putInt(EXTRA_LESSON_ID, lessonId);
+        arguments.putInt(EXTRA_LESSON_ID, sentenceMaker.getLessonId());
         fragment.setArguments(arguments);
         activity.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
@@ -242,6 +274,7 @@ public abstract class AbstractLevelFragment extends Fragment implements Constant
 
     protected void openVideo() { // need refactoring todo
         Uri videoUri;
+        int lessonId = sentenceMaker.getLessonId();
         try {
             videoUri = Uri.parse(YOUTUBE_APP_BASE_URL + VIDEO_ID[lessonId]);
             startActivity(new Intent(Intent.ACTION_VIEW, videoUri));

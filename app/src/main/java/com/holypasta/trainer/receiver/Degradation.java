@@ -10,9 +10,6 @@ import com.holypasta.trainer.util.SharedPreferencesUtil;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by q1bot on 02.04.2015.
- */
 public class Degradation extends BroadcastReceiver implements Constants {
 
     @Override
@@ -22,7 +19,7 @@ public class Degradation extends BroadcastReceiver implements Constants {
             System.out.println("!!! Degradation not now!");
             return;
         }
-        List<Integer> scores = SharedPreferencesUtil.getScores(context);
+        List<Integer> scores = SharedPreferencesUtil.getInstance(context).getScores();
         for (int levelId = 0; levelId < scores.size(); levelId++) {
             int score = scores.get(levelId);
             System.out.println("!!! Degradation level " + (levelId+1) + " with score " + score);
@@ -31,9 +28,10 @@ public class Degradation extends BroadcastReceiver implements Constants {
                 if (score < 1) {
                     score = 1;
                 }
-                SharedPreferencesUtil.saveScore(context, levelId, score);
+                SharedPreferencesUtil.getInstance(context).saveScore(levelId, score);
             }
         }
+        SharedPreferencesUtil.getInstance(context).saveScore(REPEAT_LESSONS_LESSON, 0);
     }
 
     private boolean isDegradationTime() {

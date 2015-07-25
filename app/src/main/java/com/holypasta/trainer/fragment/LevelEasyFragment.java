@@ -32,8 +32,6 @@ public class LevelEasyFragment extends AbstractLevelFragment implements Animatio
         if (rootView != null) { // lolfix
             return rootView;
         }
-        Bundle extras = getArguments();
-        lessonId = extras.getInt(EXTRA_LESSON_ID);
         rootView = inflater.inflate(R.layout.fragment_level_easy, container, false);
 
         super.findCommonViews(rootView);

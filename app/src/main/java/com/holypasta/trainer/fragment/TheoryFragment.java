@@ -18,7 +18,7 @@ import com.holypasta.trainer.english.R;
 import org.androidannotations.annotations.*;
 
 @EFragment(R.layout.fragment_theory)
-public class TheoryFragment extends Fragment implements Constants {
+public class TheoryFragment extends AbstractFragment {
 
     @FragmentArg(EXTRA_LESSON_ID)
     protected int ID_LESSON;
@@ -36,10 +36,14 @@ public class TheoryFragment extends Fragment implements Constants {
 
     @AfterViews
     protected void calledAfterViewInjection() {
+        web.loadUrl("file:///android_res/raw/lesson" + (ID_LESSON+1) + ".html");
+    }
+
+    @Override
+    protected void setTitle() {
         ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setTitle(getString(R.string.title_activity_theory));
+            actionBar.setTitle(getString(R.string.title_activity_theory) + ". " + (ID_LESSON+1) + " урок ");
         }
-        web.loadUrl("file:///android_res/raw/lesson" + (ID_LESSON+1) + ".html");
     }
 }

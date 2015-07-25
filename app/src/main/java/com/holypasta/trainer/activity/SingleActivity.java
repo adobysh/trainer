@@ -3,17 +3,15 @@ package com.holypasta.trainer.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.fragment.MainFragment;
+import com.holypasta.trainer.fragment.QuickStartFragment_;
 
-import com.holypasta.trainer.fragment.MainFragment_;
 import org.androidannotations.annotations.*;
 
 import java.util.Locale;
@@ -29,7 +27,7 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
     protected void afterViews() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.container, new MainFragment_(), MainFragment_.class.getSimpleName())
+                .add(R.id.container, new QuickStartFragment_())
                 .commit();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             public void onBackStackChanged() {
@@ -45,6 +43,18 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
             }
         });
         checkSpeechSynthesis();
+    }
+
+    public void openFragment(Fragment fragment) {
+        openFragment(fragment, null);
+    }
+
+    public void openFragment(Fragment fragment, Bundle arguments) {
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void checkSpeechSynthesis() {

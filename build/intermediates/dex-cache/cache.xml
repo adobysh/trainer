@@ -2,20 +2,6 @@
 <items version="2" >
 
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-04a37beec072410017e63b6e499f4a4806ea6878.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-9c13c94103201aaf2f11a8f87ac758b94b664f97.jar" />
-    </item>
-    <item
         jar="/home/kaschey/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -23,25 +9,11 @@
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-b2201870606416dcd6677f099afb429dfcc4a870.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-1e36d0f6314fa1e52ce496aaabe2514e19c04101.jar" />
-    </item>
-    <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="d405025c600055237c171a0bbabaa49d69696573">
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-86ef22ba99d08c3d804f9897e6e5aa800de03297.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-7503750ac72e9540746d08ead056c7dc2a013d25.jar" />
     </item>
     <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/classes.jar"
@@ -65,39 +37,11 @@
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-14403541762aec0c635972f1d2e91ccd4173b207.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-ecff43dd954294a11245cbddfe040fd939b26696.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-89e0b979528517fefd819ed7d28ab692c8968442.jar" />
-    </item>
-    <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-52c5d5ca4540163302b8fb6f9021bf635ca35677.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-23c7d8e2cea42edadbf1e63aba5a051c36d3c0c6.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-e91164244ff04480bef3605cfe750ab903889dfb.jar" />
     </item>
     <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/classes.jar"
@@ -107,39 +51,11 @@
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-17691f754ea1ed75c9bcc9133b6aaa149ed31e7d.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/ormlite-android-4.48.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="afa06f539a4026c10b247386312aa67404b80a16">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/ormlite-android-4.48-e4e50c15741a37bdc2a64dbe246fd9520925c664.jar" />
-    </item>
-    <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="02bac2dc792d78241077861566f2c82da955e7fa">
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-38dcd01d5d0728b5aa586fc4b00a5ce2c16bf96a.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-a30e9f2e83fa9dcd506937c4fd17d6f1ceebe185.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-27cc8b43a171917b8bc6c8c8e12ab07458fac87f.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-8e5aba725b28e1032a381848e65bb935decc4773.jar" />
     </item>
     <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/classes.jar"
@@ -149,13 +65,6 @@
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-9c599b6e00d8b2f1e90e7473c67846841257dc1f.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-cf2f55c7bc7b533970021b32834bcd759229f9b5.jar" />
-    </item>
-    <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -163,18 +72,11 @@
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-7350f8ffc36afefb5ada9b318177b50bffe6e3dd.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/classes.jar"
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/libs/internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-ebe60ebb011edd558323760249b9f50a7e7827a9.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/ormlite-core-4.48.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/ormlite-core-4.48-bb9d85ae6cafeba27c1ccc494b27d122b7a87996.jar" />
+        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-cf2f55c7bc7b533970021b32834bcd759229f9b5.jar" />
     </item>
     <item
         jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/classes.jar"
@@ -203,6 +105,104 @@
         revision="21.1.2"
         sha1="a1372c17fccacca753d3951d3ad820571cbce075">
         <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-bfd7c59c0b3e23d33db06ff61784a536ebee130f.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-04a37beec072410017e63b6e499f4a4806ea6878.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-9c13c94103201aaf2f11a8f87ac758b94b664f97.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-1e36d0f6314fa1e52ce496aaabe2514e19c04101.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/libs/internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-7503750ac72e9540746d08ead056c7dc2a013d25.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-ecff43dd954294a11245cbddfe040fd939b26696.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-89e0b979528517fefd819ed7d28ab692c8968442.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-e91164244ff04480bef3605cfe750ab903889dfb.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-23c7d8e2cea42edadbf1e63aba5a051c36d3c0c6.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/ormlite-android-4.48-e4e50c15741a37bdc2a64dbe246fd9520925c664.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-a30e9f2e83fa9dcd506937c4fd17d6f1ceebe185.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-27cc8b43a171917b8bc6c8c8e12ab07458fac87f.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-8e5aba725b28e1032a381848e65bb935decc4773.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-ebe60ebb011edd558323760249b9f50a7e7827a9.jar" />
+    </item>
+    <item
+        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/ormlite-core-4.48.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
+        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/ormlite-core-4.48-bb9d85ae6cafeba27c1ccc494b27d122b7a87996.jar" />
     </item>
 
 </items>
