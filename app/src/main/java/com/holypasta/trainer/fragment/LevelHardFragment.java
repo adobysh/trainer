@@ -32,6 +32,7 @@ public class LevelHardFragment extends AbstractLevelFragment implements TextView
 
         super.findCommonViews(rootView);
         findViews(rootView);
+        resultField.setOnEditorActionListener(this);
         Resources resources = getResources();
         colorGreen = resources.getColor(R.color.material_green);
         colorRed = resources.getColor(R.color.material_red);
