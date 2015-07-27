@@ -82,6 +82,5 @@ public class QuickStartFragment extends AbstractFragment {
     @Override
     protected void setTitle() {
         ((SingleActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.app_name));
-        ((SingleActivity)getActivity()).getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.background_image)));
     }
 }

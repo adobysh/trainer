@@ -3,14 +3,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_image">
+    android:background="@android:color/white">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_margin="@dimen/activity_vertical_margin"
-        android:src="@drawable/landmarks_of_the_earth"/>
+        android:src="@drawable/earth"/>
 
     <Button
         style="@style/MaterialButton"

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -39,6 +40,12 @@ public class LevelHardFragment extends AbstractLevelFragment implements TextView
         return rootView;
 	}
 
+    @Override
+    protected void startLesson() {
+        super.startLesson();
+        showSoftKeyboard((EditText)resultField);
+    }
+
     protected void findViews(View rootView) {
         textProgress = (TextView) rootView.findViewById(R.id.tvScore);
         resultField = (EditText) rootView.findViewById(R.id.editText1);
@@ -64,7 +71,7 @@ public class LevelHardFragment extends AbstractLevelFragment implements TextView
     @Override
     public void onResume() {
         super.onResume();
-        if (welcomeView != null && welcomeView.getVisibility() != View.VISIBLE) {
+        if (welcomeView == null || welcomeView.getVisibility() != View.VISIBLE) {
             showSoftKeyboard((EditText) resultField);
         }
     }

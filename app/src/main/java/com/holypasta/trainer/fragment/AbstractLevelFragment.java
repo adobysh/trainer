@@ -88,7 +88,7 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
                 @Override
                 public void onClick(View v) {
                     welcomeView.setVisibility(View.GONE);
-                    buttonNext();
+                    startLesson();
                 }
             });
             videoButton.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +104,12 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
                 }
             });
         } else {
-            buttonNext();
+            startLesson();
         }
+    }
+
+    protected void startLesson() {
+        buttonNext();
     }
 
     @Override

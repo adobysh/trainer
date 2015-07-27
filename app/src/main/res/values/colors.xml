@@ -8,8 +8,6 @@
     <color name="material_black">#212121</color>
     <color name="material_divider">#B6B6B6</color>
 
-    <color name="background_image">#ccecf9</color>
-
     <color name="pressed">#c0df</color>
     <color name="background_accent">#9fff</color>
     <color name="text_dimmed">#6000</color>
