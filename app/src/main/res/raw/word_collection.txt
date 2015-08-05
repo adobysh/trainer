@@ -40,25 +40,12 @@ many
 ######################### 6.x nouns | имя существительное, множественное и единственное число  ##
 @ 6 @
 time
-dollars
-boys
 money
 love
-numbers
-music
-pictures
-flowers
-milk
-ships
-chairs
-cars
-tea
-sugar
-hours
-food
-cheese
-girls
-pencils
+day
+dollar
+rouble
+people
 
 ######################### 1.x pronouns | местоимения #############################
 @ 6 7 8 @
@@ -75,8 +62,10 @@ we
 everybody
 somebody
 nobody
+everything
 something
 nothing
+everywhere
 somewhere
 nowhere
 

@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -125,6 +126,17 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (rootView != null) { // lolfix
+            ViewGroup parentViewGroup = (ViewGroup) rootView.getParent();
+            if (parentViewGroup != null) {
+                parentViewGroup.removeAllViews();
+            }
+        }
+    }
+
     protected boolean firstOpen(int score) {
         if (lessonId == REPEAT_LESSONS_LESSON) {
             return false;
@@ -166,7 +178,17 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
 
     protected void showNextLevelDialog() {
         AlertDialog aboutDialog;
-        if (lessonId == LAST_LEVEL) {
+        if (lessonId == REPEAT_LESSONS_LESSON
+                && SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId() == COMPLETE-1
+                && SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(COMPLETE-1) > 0) {
+
+            aboutDialog = new AlertDialog.Builder(activity)
+                    .setMessage(getString(R.string.title_dialog_repeat_available_levels))
+                    .setPositiveButton(getString(R.string.button_positive), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) { /* nothing */ }
+                    }).create();
+        } else if (lessonId == LAST_LEVEL) {
             aboutDialog = new AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.title_dialog_complete_all_levels))
                     .setPositiveButton(getString(R.string.button_positive), new DialogInterface.OnClickListener() {

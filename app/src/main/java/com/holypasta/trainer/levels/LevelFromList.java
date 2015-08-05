@@ -3,7 +3,6 @@ package com.holypasta.trainer.levels;
 import android.content.Context;
 
 import com.holypasta.trainer.data.AbstractMultiSentence;
-import com.holypasta.trainer.data.MultiSentenceData;
 import com.holypasta.trainer.data.MultiSentenceDataV2;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.RawReader;
@@ -13,9 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by q1bot on 11.01.15.
- */
 public class LevelFromList extends AbstractLevel {
 
     private final int RANDOM_LIMIT = 10;
@@ -59,7 +55,7 @@ public class LevelFromList extends AbstractLevel {
         for (String line : lines) {
             List<String> variant = new ArrayList<>(Arrays.asList(line.split("\n")));
             removeComments(variant);
-            if (variant.isEmpty()) continue;
+            if (variant.isEmpty() || variant.size()!=2) continue;
             String ruSentence = variant.get(0);
             String enSentence = variant.get(1);
             variants.add(new MultiSentenceDataV2(ruSentence, enSentence, wronger));
@@ -69,7 +65,8 @@ public class LevelFromList extends AbstractLevel {
 
     private void removeComments(List<String> variant) {
         for (int i = 0; i < variant.size(); i++) {
-            if (variant.get(i).startsWith("#")) {
+            String line = variant.get(i);
+            if (line.isEmpty() || line.startsWith("#")) {
                 variant.remove(i);
                 i--;
             }

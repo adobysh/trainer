@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.holypasta.trainer.Constants;
@@ -18,6 +19,7 @@ import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.SharedPreferencesUtil;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
@@ -27,7 +29,7 @@ import java.util.List;
 public class MainFragment extends AbstractFragment implements AdapterView.OnItemClickListener {
 
     @ViewById
-    protected ListView lv1main;
+    ListView lv1main;
     private LevelsAdapter adapter;
     private List<Integer> scores;
     private int mode;
@@ -60,35 +62,17 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
         lv1main.setOnItemClickListener(this);
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        SharedPreferencesUtil.getInstance(getActivity()).saveMode(mode);
+    @Click
+    void buttonRepeatLessons() {
+        openLesson(REPEAT_LESSONS_LESSON);
     }
 
     @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int levelId, long arg3) {
-        if (levelId < Constants.COMPLETE) {
-            int score = scores.get(levelId);
+    public void onItemClick(AdapterView<?> arg0, View arg1, int lessonId, long arg3) {
+        if (lessonId < Constants.COMPLETE) {
+            int score = scores.get(lessonId);
             if (score > -1) {
-                Bundle arguments = new Bundle();
-                arguments.putInt(EXTRA_LESSON_ID, levelId);
-                AbstractLevelFragment levelFragment;
-                switch (mode) {
-                    case MODE_HARD:
-                        levelFragment = new LevelHardFragment();
-                        break;
-                    case MODE_EASY:
-                        levelFragment = new LevelEasyFragment();
-                        break;
-                    default:
-                        return;
-                }
-                levelFragment.setArguments(arguments);
-                activity.getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, levelFragment)
-                        .addToBackStack(null)
-                        .commit();
+                openLesson(lessonId);
             } else {
                 final AlertDialog aboutDialog = new AlertDialog.Builder(activity)
                         .setMessage("Вам необходимо завершить предыдущие уроки")
@@ -101,29 +85,14 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
         }
     }
 
-//    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        inflater.inflate(R.menu.main_menu, menu);
-//        if (mode == MODE_HARD) {
-//            menu.findItem(R.id.action_hardcore_mode).setChecked(true);
-//        }
-//        super.onCreateOptionsMenu(menu,inflater);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_hardcore_mode:
-//                if (item.isChecked() == true) {
-//                    item.setChecked(false);
-//                    mode = MODE_EASY;
-//                } else {
-//                    item.setChecked(true);
-//                    mode = MODE_HARD;
-//                }
-//                break;
-//		}
-//        return super.onOptionsItemSelected(item);
-//    }
+    private void openLesson(int lessonId) {
+        SingleActivity singleActivity = (SingleActivity) getActivity();
+        if (singleActivity == null) return;
+
+        Bundle arguments = new Bundle();
+        arguments.putInt(EXTRA_LESSON_ID, lessonId);
+        AbstractLevelFragment levelFragment = mode == MODE_EASY ? new LevelEasyFragment() : new LevelHardFragment();
+        singleActivity.openFragment(levelFragment, arguments);
+    }
 
 }

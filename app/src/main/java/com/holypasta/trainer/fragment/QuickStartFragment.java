@@ -44,20 +44,25 @@ public class QuickStartFragment extends AbstractFragment {
     @Click
     protected void buttonQuickStart() {
         SingleActivity singleActivity = (SingleActivity) getActivity();
-        if (singleActivity != null) {
-            int lessonId;
-            int lastOpenLessonId = SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId();
-            int repeatLessonsLessonScore = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(REPEAT_LESSONS_LESSON);
-            if (lastOpenLessonId >= 1 && repeatLessonsLessonScore < MAX_SCORE) {
-                lessonId = REPEAT_LESSONS_LESSON;
-            } else {
-                lessonId = lastOpenLessonId;
-            }
-            Bundle arguments = new Bundle();
-            arguments.putInt(EXTRA_LESSON_ID, lessonId);
-            AbstractLevelFragment fragment = mode == MODE_EASY ? new LevelEasyFragment() : new LevelHardFragment();
-            singleActivity.openFragment(fragment, arguments);
+        if (singleActivity == null) return;
+
+        int lessonId;
+        int lastOpenLessonId = SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId();
+        int lastOpenLessonScore = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(lastOpenLessonId);
+        int repeatLessonsLessonScore = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(REPEAT_LESSONS_LESSON);
+        if ((lastOpenLessonId >= 1 && repeatLessonsLessonScore < MAX_SCORE)
+                || (lastOpenLessonId == COMPLETE-1 && lastOpenLessonScore > 0)) {
+            lessonId = REPEAT_LESSONS_LESSON;
+        } else {
+            lessonId = lastOpenLessonId;
         }
+        if (lastOpenLessonId == 0) {
+            SharedPreferencesUtil.getInstance(singleActivity).saveScore(REPEAT_LESSONS_LESSON, MAX_SCORE);
+        }
+        Bundle arguments = new Bundle();
+        arguments.putInt(EXTRA_LESSON_ID, lessonId);
+        AbstractLevelFragment fragment = (mode == MODE_EASY) ? new LevelEasyFragment() : new LevelHardFragment();
+        singleActivity.openFragment(fragment, arguments);
     }
 
     @Click

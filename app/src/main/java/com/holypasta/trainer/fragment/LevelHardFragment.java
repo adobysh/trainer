@@ -61,12 +61,6 @@ public class LevelHardFragment extends AbstractLevelFragment implements TextView
     public void onDestroyView() {
         super.onDestroyView();
         hideSoftKeyboard((EditText) resultField);
-        if (rootView != null) { // lolfix
-            ViewGroup parentViewGroup = (ViewGroup) rootView.getParent();
-            if (parentViewGroup != null) {
-                parentViewGroup.removeAllViews();
-            }
-        }
     }
 
     @Override

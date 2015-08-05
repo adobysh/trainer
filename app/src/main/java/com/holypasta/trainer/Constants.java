@@ -19,8 +19,9 @@ public interface Constants {
     int DEGRADATION_STEP = MAX_SCORE;
 
     int LAST_OLD_LOGIC_LESSON = 4;
-    int COMPLETE = 8;
+    int COMPLETE = 6;
     int LAST_LEVEL = 15;
+    int CLOSED_LESSON = -1;
     int REPEAT_LESSONS_LESSON = -2;
 
     String ACTION_REMINDER = ACTION + "reminder";

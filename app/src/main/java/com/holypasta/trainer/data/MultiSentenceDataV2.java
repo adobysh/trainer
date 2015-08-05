@@ -10,11 +10,13 @@ public class MultiSentenceDataV2 extends AbstractMultiSentence {
     private String enSentence;
     private boolean isQuestion;
     private Wronger wronger;
+    private Random random;
 
     public MultiSentenceDataV2(String ruSentence, String enSentence, Wronger wronger) {
         this.ruSentence = ruSentence;
         this.enSentence = enSentence;
         this.wronger = wronger;
+        random = new Random();
         this.isQuestion = checkIsQuestion(enSentence);
     }
     
@@ -34,7 +36,7 @@ public class MultiSentenceDataV2 extends AbstractMultiSentence {
     }
 
     public String getEnSentence() {
-        if (new Random().nextBoolean()) { // 50% wrong
+        if (random.nextBoolean()) { // 50% wrong
             return getCorrectEnSentence();
         } else {
             return getWrongSentence();
@@ -46,15 +48,16 @@ public class MultiSentenceDataV2 extends AbstractMultiSentence {
     }
 
     public String getWrongSentence() {
-        if (onlyOneWord() || new Random().nextBoolean()) {
-            return getSentence(wrongSentence(enSentence) + " LIE! wrong");
+        if (onlyOneWord() || random.nextBoolean()) {
+            return getSentence(wrongSentence(enSentence)); //  + " LIE! wrong"
         } else {
-            return getSentence(wordMixing(enSentence) + " LIE! mix");
+            return getSentence(wordMixing(enSentence)); //  + " LIE! mix"
         }
     }
 
     private boolean onlyOneWord() {
-        return !enSentence.contains(" ");
+        boolean onlyOneWord = !enSentence.contains(" ");
+        return onlyOneWord;
     }
 
     private String wrongSentence(String rightSentence) {
@@ -63,7 +66,6 @@ public class MultiSentenceDataV2 extends AbstractMultiSentence {
 
     private String wordMixing(String sentence) {
         String[] words = sentence.split(" ");
-        Random random = new Random();
         int wordOneIndex = random.nextInt(words.length);
         int wordTwoIndex = random.nextInt(words.length);
         while (wordOneIndex == wordTwoIndex) {

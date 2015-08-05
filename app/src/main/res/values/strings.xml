@@ -23,6 +23,7 @@
     <string name="title_activity_dictionary">Словарь</string>
     <string name="title_dialog_next_lesson">Перейти на следующий урок?</string>
     <string name="title_dialog_complete_available_levels">Поздравляю!\nВы закончили все доступные уроки.</string>
+    <string name="title_dialog_repeat_available_levels">Поздравляю!\nВы повторили все доступные уроки.</string>
     <string name="title_dialog_complete_all_levels">Поздравляю!\nВы закончили все уроки.</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-3369297231287003/6928841575</string>

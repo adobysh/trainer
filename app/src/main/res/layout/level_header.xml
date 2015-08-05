@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:gravity="center"
-        android:text="ru sentence"/>
+        android:text="ru sentence ru sentence ru sentence ru sentence ru sentence "
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
 </LinearLayout>

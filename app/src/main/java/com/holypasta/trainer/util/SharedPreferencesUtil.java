@@ -42,11 +42,11 @@ public class SharedPreferencesUtil implements Constants {
     public int getLastOpenLessonId() {
         for (int lessonId = 0; lessonId < SCORE_SIZE; lessonId++) {
             int score = sharedPreferences.getInt(PREF_SCORE_0_15 + lessonId, lessonId == 0 ? 0 : -1);
-            if (score == -1) {
+            if (score == -1 && lessonId <= COMPLETE) {
                 return lessonId-1;
             }
         }
-        return LAST_LEVEL;
+        return COMPLETE-1;
     }
 
     public int getLessonScore(int lessonId) {

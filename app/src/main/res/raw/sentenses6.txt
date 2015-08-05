@@ -1,76 +1,76 @@
-######################### part 1 ##################
+######################### part 1.1 ##################
 много времени
 much time
 
 много долларов
 many dollars
 
-много мальчиков
-many boys
-
-много денег
-much money
-
 много любви
 much love
-
-много чисел
-many numbers
-
-много музыки
-much music
-
-много картин
-many pictures
-
-много цветов
-many flowers
-
-много молока
-much milk
-
-много кораблей
-many ships
-
-много стульев
-many chairs
-
-много машин
-many cars
-
-много чая
-much tea
-
-много сахара
-much sugar
 
 много часов
 many hours
 
-много еды
-much food
+много денег
+much money
 
-много сыра
-much cheese
+много дней
+many days
 
-много девушек
-many girls
+много рублей
+many roubles
 
-много карандашей
-many pencils
+много людей
+many people
 
-#################################### part 2 ################
-cколько времени тебе нужно
+#много мальчиков
+#many boys
+
+#много чисел
+#many numbers
+
+#много музыки
+#much music
+
+#много картин
+#many pictures
+
+#много цветов
+#many flowers
+
+#много молока
+#much milk
+
+#много кораблей
+#many ships
+
+#много стульев
+#many chairs
+
+#много машин
+#many cars
+
+#много чая
+#much tea
+
+#много сахара
+#much sugar
+
+#много еды
+#much food
+
+#много сыра
+#much cheese
+
+#много девушек
+#many girls
+
+#много карандашей
+#many pencils
+
+#################################### part 1.2 ################
+сколько времени тебе нужно
 how much time do you need
-
-сколько друзей у тебя есть
-how many friends do you have
-
-сколько дней у тебя есть
-how many days do you have
-
-сколько картин у тебя есть
-how many pictures do you have
 
 сколько у тебя есть денег
 how much money do you have
@@ -78,33 +78,36 @@ how much money do you have
 у них нет много денег
 they haven't got much money
 
-ты пьешь много чая
-do you drink much tea
+сколько дней у тебя есть
+how many days do you have
 
-они не спрашивали меня много вопросов
-they didn't ask me many questions
+#сколько друзей у тебя есть
+#how many friends do you have
 
-у тебя много друзей
-do you have many friends
+#сколько картин у тебя есть
+#how many pictures do you have
 
-сколько машин у тебя есть
-how many cars do you have
+#ты пьешь много чая
+#do you drink much tea
 
-у Карлы так много друзей
-Carla has so many friends
+#они не спрашивали меня много вопросов
+#they didn't ask me many questions
 
-##################################### part 3 ##########################
+#у тебя много друзей
+#do you have many friends
+
+#сколько машин у тебя есть
+#how many cars do you have
+
+#у Карлы так много друзей
+#Carla has so many friends
+
+##################################### part 2 ##########################
 каждый знает это
 everybody knows that
 
 все здесь
 everybody is here
-
-все любят чай
-everybody likes tea
-
-кто-то взял мой словарь
-somebody took my dictionary
 
 я знаю кого-то, кто может помочь тебе
 I know somebody who can help you
@@ -112,23 +115,14 @@ I know somebody who can help you
 всё в порядке
 everything is all right
 
-всё, (что) я сказал, правда
-everything I said is true
-
 всё выглядит так красиво весной
 everything looks so beautiful in spring
-
-всё готово
-everything is ready
 
 он все знает
 he knows everything
 
 спасибо за всё
 thank you for everything
-
-я расскажу тебе что-то интересное
-I’ll tell you something interesting
 
 я хочу что-нибудь поесть
 I want something to eat
@@ -163,7 +157,22 @@ I have nothing to say
 им нечего было есть
 they had nothing to eat
 
-################################## part 4 ######################
+#я расскажу тебе что-то интересное
+#I’ll tell you something interesting
+
+#всё готово
+#everything is ready
+
+#всё, (что) я сказал, правда
+#everything I said is true
+
+#все любят чай
+#everybody likes tea
+
+#кто-то взял мой словарь
+#somebody took my dictionary
+
+################################## part 3 ######################
 я никогда не делаю этого
 I never do it
 
@@ -173,17 +182,8 @@ sometimes I do it
 он всегда это делает
 he always does it
 
-он всегда опаздывает
-he is always late
-
 она никогда не приходит утром
 she never comes in the morning
-
-Катя всегда встает в девять утра
-Katya always gets up at nine o'clock
-
-иногда я читаю эту книгу
-sometimes I read this book
 
 они всегда приходят вовремя
 they always come on time
@@ -191,5 +191,14 @@ they always come on time
 он иногда приходит сюда
 he sometimes comes here
 
-я никогда не курю
-I never smoke
+#я никогда не курю
+#I never smoke
+
+#он всегда опаздывает
+#he is always late
+
+#Катя всегда встает в девять утра
+#Katya always gets up at nine o'clock
+
+#иногда я читаю эту книгу
+#sometimes I read this book

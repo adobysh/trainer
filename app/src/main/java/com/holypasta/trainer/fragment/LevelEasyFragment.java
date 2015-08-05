@@ -64,17 +64,6 @@ public class LevelEasyFragment extends AbstractLevelFragment implements Animatio
         progressBar.setProgress(score);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (rootView != null) { // lolfix
-            ViewGroup parentViewGroup = (ViewGroup) rootView.getParent();
-            if (parentViewGroup != null) {
-                parentViewGroup.removeAllViews();
-            }
-        }
-    }
-
     protected boolean check(int buttonId) {
         String answer = resultField.getText().toString();
         boolean checkSentence = multiSentence.checkResult(answer);
@@ -83,9 +72,9 @@ public class LevelEasyFragment extends AbstractLevelFragment implements Animatio
         if (checkResult) {
             buttonNextWithTimer();
         } else {
-//            if (score > 1) { todo
-//                score--;
-//            }
+            if (score > 1) {
+                score--;
+            }
             if (buttonId == R.id.answer_false) {
                 buttonNextWithTimer();
             }

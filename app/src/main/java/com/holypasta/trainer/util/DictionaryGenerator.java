@@ -26,6 +26,8 @@ public class DictionaryGenerator {
                 return getItems4();
             case 4:
                 return getItems5();
+            case 5:
+                return getItems6();
             default:
                 return null;
         }
@@ -211,5 +213,33 @@ public class DictionaryGenerator {
         return Arrays.asList(itemsArray);
     }
 
+    public List<String> getItems6() {
+        String[] itemsArray = new String[]{
+                "time - время",
+                "dollar - доллар",
+                "rouble - рубль",
+                "money - деньги",
+                "hour - час",
+                "love - любовь",
+                "day - день",
+                "people - люди",
+                "have, has (had) - иметь (с местоимениями he, she - has)",
+                "much - много (нельзя посчитать)",
+                "many - много (можно посчитать)",
+                "everybody - все, всякий, каждый",
+                "somebody - кто-то, кто-нибудь, кое-кто",
+                "nobody - никто",
+                "everything - всё",
+                "something - что-нибудь, что-то, кое-что",
+                "nothing - ничего",
+                "everywhere - везде, всюду",
+                "somewhere - где-то, куда-то, где-нибудь",
+                "nowhere - нигде, никуда",
+                "always - всегда",
+                "sometimes - иногда",
+                "never - никогда"
+        };
+        return Arrays.asList(itemsArray);
+    }
 
 }
