@@ -5,11 +5,9 @@ import android.app.Application;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.holypasta.trainer.helper.HelperFactory;
-import com.holypasta.trainer.util.SharedPreferencesUtil;
+import com.holypasta.trainer.util.AppState;
 
 import java.util.Calendar;
 
@@ -31,7 +29,7 @@ public class App extends Application implements Constants {
     }
 
     private void regVisit() {
-        SharedPreferencesUtil.getInstance(this).regVisit();
+        AppState.getInstance(this).regVisit();
     }
 
     private void startReminder() {

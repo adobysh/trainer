@@ -1,25 +1,19 @@
 package com.holypasta.trainer.receiver;
 
-import android.app.AlarmManager;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.english.R;
+import com.holypasta.trainer.util.AppState;
 
 import java.util.Calendar;
 
-/**
- * Created by q1bot on 30.03.2015.
- */
 public class Reminder extends BroadcastReceiver implements Constants {
 
     @Override
@@ -31,7 +25,7 @@ public class Reminder extends BroadcastReceiver implements Constants {
     }
 
     private boolean lastVisitToday(Context context) {
-        long time = readTime(context);
+        long time = AppState.getInstance(context).getVisit();
         Calendar calendarSaved = Calendar.getInstance();
         calendarSaved.setTimeInMillis(time);
         Calendar calendarToday = Calendar.getInstance();
@@ -46,11 +40,6 @@ public class Reminder extends BroadcastReceiver implements Constants {
         }
         System.out.println("!!! last visit not today");
         return false;
-    }
-
-    private long readTime(Context context) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getLong(PREF_LAST_VISIT, -1);
     }
 
     private PendingIntent createPendingIntent(Context context) {

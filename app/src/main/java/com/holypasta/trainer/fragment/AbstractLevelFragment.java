@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,17 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.data.AbstractMultiSentence;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.levels.SentenceMaker;
-import com.holypasta.trainer.util.SharedPreferencesUtil;
+import com.holypasta.trainer.util.AppState;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public abstract class AbstractLevelFragment extends AbstractFragment implements View.OnClickListener {
 
@@ -75,7 +71,7 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
     protected void postFindViews() {
         buttonNext.setOnClickListener(this);
         buttonCheck.setOnClickListener(this);
-        score = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(lessonId);
+        score = AppState.getInstance(getActivity()).getLessonScore(lessonId);
         setHasOptionsMenu(true);
         setProgress(score);
         boolean isFirstOpen = firstOpen(score);
@@ -157,30 +153,30 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
         if (resultField.getText().length() == 0) return;
         boolean checkResult = check(buttonId);
         if (checkResult) {
-            if (score < MAX_SCORE) {
+            if (score < SCORE_MAX) {
                 score++;
-                if (score == MAX_SCORE) {
+                if (score == SCORE_MAX) {
                     showNextLevelDialog();
                 }
             }
-            if (score >= MAX_SCORE) {
+            if (score >= SCORE_MAX) {
                 unlockNextLesson();
             }
         }
         buttonsEnabled(false);
         setProgress(score);
-        SharedPreferencesUtil.getInstance(getActivity()).saveScore(lessonId, score);
+        AppState.getInstance(getActivity()).setScore(lessonId, score);
     }
 
     protected void unlockNextLesson() {
-        SharedPreferencesUtil.getInstance(getActivity()).unlockNextLesson(lessonId);
+        AppState.getInstance(getActivity()).unlockNextLesson(lessonId);
     }
 
     protected void showNextLevelDialog() {
         AlertDialog aboutDialog;
         if (lessonId == REPEAT_LESSONS_LESSON
-                && SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId() == COMPLETE-1
-                && SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(COMPLETE-1) > 0) {
+                && AppState.getInstance(getActivity()).getLastOpenLessonId() == COMPLETE-1
+                && AppState.getInstance(getActivity()).getLessonScore(COMPLETE-1) > 0) {
 
             aboutDialog = new AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.title_dialog_repeat_available_levels))
@@ -224,7 +220,7 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
         Bundle arguments = new Bundle();
         int nextLessonId;
         if (lessonId == REPEAT_LESSONS_LESSON) {
-            nextLessonId = SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId();
+            nextLessonId = AppState.getInstance(getActivity()).getLastOpenLessonId();
         } else {
             nextLessonId = lessonId + 1;
         }

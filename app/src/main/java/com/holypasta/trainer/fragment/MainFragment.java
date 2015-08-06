@@ -4,19 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.adapter.LevelsAdapter;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.util.SharedPreferencesUtil;
+import com.holypasta.trainer.util.AppState;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -44,7 +40,7 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     @AfterViews
     void calledAfterViewInjection() {
         setHasOptionsMenu(true);
-        mode = SharedPreferencesUtil.getInstance(getActivity()).getMode();
+        mode = AppState.getInstance(getActivity()).getMode();
     }
 
     @Override
@@ -56,7 +52,7 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     public void onResume() {
         super.onResume();
         String[] parts = getResources().getStringArray(R.array.contents);
-        scores = SharedPreferencesUtil.getInstance(getActivity()).getScores();
+        scores = AppState.getInstance(getActivity()).getScores();
         adapter = new LevelsAdapter(parts, activity, scores);
         lv1main.setAdapter(adapter);
         lv1main.setOnItemClickListener(this);

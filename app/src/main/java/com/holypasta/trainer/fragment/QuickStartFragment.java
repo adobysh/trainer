@@ -1,14 +1,11 @@
 package com.holypasta.trainer.fragment;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.widget.Button;
 
-import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.util.SharedPreferencesUtil;
+import com.holypasta.trainer.util.AppState;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -27,7 +24,7 @@ public class QuickStartFragment extends AbstractFragment {
 
     @AfterViews
     void calledAfterViewInjection() {
-        mode = SharedPreferencesUtil.getInstance(getActivity()).getMode();
+        mode = AppState.getInstance(getActivity()).getMode();
         if (mode == MODE_HARD) {
             buttonHardcoreMode.setText("Hardcore Mode ON");
         } else {
@@ -38,7 +35,7 @@ public class QuickStartFragment extends AbstractFragment {
     @Override
     public void onPause() {
         super.onPause();
-        SharedPreferencesUtil.getInstance(getActivity()).saveMode(mode);
+        AppState.getInstance(getActivity()).setMode(mode);
     }
 
     @Click
@@ -47,17 +44,14 @@ public class QuickStartFragment extends AbstractFragment {
         if (singleActivity == null) return;
 
         int lessonId;
-        int lastOpenLessonId = SharedPreferencesUtil.getInstance(getActivity()).getLastOpenLessonId();
-        int lastOpenLessonScore = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(lastOpenLessonId);
-        int repeatLessonsLessonScore = SharedPreferencesUtil.getInstance(getActivity()).getLessonScore(REPEAT_LESSONS_LESSON);
-        if ((lastOpenLessonId >= 1 && repeatLessonsLessonScore < MAX_SCORE)
+        int lastOpenLessonId = AppState.getInstance(getActivity()).getLastOpenLessonId();
+        int lastOpenLessonScore = AppState.getInstance(getActivity()).getLessonScore(lastOpenLessonId);
+        int repeatLessonsLessonScore = AppState.getInstance(getActivity()).getLessonScore(REPEAT_LESSONS_LESSON);
+        if ((lastOpenLessonId >= 1 && repeatLessonsLessonScore < SCORE_MAX)
                 || (lastOpenLessonId == COMPLETE-1 && lastOpenLessonScore > 0)) {
             lessonId = REPEAT_LESSONS_LESSON;
         } else {
             lessonId = lastOpenLessonId;
-        }
-        if (lastOpenLessonId == 0) {
-            SharedPreferencesUtil.getInstance(singleActivity).saveScore(REPEAT_LESSONS_LESSON, MAX_SCORE);
         }
         Bundle arguments = new Bundle();
         arguments.putInt(EXTRA_LESSON_ID, lessonId);

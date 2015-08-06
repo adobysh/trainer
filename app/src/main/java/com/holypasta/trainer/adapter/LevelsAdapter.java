@@ -72,7 +72,7 @@ public class LevelsAdapter extends BaseAdapter implements Constants {
         holder.textNumber.setText((position + 1) + "");
         int itemScore = scores.get(position);
         if (itemScore > -1 && position < Constants.COMPLETE) {
-            if (itemScore == MAX_SCORE) {
+            if (itemScore == SCORE_MAX) {
                 holder.image.setImageDrawable(levelComplete);
             } else {
                 holder.image.setImageDrawable(levelOpened);
