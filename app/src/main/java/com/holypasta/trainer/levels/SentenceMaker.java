@@ -5,7 +5,7 @@ import android.util.SparseArray;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.data.AbstractMultiSentence;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +29,7 @@ public class SentenceMaker implements Constants {
         switch (lessonId) {
             case REPEAT_LESSONS_LESSON:
                 this.context = context;
-                lastOpenLesson = AppState.getInstance(context).getLastOpenLessonId();
+                lastOpenLesson = JesusSaves.getInstance(context).getLastOpenLessonId();
                 if (lastOpenLesson == 0) {
                     throw new IllegalArgumentException("wtf repeat?! open only first lesson");
                 }

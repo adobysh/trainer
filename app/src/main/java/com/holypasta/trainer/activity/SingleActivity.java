@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBarActivity;
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.fragment.QuickStartFragment_;
-import com.holypasta.trainer.util.AppState;
 
 import org.androidannotations.annotations.*;
 
@@ -44,12 +43,6 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
             }
         });
         checkSpeechSynthesis();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        AppState.getInstance(this).saveState();
     }
 
     public void openFragment(Fragment fragment) {

@@ -277,7 +277,7 @@ public class Level02 extends AbstractLevel {
                         {"Почему я вижу его?", "Why do I see him?"},
                         {"Почему мы знаем её?", "Why do we know her?"},
 
-                        {"Почему он спрашивает ее?", "Why does he ask her?"},
+                        {"Как он спрашивает ее?", "How does he ask her?"},
                         {"Что она отвечает ему?", "What does she answer him?"},
                         {"Что мы даём ему?", "What do we give him?"},
                         {"Как они говорят нам?", "How do they speak us?"}};

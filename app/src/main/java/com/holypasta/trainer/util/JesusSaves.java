@@ -9,7 +9,7 @@ import com.holypasta.trainer.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppState implements Constants {
+public class JesusSaves implements Constants {
 
     private static final String PREF_SCORE_REPEAT = PREF + "repeat";
     private static final String PREF_SCORE_0_15 = PREF + "score_";
@@ -17,38 +17,32 @@ public class AppState implements Constants {
     private static final String PREF_LAST_VISIT = PREF + "last.visit";
     private static final int SCORE_SIZE = LAST_LEVEL + 1;
     
-    private static AppState appState;
+    private static JesusSaves jesusSaves;
     private SharedPreferences sharedPreferences;
     private List<Integer> scores;
     private int repeatLessonsLessonScore;
     private int mode;
     private long lastVisit;
 
-    public static synchronized AppState getInstance(Context context) {
-        if (appState == null) {
-            appState = new AppState(context);
+    public static synchronized JesusSaves getInstance(Context context) {
+        if (jesusSaves == null) {
+            jesusSaves = new JesusSaves(context);
         }
-        return appState;
+        return jesusSaves;
     }
 
-    public AppState(Context context) {
+    public JesusSaves(Context context) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         loadScores();
         loadMode();
         loadVisit();
     }
 
-    public void saveState() {
-        saveScores();
-        saveMode();
-        saveVisit();
-    }
-
-    public List<Integer> getScores() {
+    public synchronized List<Integer> getScores() {
         return scores;
     }
 
-    public int getLessonScore(int lessonId) {
+    public synchronized int getLessonScore(int lessonId) {
         if (lessonId == REPEAT_LESSONS_LESSON) {
             return repeatLessonsLessonScore;
         } else {
@@ -56,34 +50,46 @@ public class AppState implements Constants {
         }
     }
 
-    public void setScore(int lessonId, int score) {
+    public synchronized void setScore(int lessonId, int score) {
         if (lessonId == REPEAT_LESSONS_LESSON) {
             repeatLessonsLessonScore = score;
         } else {
             scores.set(lessonId, score);
         }
+        saveScore(lessonId, score);
     }
 
-    public boolean unlockNextLesson(int currentLessonId) {
+    public synchronized boolean unlockNextLesson(int currentLessonId) {
         if (currentLessonId != LAST_LEVEL) {
             int nextLessonId = currentLessonId + 1;
             if (scores.size() > nextLessonId && scores.get(nextLessonId) == SCORE_LESSON_CLOSE) {
                 scores.set(nextLessonId, SCORE_LESSON_OPEN);
+                saveScore(nextLessonId, SCORE_LESSON_OPEN);
                 return true;
             }
         }
         return false;
     }
 
-    public int getMode() {
+    public synchronized void unlockUntoLesson(int currentLessonId) {
+        for (int lessonId = 0; lessonId <= currentLessonId; lessonId++) {
+            if (scores.get(lessonId) == SCORE_LESSON_CLOSE) {
+                scores.set(lessonId, SCORE_LESSON_OPEN);
+                saveScore(lessonId, SCORE_LESSON_OPEN);
+            }
+        }
+    }
+
+    public synchronized int getMode() {
         return mode;
     }
 
-    public void setMode(int mode) {
+    public synchronized void setMode(int mode) {
         this.mode = mode;
+        saveMode();
     }
 
-    public int getLastOpenLessonId() {
+    public synchronized int getLastOpenLessonId() {
         for (int lessonId = 0; lessonId < SCORE_SIZE; lessonId++) {
             int score = scores.get(lessonId);
             if (score == -1 && lessonId <= COMPLETE) {
@@ -93,12 +99,13 @@ public class AppState implements Constants {
         return COMPLETE-1;
     }
 
-    public long getVisit() {
+    public synchronized long getVisit() {
         return lastVisit;
     }
 
-    public void regVisit() {
+    public synchronized void regVisit() {
         lastVisit = System.currentTimeMillis();
+        saveVisit();
     }
 
     private void loadScores() {
@@ -114,12 +121,13 @@ public class AppState implements Constants {
         repeatLessonsLessonScore = sharedPreferences.getInt(PREF_SCORE_REPEAT, SCORE_MAX);
     }
 
-    private void saveScores() {
+    private void saveScore(int lessonId, int score) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        for (int lessonId = 0; lessonId < scores.size(); lessonId++) {
-            editor.putInt(PREF_SCORE_0_15 + lessonId, scores.get(lessonId));
+        if (lessonId == REPEAT_LESSONS_LESSON) {
+            editor.putInt(PREF_SCORE_REPEAT, score);
+        } else {
+            editor.putInt(PREF_SCORE_0_15 + lessonId, score);
         }
-        editor.putInt(PREF_SCORE_REPEAT, repeatLessonsLessonScore);
         editor.apply();
     }
 
@@ -141,11 +149,5 @@ public class AppState implements Constants {
         SharedPreferences.Editor edit = sharedPreferences.edit();
         edit.putLong(PREF_LAST_VISIT, lastVisit);
         edit.apply();
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        saveState();
     }
 }

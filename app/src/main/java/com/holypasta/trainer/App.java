@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.holypasta.trainer.helper.HelperFactory;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import java.util.Calendar;
 
@@ -29,7 +29,7 @@ public class App extends Application implements Constants {
     }
 
     private void regVisit() {
-        AppState.getInstance(this).regVisit();
+        JesusSaves.getInstance(this).regVisit();
     }
 
     private void startReminder() {

@@ -10,7 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import java.util.Calendar;
 
@@ -25,7 +25,7 @@ public class Reminder extends BroadcastReceiver implements Constants {
     }
 
     private boolean lastVisitToday(Context context) {
-        long time = AppState.getInstance(context).getVisit();
+        long time = JesusSaves.getInstance(context).getVisit();
         Calendar calendarSaved = Calendar.getInstance();
         calendarSaved.setTimeInMillis(time);
         Calendar calendarToday = Calendar.getInstance();

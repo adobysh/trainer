@@ -5,7 +5,7 @@ import android.widget.Button;
 
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -24,7 +24,7 @@ public class QuickStartFragment extends AbstractFragment {
 
     @AfterViews
     void calledAfterViewInjection() {
-        mode = AppState.getInstance(getActivity()).getMode();
+        mode = JesusSaves.getInstance(getActivity()).getMode();
         if (mode == MODE_HARD) {
             buttonHardcoreMode.setText("Hardcore Mode ON");
         } else {
@@ -35,7 +35,7 @@ public class QuickStartFragment extends AbstractFragment {
     @Override
     public void onPause() {
         super.onPause();
-        AppState.getInstance(getActivity()).setMode(mode);
+        JesusSaves.getInstance(getActivity()).setMode(mode);
     }
 
     @Click
@@ -44,9 +44,9 @@ public class QuickStartFragment extends AbstractFragment {
         if (singleActivity == null) return;
 
         int lessonId;
-        int lastOpenLessonId = AppState.getInstance(getActivity()).getLastOpenLessonId();
-        int lastOpenLessonScore = AppState.getInstance(getActivity()).getLessonScore(lastOpenLessonId);
-        int repeatLessonsLessonScore = AppState.getInstance(getActivity()).getLessonScore(REPEAT_LESSONS_LESSON);
+        int lastOpenLessonId = JesusSaves.getInstance(getActivity()).getLastOpenLessonId();
+        int lastOpenLessonScore = JesusSaves.getInstance(getActivity()).getLessonScore(lastOpenLessonId);
+        int repeatLessonsLessonScore = JesusSaves.getInstance(getActivity()).getLessonScore(REPEAT_LESSONS_LESSON);
         if ((lastOpenLessonId >= 1 && repeatLessonsLessonScore < SCORE_MAX)
                 || (lastOpenLessonId == COMPLETE-1 && lastOpenLessonScore > 0)) {
             lessonId = REPEAT_LESSONS_LESSON;

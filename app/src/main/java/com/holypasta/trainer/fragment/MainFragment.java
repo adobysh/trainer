@@ -6,13 +6,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.adapter.LevelsAdapter;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -26,6 +27,8 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
 
     @ViewById
     ListView lv1main;
+    @ViewById
+    Button buttonRepeatLessons;
     private LevelsAdapter adapter;
     private List<Integer> scores;
     private int mode;
@@ -40,7 +43,10 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     @AfterViews
     void calledAfterViewInjection() {
         setHasOptionsMenu(true);
-        mode = AppState.getInstance(getActivity()).getMode();
+        if (JesusSaves.getInstance(getActivity()).getLastOpenLessonId() == 0) {
+            buttonRepeatLessons.setVisibility(View.GONE);
+        }
+        mode = JesusSaves.getInstance(getActivity()).getMode();
     }
 
     @Override
@@ -52,7 +58,7 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     public void onResume() {
         super.onResume();
         String[] parts = getResources().getStringArray(R.array.contents);
-        scores = AppState.getInstance(getActivity()).getScores();
+        scores = JesusSaves.getInstance(getActivity()).getScores();
         adapter = new LevelsAdapter(parts, activity, scores);
         lv1main.setAdapter(adapter);
         lv1main.setOnItemClickListener(this);
@@ -64,7 +70,7 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     }
 
     @Override
-    public void onItemClick(AdapterView<?> arg0, View arg1, int lessonId, long arg3) {
+    public void onItemClick(AdapterView<?> arg0, View arg1, final int lessonId, long arg3) {
         if (lessonId < Constants.COMPLETE) {
             int score = scores.get(lessonId);
             if (score > -1) {
@@ -75,6 +81,13 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) { }
+//                        })
+//                        .setNegativeButton("Разблокировать", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                JesusSaves.getInstance(getActivity()).unlockUntoLesson(lessonId);
+//                                openLesson(lessonId);
+//                            }
                         }).create();
                 aboutDialog.show();
             }

@@ -22,7 +22,7 @@ import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.data.AbstractMultiSentence;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.levels.SentenceMaker;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import java.lang.reflect.Constructor;
 
@@ -71,7 +71,7 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
     protected void postFindViews() {
         buttonNext.setOnClickListener(this);
         buttonCheck.setOnClickListener(this);
-        score = AppState.getInstance(getActivity()).getLessonScore(lessonId);
+        score = JesusSaves.getInstance(getActivity()).getLessonScore(lessonId);
         setHasOptionsMenu(true);
         setProgress(score);
         boolean isFirstOpen = firstOpen(score);
@@ -165,18 +165,18 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
         }
         buttonsEnabled(false);
         setProgress(score);
-        AppState.getInstance(getActivity()).setScore(lessonId, score);
+        JesusSaves.getInstance(getActivity()).setScore(lessonId, score);
     }
 
     protected void unlockNextLesson() {
-        AppState.getInstance(getActivity()).unlockNextLesson(lessonId);
+        JesusSaves.getInstance(getActivity()).unlockNextLesson(lessonId);
     }
 
     protected void showNextLevelDialog() {
         AlertDialog aboutDialog;
         if (lessonId == REPEAT_LESSONS_LESSON
-                && AppState.getInstance(getActivity()).getLastOpenLessonId() == COMPLETE-1
-                && AppState.getInstance(getActivity()).getLessonScore(COMPLETE-1) > 0) {
+                && JesusSaves.getInstance(getActivity()).getLastOpenLessonId() == COMPLETE-1
+                && JesusSaves.getInstance(getActivity()).getLessonScore(COMPLETE-1) > 0) {
 
             aboutDialog = new AlertDialog.Builder(activity)
                     .setMessage(getString(R.string.title_dialog_repeat_available_levels))
@@ -220,7 +220,7 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
         Bundle arguments = new Bundle();
         int nextLessonId;
         if (lessonId == REPEAT_LESSONS_LESSON) {
-            nextLessonId = AppState.getInstance(getActivity()).getLastOpenLessonId();
+            nextLessonId = JesusSaves.getInstance(getActivity()).getLastOpenLessonId();
         } else {
             nextLessonId = lessonId + 1;
         }

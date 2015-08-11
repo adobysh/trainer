@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.holypasta.trainer.Constants;
-import com.holypasta.trainer.util.AppState;
+import com.holypasta.trainer.util.JesusSaves;
 
 import java.util.Calendar;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Degradation extends BroadcastReceiver implements Constants {
             System.out.println("!!! Degradation not now!");
             return;
         }
-        List<Integer> scores = AppState.getInstance(context).getScores();
+        List<Integer> scores = JesusSaves.getInstance(context).getScores();
         for (int levelId = 0; levelId < scores.size(); levelId++) {
             int score = scores.get(levelId);
             System.out.println("!!! Degradation level " + (levelId+1) + " with score " + score);
@@ -28,11 +28,10 @@ public class Degradation extends BroadcastReceiver implements Constants {
                 if (score < 1) {
                     score = 1;
                 }
-                AppState.getInstance(context).setScore(levelId, score);
+                JesusSaves.getInstance(context).setScore(levelId, score);
             }
         }
-        AppState.getInstance(context).setScore(REPEAT_LESSONS_LESSON, 0);
-        AppState.getInstance(context).saveState();
+        JesusSaves.getInstance(context).setScore(REPEAT_LESSONS_LESSON, 0);
     }
 
     private boolean isDegradationTime() {
