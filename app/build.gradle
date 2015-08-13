@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
+
 android {
     compileSdkVersion 21
     buildToolsVersion '21.1.2'
@@ -8,8 +9,8 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 21
-        versionCode 11
-        versionName "1.6.1"
+        versionCode 12
+        versionName "1.7.0"
     }
     buildTypes {
         release {

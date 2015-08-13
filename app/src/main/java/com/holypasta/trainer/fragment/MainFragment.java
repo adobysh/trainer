@@ -50,8 +50,8 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     }
 
     @Override
-    protected void setTitle() {
-        activity.getSupportActionBar().setTitle(getString(R.string.app_name));
+    protected String getTitle() {
+        return getString(R.string.app_name);
     }
 
     @Override
@@ -80,14 +80,15 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
                         .setMessage("Вам необходимо завершить предыдущие уроки")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) { }
-//                        })
-//                        .setNegativeButton("Разблокировать", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                JesusSaves.getInstance(getActivity()).unlockUntoLesson(lessonId);
-//                                openLesson(lessonId);
-//                            }
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setNegativeButton("Разблокировать", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                JesusSaves.getInstance(getActivity()).unlockUntoLesson(lessonId);
+                                openLesson(lessonId);
+                            }
                         }).create();
                 aboutDialog.show();
             }

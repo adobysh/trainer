@@ -21,29 +21,18 @@ import org.androidannotations.annotations.*;
 public class TheoryFragment extends AbstractFragment {
 
     @FragmentArg(EXTRA_LESSON_ID)
-    protected int ID_LESSON;
+    int ID_LESSON;
 
     @ViewById(R.id.webTheory)
-    protected WebView web;
-
-    private SingleActivity activity;
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = (SingleActivity)activity;
-    }
+    WebView web;
 
     @AfterViews
-    protected void calledAfterViewInjection() {
+    void calledAfterViewInjection() {
         web.loadUrl("file:///android_res/raw/lesson" + (ID_LESSON+1) + ".html");
     }
 
     @Override
-    protected void setTitle() {
-        ActionBar actionBar = activity.getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(getString(R.string.title_activity_theory) + ". " + (ID_LESSON+1) + " урок ");
-        }
+    protected String getTitle() {
+        return getString(R.string.title_activity_theory) + ". " + (ID_LESSON+1) + " урок ";
     }
 }

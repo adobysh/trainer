@@ -28,6 +28,8 @@ public class DictionaryGenerator {
                 return getItems5();
             case 5:
                 return getItems6();
+            case 6:
+                return getItems7();
             default:
                 return null;
         }
@@ -238,6 +240,34 @@ public class DictionaryGenerator {
                 "always - всегда",
                 "sometimes - иногда",
                 "never - никогда"
+        };
+        return Arrays.asList(itemsArray);
+    }
+
+    public List<String> getItems7() {
+        String[] itemsArray = new String[]{
+                "try - пытаться, стараться, примерять",
+                "buy (bought) - покупать",
+                "shirt - рубашка",
+                "pay (paid) - платить, оплачивать",
+                "cash - наличные",
+                "credit card - кредитная карта",
+                "play - играть",
+                "film - фильм",
+                "change - менять, обменивать, переодеваться",
+                "choose (chose) - выбирать",
+                "dress - платье",
+                "car - машина, автомобиль",
+                "drive - ехать, водить",
+                "slowly - медленно",
+                "hurry - спешить",
+                "cinema - кино",
+                "dinner - обед",
+                "watch TV - смотреть телевизор",
+                "football - футбол",
+                "mail - почта",
+                "together - вместе",
+                "right now - прямо сейчас"
         };
         return Arrays.asList(itemsArray);
     }

@@ -17,10 +17,10 @@ import org.androidannotations.annotations.ViewById;
 public class QuickStartFragment extends AbstractFragment {
 
     @ViewById
-    protected Button buttonHardcoreMode;
+    Button buttonHardcoreMode;
 
     @InstanceState
-    protected int mode;
+    int mode;
 
     @AfterViews
     void calledAfterViewInjection() {
@@ -39,7 +39,7 @@ public class QuickStartFragment extends AbstractFragment {
     }
 
     @Click
-    protected void buttonQuickStart() {
+    void buttonQuickStart() {
         SingleActivity singleActivity = (SingleActivity) getActivity();
         if (singleActivity == null) return;
 
@@ -60,7 +60,7 @@ public class QuickStartFragment extends AbstractFragment {
     }
 
     @Click
-    protected void buttonChoiceLesson() {
+    void buttonChoiceLesson() {
         SingleActivity singleActivity = (SingleActivity) getActivity();
         if (singleActivity != null) {
             singleActivity.openFragment(new MainFragment_());
@@ -68,7 +68,7 @@ public class QuickStartFragment extends AbstractFragment {
     }
 
     @Click
-    protected void buttonHardcoreMode() {
+    void buttonHardcoreMode() {
         if (mode == MODE_HARD) {
             mode = MODE_EASY;
             buttonHardcoreMode.setText("Hardcore Mode OFF");
@@ -78,8 +78,16 @@ public class QuickStartFragment extends AbstractFragment {
         }
     }
 
+//    @Click
+//    void imageView() {
+//        SingleActivity activity = (SingleActivity) getActivity();
+//        if (activity != null) {
+//            activity.openFragment(new DonateFragment());
+//        }
+//    }
+
     @Override
-    protected void setTitle() {
-        ((SingleActivity)getActivity()).getSupportActionBar().setTitle(getString(R.string.app_name));
+    protected String getTitle() {
+        return getString(R.string.app_name);
     }
 }

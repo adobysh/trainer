@@ -21,7 +21,7 @@ public interface Constants {
     int DEGRADATION_STEP = SCORE_MAX;
 
     int LAST_OLD_LOGIC_LESSON = 4;
-    int COMPLETE = 6;
+    int COMPLETE = 7;
     int LAST_LEVEL = 15;
     int REPEAT_LESSONS_LESSON = -2;
 
@@ -33,7 +33,7 @@ public interface Constants {
     String YOUTUBE_APP_BASE_URL = "vnd.youtube:";
     String YOUTUBE_SITE_BASE_URL = "https://www.youtube.com/watch?v=";
     String[] VIDEO_ID = new String [] { "y9fFDpSqKdQ", "KpNy_DBth6k", "qg9NhobhbTg",
-            "Bq6zgXdAc7Q", "VMwVt6ohKFE", "B93DPIcRV2o", "xCNIdZewu2s", "yr5KPLPXOVs",
+            "Bq6zgXdAc7Q", "VMwVt6ohKFE", "B93DPIcRV2o", "cdWNe2rt0nI" /* "xCNIdZewu2s" */, "yr5KPLPXOVs",
             "2x4WP4owvkw", "vkO2B8p_jy4", "mq0Bz4YR45k", "bSVEllZUFTw", "ASz1-RT-zgc",
             "rW6YhEjABbw", "KAP66olZSQA", "kY4_9sXfcSo" };
 }

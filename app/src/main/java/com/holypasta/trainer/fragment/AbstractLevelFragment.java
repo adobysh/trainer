@@ -110,10 +110,6 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
     }
 
     @Override
-    protected void setTitle() {
-        activity.getSupportActionBar().setTitle(getTitle());
-    }
-
     protected String getTitle() {
         if (lessonId == REPEAT_LESSONS_LESSON) {
             return "Повторение";

@@ -57,7 +57,7 @@ public class DictionaryFragment extends AbstractFragment {
     }
 
     @Override
-    protected void setTitle() {
-        activity.getSupportActionBar().setTitle(getString(R.string.title_activity_dictionary) + ". " + (lessonId+1) + " урок ");
+    protected String getTitle() {
+        return getString(R.string.title_activity_dictionary) + ". " + (lessonId+1) + " урок ";
     }
 }
