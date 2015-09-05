@@ -60,7 +60,7 @@ public class JesusSaves implements Constants {
     }
 
     public synchronized boolean unlockNextLesson(int currentLessonId) {
-        if (currentLessonId != LAST_LEVEL) {
+        if (currentLessonId >= 0 && currentLessonId < LAST_LEVEL) {
             int nextLessonId = currentLessonId + 1;
             if (scores.size() > nextLessonId && scores.get(nextLessonId) == SCORE_LESSON_CLOSE) {
                 scores.set(nextLessonId, SCORE_LESSON_OPEN);
@@ -71,8 +71,8 @@ public class JesusSaves implements Constants {
         return false;
     }
 
-    public synchronized void unlockUntoLesson(int currentLessonId) {
-        for (int lessonId = 0; lessonId <= currentLessonId; lessonId++) {
+    public synchronized void unlockUntoLesson(int targetLessonId) {
+        for (int lessonId = 0; lessonId <= targetLessonId; lessonId++) {
             if (scores.get(lessonId) == SCORE_LESSON_CLOSE) {
                 scores.set(lessonId, SCORE_LESSON_OPEN);
                 saveScore(lessonId, SCORE_LESSON_OPEN);

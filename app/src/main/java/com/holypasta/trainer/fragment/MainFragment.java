@@ -2,6 +2,7 @@ package com.holypasta.trainer.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,34 @@ import org.androidannotations.annotations.ViewById;
 import java.util.List;
 
 @EFragment(R.layout.fragment_main)
-public class MainFragment extends AbstractFragment implements AdapterView.OnItemClickListener {
+public class MainFragment extends AbstractFragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+
+    private class SOSLesson {
+
+        private int lessonId;
+        private int count;
+
+        private SOSLesson() {
+            lessonId = -1;
+        }
+
+        public boolean pip(int lessonId, Context context) {
+            if (lessonId == this.lessonId) {
+                count++;
+            } else {
+                this.lessonId = lessonId;
+                count = 0;
+            }
+
+            if (count == 5) {
+                JesusSaves.getInstance(context).unlockUntoLesson(lessonId);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
 
     @ViewById
     ListView lv1main;
@@ -31,8 +59,10 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
     Button buttonRepeatLessons;
     private LevelsAdapter adapter;
     private List<Integer> scores;
+    private String[] parts;
     private int mode;
     private SingleActivity activity;
+    private SOSLesson sosLesson;
 
     @Override
     public void onAttach(Activity activity) {
@@ -46,22 +76,24 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
         if (JesusSaves.getInstance(getActivity()).getLastOpenLessonId() == 0) {
             buttonRepeatLessons.setVisibility(View.GONE);
         }
+        parts = getResources().getStringArray(R.array.contents);
         mode = JesusSaves.getInstance(getActivity()).getMode();
+        sosLesson = new SOSLesson();
     }
 
     @Override
     protected String getTitle() {
-        return getString(R.string.app_name);
+        return getString(R.string.title_lessons);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        String[] parts = getResources().getStringArray(R.array.contents);
         scores = JesusSaves.getInstance(getActivity()).getScores();
         adapter = new LevelsAdapter(parts, activity, scores);
         lv1main.setAdapter(adapter);
         lv1main.setOnItemClickListener(this);
+        lv1main.setOnItemLongClickListener(this);
     }
 
     @Click
@@ -82,17 +114,27 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
-                        })
-                        .setNegativeButton("Разблокировать", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                JesusSaves.getInstance(getActivity()).unlockUntoLesson(lessonId);
-                                openLesson(lessonId);
-                            }
+//                        })
+//                        .setNegativeButton("Разблокировать", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                JesusSaves.getInstance(getActivity()).unlockUntoLesson(lessonId);
+//                                openLesson(lessonId);
+//                            }
                         }).create();
                 aboutDialog.show();
             }
         }
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        if (sosLesson.pip(position, getActivity())) {
+            scores = JesusSaves.getInstance(getActivity()).getScores();
+            adapter = new LevelsAdapter(parts, activity, scores);
+            lv1main.setAdapter(adapter);
+        }
+        return false;
     }
 
     private void openLesson(int lessonId) {
@@ -104,5 +146,4 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
         AbstractLevelFragment levelFragment = mode == MODE_EASY ? new LevelEasyFragment() : new LevelHardFragment();
         singleActivity.openFragment(levelFragment, arguments);
     }
-
 }
