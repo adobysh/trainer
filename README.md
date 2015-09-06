@@ -1,3 +1,10 @@
+Инструкция по составлению материалов для урока:
+
+
+
+---
+
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
