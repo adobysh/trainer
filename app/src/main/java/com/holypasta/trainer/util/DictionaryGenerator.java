@@ -30,6 +30,8 @@ public class DictionaryGenerator {
                 return getItems6();
             case 6:
                 return getItems7();
+            case 7:
+                return getItems8();
             default:
                 return null;
         }
@@ -268,6 +270,69 @@ public class DictionaryGenerator {
                 "mail - почта",
                 "together - вместе",
                 "right now - прямо сейчас"
+        };
+        return Arrays.asList(itemsArray);
+    }
+
+    public List<String> getItems8() {
+        String[] itemsArray = new String[]{
+                "try - пытаться, стараться, примерять",
+                "buy (bought) - покупать",
+                "in - в (внутри)",
+                "to - к, в (по направлению к)",
+                "from - от",
+                "under - под",
+                "on - на, по (над)",
+                "at - у чего-то",
+                "over - над",
+                "between - между",
+                "with - с",
+                "without - без",
+        "for - для",
+        "about - о, около",
+        "measure - измерять",
+        "whim - каприз",
+        "sew - шить",
+        "woman - женщина",
+        "women - женщины",
+        "man - мужчина, человек",
+        "men - мужчины",
+        "people - люди, народ",
+        "human - человеческий",
+        "mankind - человечество",
+        "society - общество",
+      //  "# дополнительные слова из предложений",
+        "Moscow - Москва",
+        "ground - земля",
+        "table - стол",
+        "school - школа",
+        "home - дом",
+        "tell - рассказывать",
+        "father - отец",
+        "minute - минута",
+        "meet - встретить",
+        "o'clock - час (время дня)",
+        "go up - подниматься",
+        "go down - спускаться",
+        "go back - возвращаться",
+        "go away - прочь, в сторону",
+        "go in - заходить",
+        "go out - выходить",
+        "look up - посмотреть вверх",
+        "look down - посмотреть вниз",
+        "look back - оглянуться",
+        "look away - отвернуться",
+        "look in - заглянуть",
+        "look out - выглянуть",
+        "take up - поднять",
+        "take down - опустить",
+        "take away - отобрать",
+        "take in - внести",
+        "take out - вынести",
+        "market - рынок",
+        "make (made) - делать",
+        "shirt - рубашка",
+        "hope - надеяться"
         };
         return Arrays.asList(itemsArray);
     }

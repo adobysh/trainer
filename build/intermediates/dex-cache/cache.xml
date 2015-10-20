@@ -2,207 +2,228 @@
 <items version="2" >
 
     <item
-        jar="/home/kaschey/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-b2201870606416dcd6677f099afb429dfcc4a870.jar" />
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-fba0f0295f15bd1d405e21ae005fc6d7ff070dfd.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="f44d03c138cb6488fdbaa65e3a7e5878861a56d8">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-c4afe694f1dc24b97aaac43d68304e5129355b0c.jar" />
+        sha1="3c729e6d76a36c5dc27e6a4c4009296f49eaa88a">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-4c74577a689baae20c6bcf8d0be707edeec4caa0.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="8d736fefa22d896e84a268354b3ed48a42663150">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-49b45ece16f246b6eb1fd7ccdac9e50622a21cd1.jar" />
+        sha1="9cf8c0ef60847621c7ad00b4f78dbfc9daba4af2">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-de0ed95cfb032e043b89b01be22e2fd9584361d8.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e7b35244f50663b3f8d150714bca9ecd7a290da1">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-efe11c1ae4d1263b0c9405a9c2eb09c9597c9c54.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="68c140702c7242d914655bcb3164d9e8c45b84cb">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-c59427aedc1cfd66a10032935eef8cffc61f2980.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="69dd177337ead693c408c8dddc9546bb6f1244fa">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-57d9ae95e08eff6175c6440ca6b989440fcb1168.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a78183f30e769a98ab4820794f597763088d3065">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-7e0ee4aa3488ceeed5d474715f5f529d4957883f.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-4f64d380ce1fd909497baaa3fa7a2a96a1702f33.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/ormlite-android-4.48.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="afa06f539a4026c10b247386312aa67404b80a16">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/ormlite-android-4.48-e4e50c15741a37bdc2a64dbe246fd9520925c664.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="272bc5d7063f24bc3a33ea1d318cde8f31f5ec4c">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-383d2ea1e066d313112230eb4b023fbbe4e73354.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ba3df4eb0a630d7de294f0e48d3f9267d279b784">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-824659c41948049fc025b1c87e68cd4484b1735c.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f02127a85abd52a2cd526d4c2409f21969f80ee8">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-485adce045b10a4c354dd9e25499b50216881aea.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6440e5e5cfe368f9bff3c537fb8988048069cb33">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-a8bd6be9e6a55fc03c75488432878a27c2d21925.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ba207be21987c11b37d9f8faa08ed6e722569f30">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-cf316381f12d1fecf2043871a95dee6f729a0b6d.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-871c9aead607dc679c831b36b3f4f4ad2035ed00.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.5.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d405025c600055237c171a0bbabaa49d69696573">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-1ec99809911ba253de622bc6cb404dba2d413fb0.jar" />
-    </item>
-    <item
-        jar="/home/kaschey/.gradle/caches/modules-2/files-2.1/org.androidannotations/androidannotations-api/3.3.1/3b8b2740d5f8680a9eac6f6f726925988059fccd/androidannotations-api-3.3.1.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/libs/androidannotations-api-3.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="3b8b2740d5f8680a9eac6f6f726925988059fccd">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/androidannotations-api-3.3.1-426f192c9587ea4f1ecd605e9a4d7624645ba801.jar" />
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/androidannotations-api-3.3.1-99123d25d663c92b82a316e510eb1163782f1ebe.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="6836d188602ec5382d1967c58b00960eb8ff8773">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-bd66888ad9bd6bf0d4e8c94d56730365402f6abc.jar" />
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-8c1dbfa2e1e757fe4e820c701e5de7a92c7f7cf3.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="a172852a35ff919e85b9b7f14bbc15c5bee25520">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-8c89b6a9feff6ee55d5487e350999f89afde3414.jar" />
+        sha1="0632f06970823b7e3436f649bfa65b47035c91d0">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-eaa82b1c95703cebb159a48f2ef51ab31760392f.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="8e3a972f28b8bae817e382257ba177a31bcadbbc">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-e9157406a40a9c7bb87ec66570fa205b67cefb3b.jar" />
+        sha1="d61920aba361832a9545a43fa8c9453eb02f18f7">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-0d7bcfa58135cb1a0616839a13c80f2cfc5b398b.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="1e98ef3f124bb7a11f8575f9ff5dfea330b61b6f">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-34b8aa3ae6f569e58956d72f07b7fe6028208e74.jar" />
+        sha1="dcb5b75baf05d92e61d5706737200ee55949f97b">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-04ca589d24444bd1d6b8f7ea7f800536d895c2db.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/libs/ormlite-core-4.48.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-1b3fa3834313535360a2f4e76186de49a7daa2bd.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d294caf562c4c678b2ef351662a0ca6f1a4d06c0">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-dbd4de3dcae198066990964ce79a9c1a6eae4e15.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/libs/ormlite-core-4.48.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="e579bd2905d0399af5029aaaf9817d5fa0ca88a5">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/ormlite-core-4.48-bb9d85ae6cafeba27c1ccc494b27d122b7a87996.jar" />
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/ormlite-core-4.48-f04d719cf92269acf52ff9c8d507a3f031266be3.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="02bac2dc792d78241077861566f2c82da955e7fa">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-41a9dd84207ce6faebd751d2c0ee68469eec82fe.jar" />
+        sha1="993834cb17d07d51b92db89d2c330243592ebf77">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-58f914336c744c7879ee4aea2c507b2ded965e2e.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="1a6411087ab88ce5542f593e63a2752b6b0d6f1a">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-68931872ba50949d0df94f416821a259b37307c7.jar" />
+        sha1="17449c47df35c754b257532052f1270c444f7993">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-d176b2fee418c83ffdef7d74c915b5ceb2e63e7e.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.0.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="a1372c17fccacca753d3951d3ad820571cbce075">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-0a7c11518a2e663a5fc8abe1fd98a1ee80ef48ab.jar" />
+        sha1="dcf8c83c3dead00a6c4fe313e95f7aaca20dc641">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-8f9f5b4b804fa3e490c330fba059d46808f55282.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-05e0a4c84562f7a9d0309eb49d3e87cbd92d2702.jar" />
+        sha1="3aed37c38c56679602255dd72ef356da5d327cda">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-953dfcebd616cf3607eae37035cb735d99c98405.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="63ec6e9f4fe5482a7447d0f3091b8e543a02554c">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-98d039e0d58af18e00ca5d7218b00163f4332bfb.jar" />
+        sha1="2a7e47da654546f9457deb6132364f1bf33a1857">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-4cad7c1b9cbe3165abc4f8437ad7addc4ac7fb77.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-measurement/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="06a42becc33232ec0ee125161da68c1829c9f8fd">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-88c6d8267b1c4d4b2b630bf570a546e3533d4248.jar" />
+        sha1="482de223655d06253cc6a4955d653f8994169500">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-8c2d778f00664fa7f29a86af599fd24f871a4746.jar" />
     </item>
     <item
-        jar="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.5.0/jars/classes.jar"
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="29ebc7e04d877062317c8cc0e68b20f0c1fcda66">
-        <dex dex="/home/kaschey/Programs/Workspace/trainer/app/build/intermediates/pre-dexed/debug/classes-3fa36d47c7ec6c6e096103b8e0c0b6d02a90665b.jar" />
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-6488f0ea7f204e942a3049b80bc931714e9de2e1.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="82054090e487d78e163a988557db62d809fa9b95">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-bd81e2723d9005647dad1ad361dd6d8aaccb0c70.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="325788a04b436a0bccbc5b4c54cf0f12ebdcbd2d">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-07ab5149db1df943d87323e8c28177a1b67476f7.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3178362320bcf51228835b60ff978efadfd1f783">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-aba8098798f61628b2531e552307084e35b49775.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b92002cb2f0e11a226ac5bac6dff1dc2a9d0b774">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-f927852599d7a3342c6f16758de3132fae75f298.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/libs/ormlite-android-4.48.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="afa06f539a4026c10b247386312aa67404b80a16">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/ormlite-android-4.48-74ec078ffa07c803ebbcd7f171592abb2c344b88.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="95758a2905669affbffc5ddd262921d375674fad">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-d47fb282f25ccfa24c3741e580a3612ca16d09d6.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-587221d932369f1b9e3a40931c77037adbf10be1.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3b05c18f60969ecc2ba49c0409c4b96be2d9cb0c">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-9d117cc297ad48385b72e5e08a446590184c2984.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-e2133d21f05738ba753e9f2dbdd21f170c636e6f.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="041d93cf0533591c29d1d7263b2fa114dbfb20bd">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-e928e5ea7b21e7b9563f09fc0ff9748e8eba0fd1.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d93480da1d303122ee67dc3bc23e6297bdef9951">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-fee0b785113769b06239d70a08679923ce1bf404.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="82825756edeeb3b56b15e73b2edd56e93da5a444">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-d9d30b3b0e1307351504ee5f1b6588a3bb2ea78b.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="97f3b099801a9ad9d70e835b9125273e986eb68d">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-f2322bc44eabf0bcee2cbff6d246f982f2a2f73e.jar" />
+    </item>
+    <item
+        jar="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/8.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="997773777cf3904c11d6764fe3b7668538220e49">
+        <dex dex="/home/sunblood/AndroidStudioProjects/trainer/app/build/intermediates/pre-dexed/debug/classes-910762121d893ed8e7592edb003318471952f7e8.jar" />
     </item>
 
 </items>

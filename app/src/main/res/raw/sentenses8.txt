@@ -1,67 +1,122 @@
-######################### part 1 ##################
-я смотрю, но не вижу
-I look, but I don’t see
+в Москве
+in Moscow
 
-я слушаю, но не слышу
-I listen, but I don’t hear
+в Москву
+to Moscow
 
-наблюдать
-watch
+из Москвы
+from Moscow
 
-я наблюдаю за тобой
-I watch you
+под землей
+under ground
 
-я смущён
-I’m embarrassed
+на столе
+on the table
 
-######################### part 2 ##################
-я пойду с тобой к ним
-I will go with you to them
+постучать по столу
+knock on the table
 
-он сшил эту рубашку для меня
-he made this shirt for me
+в школе
+at school
 
-я не хочу говорить с ним об этом
-I don’t want to speak with him about it
+дома
+at home
 
-то что ты мне скажешь, останется между нами
-what you will tell me will be between us
+между мной и тобой
+between you and me
 
-она очень далека от меня
-she is very far from me
+между нами
+between us
 
-он хотел поговорить со мной о разводе
-he wanted to speak with me about divorce
+с тобой
+with you
 
-я надеюсь, что ты сделаешь это для меня
-I hope that you will do it for me
+без тебя
+without you
 
-подумай об этом
-think about it
+я делаю это для тебя
+I do it for you
 
 расскажи мне о своём отце
 tell me about your father
 
-это письмо для вас
-this letter is for you
+около 3 минут
+about 3 minutes
 
-это большое удовольствие для меня
-it is a great pleasure for me
+встретимся в 3 часа
+I will meet you at 3 o’clock
 
-письмо в коробке
-the letter is in the box
+подниматься
+go up
 
-книга на полу
-the book is on the floor
+спускаться
+go down
 
-самолет летает над городом
-the plane flies over the city
+возвращаться
+go back
 
-он в библиотеке
-he is at the library
+прочь, в сторону
+go away
 
-кот был под кроватью
-the cat was under the bed
+заходить
+go in
 
-он вышел без своей шляпы
-hе went out without his hat
+выходить
+go out
+
+посмотреть вверх
+look up
+
+посмотреть вниз
+look down
+
+оглянуться
+look back
+
+отвернуться
+look away
+
+заглянуть
+look in
+
+выглянуть
+look out
+
+поднять
+take up
+
+опустить
+take down
+
+отобрать
+take away
+
+внести
+take in
+
+вынести
+take out
+
+на рынке
+in the market
+
+Я пойду с тобой к ним
+I will go with you to them
+
+Он сделал эту рубашку для меня
+He made this shirt for me
+
+Я не хочу говорить об этом с ним
+I don’t want to speak with him about it
+
+То что ты мне скажешь останется между нами
+What you will tell me will be between us
+
+Она очень далека от меня
+She is very far from me
+
+Я надеюсь ты сделаешь это для меня
+I hope that you will do it for me
+
+Думать об этом
+Think about it

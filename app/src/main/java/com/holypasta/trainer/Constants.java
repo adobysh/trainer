@@ -21,7 +21,7 @@ public interface Constants {
     int DEGRADATION_STEP = SCORE_MAX;
 
     int LAST_OLD_LOGIC_LESSON = 4;
-    int COMPLETE = 7;
+    int COMPLETE = 8;
     int LAST_LEVEL = 15;
     int REPEAT_LESSONS_LESSON = -2;
 

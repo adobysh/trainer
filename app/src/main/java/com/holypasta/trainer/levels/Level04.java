@@ -111,7 +111,7 @@ public class Level04 extends AbstractLevel {
         switch (variant) {
             case 0:
                 wrongSentences = new String[] { "I study art history" };
-                correctSentences = new String[] { "Я изучал историю искуства", "I studied art history" };
+                correctSentences = new String[] { "Я изучал историю искусства", "I studied art history" };
                 break;
             case 1:
                 wrongSentences = new String[] { "I study history" };
