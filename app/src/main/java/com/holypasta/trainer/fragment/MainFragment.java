@@ -5,7 +5,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
@@ -16,14 +19,8 @@ import com.holypasta.trainer.adapter.LevelsAdapter;
 import com.holypasta.trainer.english.R;
 import com.holypasta.trainer.util.JesusSaves;
 
-import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
-
 import java.util.List;
 
-@EFragment(R.layout.fragment_main)
 public class MainFragment extends AbstractFragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private class SOSLesson {
@@ -42,7 +39,6 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
                 this.lessonId = lessonId;
                 count = 0;
             }
-
             if (count == 5) {
                 JesusSaves.getInstance(context).unlockUntoLesson(lessonId);
                 return true;
@@ -50,13 +46,10 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
                 return false;
             }
         }
-
     }
 
-    @ViewById
-    ListView lv1main;
-    @ViewById
-    Button buttonRepeatLessons;
+    private ListView lv1main;
+    private Button buttonRepeatLessons;
     private LevelsAdapter adapter;
     private List<Integer> scores;
     private String[] parts;
@@ -70,15 +63,27 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
         this.activity = (SingleActivity)activity;
     }
 
-    @AfterViews
-    void calledAfterViewInjection() {
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        lv1main = (ListView) rootView.findViewById(R.id.lv1main);
+        buttonRepeatLessons = (Button) rootView.findViewById(R.id.buttonRepeatLessons);
+        // ------- after view --------
+        buttonRepeatLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLesson(REPEAT_LESSONS_LESSON);
+            }
+        });
         if (JesusSaves.getInstance(getActivity()).getLastOpenLessonId() == 0) {
             buttonRepeatLessons.setVisibility(View.GONE);
         }
         parts = getResources().getStringArray(R.array.contents);
         mode = JesusSaves.getInstance(getActivity()).getMode();
         sosLesson = new SOSLesson();
+        return rootView;
     }
 
     @Override
@@ -96,11 +101,6 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
         lv1main.setOnItemLongClickListener(this);
     }
 
-    @Click
-    void buttonRepeatLessons() {
-        openLesson(REPEAT_LESSONS_LESSON);
-    }
-
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, final int lessonId, long arg3) {
         if (lessonId < Constants.COMPLETE) {
@@ -114,13 +114,6 @@ public class MainFragment extends AbstractFragment implements AdapterView.OnItem
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
-//                        })
-//                        .setNegativeButton("Разблокировать", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                JesusSaves.getInstance(getActivity()).unlockUntoLesson(lessonId);
-//                                openLesson(lessonId);
-//                            }
                         }).create();
                 aboutDialog.show();
             }

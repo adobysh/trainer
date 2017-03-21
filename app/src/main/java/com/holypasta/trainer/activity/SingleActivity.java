@@ -5,34 +5,29 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.english.R;
-import com.holypasta.trainer.fragment.QuickStartFragment_;
+import com.holypasta.trainer.fragment.QuickStartFragment;
 import com.holypasta.trainer.util.JesusSaves;
 
-import org.androidannotations.annotations.*;
-
 import java.util.Calendar;
-import java.util.Locale;
 
-@EActivity(R.layout.activity_single)
-public class SingleActivity extends ActionBarActivity implements Constants, TextToSpeech.OnInitListener {
+public class SingleActivity extends ActionBarActivity implements Constants {
 
-    private static final int MY_DATA_CHECK_CODE = 0;
-    private TextToSpeech repeatTTS;
-    private boolean ttsIsOn;
-
-    @AfterViews
-    protected void afterViews() {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_single);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.container, new QuickStartFragment_())
+                .add(R.id.container, new QuickStartFragment())
                 .commit();
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
             public void onBackStackChanged() {
@@ -47,7 +42,6 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
                 }
             }
         });
-//        checkSpeechSynthesis();
         regVisit();
         startReminder();
         startDegradation();
@@ -65,44 +59,14 @@ public class SingleActivity extends ActionBarActivity implements Constants, Text
                 .commit();
     }
 
-    private void checkSpeechSynthesis() {
-        Intent checkTTSIntent = new Intent();
-        checkTTSIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-        startActivityForResult(checkTTSIntent, MY_DATA_CHECK_CODE);
-    }
-
-    private void installTTSFromGooglePlay() {
-        Intent installTTSIntent = new Intent();
-        installTTSIntent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-        startActivity(installTTSIntent);
-    }
-
     @Override
-    public void onInit(int initStatus) {
-        if (initStatus == TextToSpeech.SUCCESS) {
-            repeatTTS.setLanguage(Locale.US);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
-    }
-
-    @OptionsItem(android.R.id.home)
-    protected void homeSelected() {
-        onBackPressed();
-    }
-
-    @OnActivityResult(MY_DATA_CHECK_CODE)
-    protected void onResult(int resultCode, Intent data) {
-        if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-            repeatTTS = new TextToSpeech(this, this);
-            ttsIsOn = true;
-        } else {
-            installTTSFromGooglePlay();
-        }
-    }
-
-	public void speakNow(String text) {
-        if (ttsIsOn) {
-            repeatTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void regVisit() {

@@ -225,8 +225,8 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
         Constructor constructor;
         Fragment fragment;
         try {
-            constructor = cls.getConstructor(null);
-            fragment = (Fragment) constructor.newInstance(null);
+            constructor = cls.getConstructor();
+            fragment = (Fragment) constructor.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
             throw new IllegalArgumentException("error");
@@ -270,7 +270,7 @@ public abstract class AbstractLevelFragment extends AbstractFragment implements 
     }
 
     protected void openTheory() {
-        Fragment fragment = new TheoryFragment_();
+        Fragment fragment = new TheoryFragment();
         openInformationFragment(fragment);
     }
 
