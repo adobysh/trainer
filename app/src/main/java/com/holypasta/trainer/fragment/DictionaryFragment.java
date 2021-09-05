@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
+//import com.google.android.gms.ads.AdRequest;
+//import com.google.android.gms.ads.AdView;
 import com.holypasta.trainer.Constants;
 import com.holypasta.trainer.activity.SingleActivity;
 import com.holypasta.trainer.adapter.WordsAdapter;

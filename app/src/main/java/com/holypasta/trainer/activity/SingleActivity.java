@@ -1,5 +1,6 @@
 package com.holypasta.trainer.activity;
 
+import android.app.ActionBar;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,8 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.holypasta.trainer.Constants;
@@ -19,7 +19,7 @@ import com.holypasta.trainer.util.JesusSaves;
 
 import java.util.Calendar;
 
-public class SingleActivity extends ActionBarActivity implements Constants {
+public class SingleActivity extends AppCompatActivity implements Constants {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,16 +29,14 @@ public class SingleActivity extends ActionBarActivity implements Constants {
         fragmentManager.beginTransaction()
                 .add(R.id.container, new QuickStartFragment())
                 .commit();
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            public void onBackStackChanged() {
-                int backCount = getSupportFragmentManager().getBackStackEntryCount();
-                ActionBar actionBar = getSupportActionBar();
-                if (actionBar != null) {
-                    if (backCount == 0) {
-                        actionBar.setDisplayHomeAsUpEnabled(false);
-                    } else {
-                        actionBar.setDisplayHomeAsUpEnabled(true);
-                    }
+        fragmentManager.addOnBackStackChangedListener((FragmentManager.OnBackStackChangedListener) () -> {
+            int backCount = fragmentManager.getBackStackEntryCount();
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                if (backCount == 0) {
+                    actionBar.setDisplayHomeAsUpEnabled(false);
+                } else {
+                    actionBar.setDisplayHomeAsUpEnabled(true);
                 }
             }
         });
